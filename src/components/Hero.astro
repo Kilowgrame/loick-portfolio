@@ -1,58 +1,16 @@
 ---
-// Hero — simple text-centered hero with 5 floating stickers around.
-// No image, no frame. Text "LOICK LEGALLAIS" big and centered, with
-// "UI / UX Designer · Freelance" subtitle below.
-import Parallax from './Parallax.astro';
+// Hero — 100vh, text centered, 5 stickers positioned around in %
+// No parallax, simple and predictable.
 ---
 
-<section class="hero" data-parallax-container>
+<section class="hero">
   <div class="hero__inner">
-    <!-- The 5 stickers, positioned absolutely around the text -->
-
-    <img
-      src="/images/stickers/etoile.svg"
-      alt=""
-      class="sticker sticker--etoile"
-      data-parallax="-0.40"
-      data-rotation="19.32"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/eyes.svg"
-      alt=""
-      class="sticker sticker--eyes"
-      data-parallax="-0.55"
-      data-rotation="-6.11"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/galaxy.svg"
-      alt=""
-      class="sticker sticker--galaxy"
-      data-parallax="-0.45"
-      data-rotation="0"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/peace.svg"
-      alt=""
-      class="sticker sticker--peace"
-      data-parallax="-0.30"
-      data-rotation="24.81"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/planete.svg"
-      alt=""
-      class="sticker sticker--planete"
-      data-parallax="-0.35"
-      data-rotation="-6.28"
-      aria-hidden="true"
-    />
+    <!-- 5 stickers — positioned in % so they scale with the hero size -->
+    <img src="/images/stickers/etoile.svg"  alt="" class="sticker sticker--etoile"  aria-hidden="true" />
+    <img src="/images/stickers/eyes.svg"    alt="" class="sticker sticker--eyes"    aria-hidden="true" />
+    <img src="/images/stickers/galaxy.svg"  alt="" class="sticker sticker--galaxy"  aria-hidden="true" />
+    <img src="/images/stickers/peace.svg"   alt="" class="sticker sticker--peace"   aria-hidden="true" />
+    <img src="/images/stickers/planete.svg" alt="" class="sticker sticker--planete" aria-hidden="true" />
 
     <!-- Centered text -->
     <div class="hero__title">
@@ -67,17 +25,14 @@ import Parallax from './Parallax.astro';
   </div>
 </section>
 
-<!-- Parallax script -->
-<Parallax />
-
 <style>
   /* ============================================
-     HERO — text-centered with floating stickers
-     Figma: 1512px wide artboard, padding 40px Y / 60px X
+     HERO — exactly 100vh, text centered
      ============================================ */
   .hero {
     background-color: var(--color-violet);
-    padding: calc(200 * var(--unit)) var(--container-padding) calc(80 * var(--unit));
+    height: 100vh;
+    padding: 0 var(--container-padding);
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
@@ -85,14 +40,9 @@ import Parallax from './Parallax.astro';
 
   .hero__inner {
     position: relative;
-    /* Inner content area = 1392px wide in Figma (1512 - 60*2 padding) */
-    max-width: calc(1392 * var(--unit));
-    margin: 0 auto;
     width: 100%;
-    /* Reserve space for stickers (image hero was 540px tall in Figma area;
-       we keep ~620px so the stickers have room to spread around the title) */
-    min-height: calc(620 * var(--unit));
-    /* Center the text vertically in this space */
+    height: 100%;
+    /* Center the text vertically and horizontally */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -100,7 +50,7 @@ import Parallax from './Parallax.astro';
     gap: calc(2 * var(--unit));
   }
 
-  /* Title — big LC Mogi text */
+  /* Title */
   .hero__title {
     display: flex;
     flex-direction: column;
@@ -118,7 +68,7 @@ import Parallax from './Parallax.astro';
     line-height: 1.2;
   }
 
-  /* Meta line below the title */
+  /* Meta line */
   .hero__meta {
     display: flex;
     align-items: center;
@@ -127,15 +77,13 @@ import Parallax from './Parallax.astro';
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--color-aubergine);
-    text-align: center;
     position: relative;
     z-index: 10;
   }
 
   /* ============================================
-     STICKERS — positions from Figma 1512px artboard
-     Reference inner area = 1392px wide.
-     All fluid via var(--unit). z-index 5 so they sit behind text.
+     STICKERS — percentage-based positions
+     They stay anchored relative to the hero corners/edges.
      ============================================ */
   .sticker {
     position: absolute;
@@ -145,50 +93,44 @@ import Parallax from './Parallax.astro';
     will-change: transform;
   }
 
-  /* Etoile — LEFT side, slightly above center
-     Figma: left 322, top 160, size 109px, rotation 19.32° */
+  /* Etoile — TOP LEFT zone, around 1/4 in from the left */
   .sticker--etoile {
-    top: calc(160 * var(--unit));
-    left: calc(322 * var(--unit));
+    top: 18%;
+    left: 22%;
     width: calc(109 * var(--unit));
     transform: rotate(19.32deg);
   }
 
-  /* Eyes — RIGHT side, slightly above center
-     Figma: left 1066, top 160, size 133px wide, rotation -6.11° */
+  /* Eyes — TOP RIGHT zone */
   .sticker--eyes {
-    top: calc(160 * var(--unit));
-    /* From left in Figma: 1066. From right in 1392 container: 1392-1066-133 = 193px */
-    right: calc(193 * var(--unit));
+    top: 18%;
+    right: 14%;
     width: calc(133 * var(--unit));
     transform: rotate(-6.11deg);
   }
 
-  /* Galaxy — LEFT side, bottom
-     Figma: left 241, top 595, size 150x107 */
+  /* Galaxy — BOTTOM LEFT zone */
   .sticker--galaxy {
-    top: calc(595 * var(--unit));
-    left: calc(241 * var(--unit));
+    bottom: 18%;
+    left: 16%;
     width: calc(150 * var(--unit));
     transform: rotate(0deg);
   }
 
-  /* Peace — RIGHT side, bottom
-     Figma: approximate position based on container percentages */
+  /* Peace — BOTTOM RIGHT zone */
   .sticker--peace {
-    top: calc(630 * var(--unit));
-    right: calc(280 * var(--unit));
+    bottom: 18%;
+    right: 18%;
     width: calc(110 * var(--unit));
     transform: rotate(24.81deg);
   }
 
-  /* Planète — CENTER, bottom
-     Figma: left 691, top 689, size 130x104, rotation -6.28° */
+  /* Planète — BOTTOM CENTER */
   .sticker--planete {
-    top: calc(689 * var(--unit));
-    left: calc(691 * var(--unit));
+    bottom: 8%;
+    left: 50%;
     width: calc(130 * var(--unit));
-    transform: rotate(-6.28deg);
+    transform: translateX(-50%) rotate(-6.28deg);
   }
 
   /* ============================================
@@ -196,11 +138,13 @@ import Parallax from './Parallax.astro';
      ============================================ */
   @media (max-width: 768px) {
     .hero {
-      padding: 133px var(--container-padding) 60px;
+      height: auto;
+      min-height: auto;
+      padding: 160px var(--container-padding) 80px;
     }
 
     .hero__inner {
-      min-height: auto;
+      height: auto;
     }
 
     .hero__name {
@@ -212,7 +156,7 @@ import Parallax from './Parallax.astro';
       font-size: 16px;
     }
 
-    /* Hide stickers on mobile for clean look */
+    /* Hide stickers on mobile for a clean text-only hero */
     .sticker {
       display: none;
     }
