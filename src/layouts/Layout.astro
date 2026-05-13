@@ -34,6 +34,15 @@ const {
          so they can set their password and access the CMS. -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+    <!-- Make sure the Identity widget appears above our floating header -->
+    <style>
+      .netlify-identity-menu,
+      iframe[title="Netlify identity"],
+      .netlify-identity-modal {
+        z-index: 999 !important;
+      }
+    </style>
+
     <title>{title}</title>
   </head>
   <body>
@@ -46,16 +55,24 @@ const {
     <Footer />
 
     <script>
-      // Redirect logged-in users from any page to /admin after Netlify Identity login.
-      // This is the recommended pattern from the Decap CMS docs.
+      // Initialize Netlify Identity properly.
+      // This MUST run on every page so the invite link (which contains
+      // #invite_token=...) is detected wherever the user lands.
       if (typeof (window as any).netlifyIdentity !== 'undefined') {
-        (window as any).netlifyIdentity.on('init', (user: any) => {
+        const identity = (window as any).netlifyIdentity;
+
+        // Redirect logged-in users to /admin after login.
+        identity.on('init', (user: any) => {
           if (!user) {
-            (window as any).netlifyIdentity.on('login', () => {
+            identity.on('login', () => {
               document.location.href = '/admin/';
             });
           }
         });
+
+        // Explicitly call init() — this is required for the widget to scan
+        // the URL hash for invite_token / recovery_token and open the form.
+        identity.init();
       }
     </script>
 
