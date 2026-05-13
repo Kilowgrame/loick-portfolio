@@ -6,54 +6,10 @@ import Parallax from './Parallax.astro';
 <section class="hero" data-parallax-container>
   <div class="hero__inner">
     <!--
-      STICKERS — positioned to match Figma exactly.
-      Each has a `data-parallax` speed and `data-rotation` (which is preserved
-      across scroll). The script combines translateY + rotate cleanly.
-
-      Parallax speeds chosen for "marked" intensity:
-        - 0.15 → subtle (just behind scroll)
-        - 0.30 → marked (clearly visible)
-        - 0.45 → strong (almost detached from background)
-    -->
-    <img
-      src="/images/stickers/etoile.svg"
-      alt=""
-      class="sticker sticker--etoile"
-      data-parallax="-0.40"
-      data-rotation="-15"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/eyes.svg"
-      alt=""
-      class="sticker sticker--eyes"
-      data-parallax="-0.55"
-      data-rotation="-8"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/peace.svg"
-      alt=""
-      class="sticker sticker--peace"
-      data-parallax="-0.30"
-      data-rotation="12"
-      aria-hidden="true"
-    />
-
-    <img
-      src="/images/stickers/galaxy.svg"
-      alt=""
-      class="sticker sticker--galaxy"
-      data-parallax="-0.45"
-      data-rotation="8"
-      aria-hidden="true"
-    />
-
-    <!--
       IMAGE STACK — image + frame move together at VERY SLOW parallax (-0.05).
-      6-11x slower than the stickers, so the contrast is clear.
+      Stickers are POSITIONED RELATIVE to this wrap so they stay anchored to the
+      image even when the hero height changes (resizing the window vertically
+      no longer moves the stickers away from the image).
     -->
     <div
       class="hero__image-wrap"
@@ -64,6 +20,47 @@ import Parallax from './Parallax.astro';
       <div class="hero__image">
         <div class="hero__placeholder">Ton image ici</div>
       </div>
+
+      <!--
+        STICKERS — positioned around the image (their parent), so they keep
+        their visual relationship even when the hero height changes.
+        Each has a `data-parallax` speed and `data-rotation` (preserved across scroll).
+      -->
+      <img
+        src="/images/stickers/etoile.svg"
+        alt=""
+        class="sticker sticker--etoile"
+        data-parallax="-0.40"
+        data-rotation="-15"
+        aria-hidden="true"
+      />
+
+      <img
+        src="/images/stickers/eyes.svg"
+        alt=""
+        class="sticker sticker--eyes"
+        data-parallax="-0.55"
+        data-rotation="-8"
+        aria-hidden="true"
+      />
+
+      <img
+        src="/images/stickers/peace.svg"
+        alt=""
+        class="sticker sticker--peace"
+        data-parallax="-0.30"
+        data-rotation="12"
+        aria-hidden="true"
+      />
+
+      <img
+        src="/images/stickers/galaxy.svg"
+        alt=""
+        class="sticker sticker--galaxy"
+        data-parallax="-0.45"
+        data-rotation="8"
+        aria-hidden="true"
+      />
     </div>
 
     <!-- Bottom block: title + meta, anchored to the bottom of the hero -->
@@ -210,7 +207,10 @@ import Parallax from './Parallax.astro';
   }
 
   /* ============================================
-     STICKERS — original positions and rotations
+     STICKERS — positions relative to the IMAGE WRAP (their new parent)
+     Reference: image wrap = 736px wide × 480px tall (Figma desktop).
+     Use negative values to make stickers OVERFLOW the image (overlay corners).
+     Positions/sizes are fluid via var(--unit).
      ============================================ */
   .sticker {
     position: absolute;
@@ -220,34 +220,34 @@ import Parallax from './Parallax.astro';
     will-change: transform;
   }
 
-  /* Eyes — top, left of center */
+  /* Eyes — top-LEFT corner, slightly overlapping the image */
   .sticker--eyes {
-    top: calc(-20 * var(--unit));
-    left: 18%;
+    top: calc(-30 * var(--unit));
+    left: calc(-60 * var(--unit));
     width: calc(134 * var(--unit));
     transform: rotate(-8deg);
   }
 
-  /* Peace — top right */
+  /* Peace — top-RIGHT corner */
   .sticker--peace {
-    top: calc(-10 * var(--unit));
-    right: 8%;
+    top: calc(-30 * var(--unit));
+    right: calc(-50 * var(--unit));
     width: calc(112 * var(--unit));
     transform: rotate(12deg);
   }
 
-  /* Etoile — bottom left */
+  /* Etoile — bottom-LEFT corner */
   .sticker--etoile {
-    bottom: calc(90 * var(--unit));
-    left: 14%;
+    bottom: calc(-30 * var(--unit));
+    left: calc(-50 * var(--unit));
     width: calc(104 * var(--unit));
     transform: rotate(-15deg);
   }
 
-  /* Galaxy — bottom right */
+  /* Galaxy — bottom-RIGHT corner */
   .sticker--galaxy {
-    bottom: calc(100 * var(--unit));
-    right: 12%;
+    bottom: calc(-30 * var(--unit));
+    right: calc(-70 * var(--unit));
     width: calc(151 * var(--unit));
     transform: rotate(8deg);
   }
