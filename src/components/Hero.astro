@@ -207,47 +207,46 @@ import Parallax from './Parallax.astro';
   }
 
   /* ============================================
-     STICKERS — positioned relative to .hero__image-wrap.
-     Sizes/positions in fluid units (--unit). Negative values make
-     stickers overflow the image for an "applied by hand" look.
-     They stay anchored to the image at any window size.
+     STICKERS — placed at the 4 corners of the image wrap.
+     Positions in fluid units, INSIDE the image area.
+     z-index high enough to appear above other elements.
      ============================================ */
   .sticker {
     position: absolute;
     pointer-events: none;
-    z-index: 2;
+    z-index: 50;
     height: auto;
     will-change: transform;
   }
 
-  /* Eyes — top-LEFT, slightly above the image */
+  /* Eyes — TOP LEFT corner of the image */
   .sticker--eyes {
-    top: calc(-40 * var(--unit));
-    left: calc(-50 * var(--unit));
+    top: calc(20 * var(--unit));
+    left: calc(20 * var(--unit));
     width: calc(134 * var(--unit));
     transform: rotate(-8deg);
   }
 
-  /* Peace — top-RIGHT */
+  /* Peace — TOP RIGHT corner */
   .sticker--peace {
-    top: calc(-50 * var(--unit));
-    right: calc(-40 * var(--unit));
+    top: calc(20 * var(--unit));
+    right: calc(20 * var(--unit));
     width: calc(112 * var(--unit));
     transform: rotate(12deg);
   }
 
-  /* Etoile — bottom-LEFT */
+  /* Etoile — BOTTOM LEFT corner */
   .sticker--etoile {
-    bottom: calc(-40 * var(--unit));
-    left: calc(-40 * var(--unit));
+    bottom: calc(20 * var(--unit));
+    left: calc(20 * var(--unit));
     width: calc(104 * var(--unit));
     transform: rotate(-15deg);
   }
 
-  /* Galaxy — bottom-RIGHT */
+  /* Galaxy — BOTTOM RIGHT corner */
   .sticker--galaxy {
-    bottom: calc(-30 * var(--unit));
-    right: calc(-60 * var(--unit));
+    bottom: calc(20 * var(--unit));
+    right: calc(20 * var(--unit));
     width: calc(151 * var(--unit));
     transform: rotate(8deg);
   }
