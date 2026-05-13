@@ -29,6 +29,11 @@ const {
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Netlify Identity widget — needed for Decap CMS invitation flow.
+         When a user clicks the invite link, this redirects them to /admin
+         so they can set their password and access the CMS. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <title>{title}</title>
   </head>
   <body>
@@ -39,6 +44,20 @@ const {
     </main>
 
     <Footer />
+
+    <script>
+      // Redirect logged-in users from any page to /admin after Netlify Identity login.
+      // This is the recommended pattern from the Decap CMS docs.
+      if (typeof (window as any).netlifyIdentity !== 'undefined') {
+        (window as any).netlifyIdentity.on('init', (user: any) => {
+          if (!user) {
+            (window as any).netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
 
     <script>
       // Simple fade-in on scroll using IntersectionObserver
