@@ -87,17 +87,13 @@ import Parallax from './Parallax.astro';
 
 <style>
   /* ============================================
-     DESKTOP — fluid, scales from 1512px Figma
-     Hero forced to 100vh, content distributed with flex.
+     DESKTOP — fluid, scales from 1512px Figma.
+     Hero adapts to its content (no forced 100vh) so the image and
+     its stickers stay together at a predictable height.
      ============================================ */
   .hero {
     background-color: var(--color-violet);
-    /* Force 100vh height so everything fits in one screen */
-    min-height: 100vh;
-    /* Distribute content vertically: image center, name + meta at bottom */
-    display: flex;
-    flex-direction: column;
-    padding: calc(140 * var(--unit)) var(--container-padding) calc(40 * var(--unit));
+    padding: calc(200 * var(--unit)) var(--container-padding) calc(60 * var(--unit));
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
@@ -105,13 +101,9 @@ import Parallax from './Parallax.astro';
 
   .hero__inner {
     position: relative;
-    /* Inner content area = 1392px wide in Figma (1512 - 60*2 padding) */
     max-width: calc(1392 * var(--unit));
     margin: 0 auto;
     width: 100%;
-    /* Take all available height */
-    flex: 1;
-    /* Layout: image takes the available space, title + meta sit at the bottom */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,18 +112,15 @@ import Parallax from './Parallax.astro';
   /* Image stack — sits in the upper portion */
   .hero__image-wrap {
     position: relative;
-    /* Fluid image size, but constrained to fit the available height */
-    width: min(calc(736 * var(--unit)), 75vw);
-    aspect-ratio: 736 / 480;
-    /* Vertically center between the menu and the bottom block */
-    margin: auto auto 0;
+    /* Reduced from 736 to 620 — image is smaller now */
+    width: min(calc(620 * var(--unit)), 75vw);
+    aspect-ratio: 620 / 404;
+    margin: 0 auto calc(60 * var(--unit));
   }
 
-  /* Bottom block: title + meta, naturally anchored at the bottom by flex */
+  /* Bottom block: title + meta */
   .hero__bottom {
     width: 100%;
-    /* Push to the very bottom of the hero */
-    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
@@ -148,11 +137,11 @@ import Parallax from './Parallax.astro';
 
   .hero__image {
     position: absolute;
-    /* Position relative to the wrap (proportional offsets) */
-    top: 3.75%;     /* 18/480 */
-    left: 2.58%;    /* 19/736 */
-    width: 95.1%;   /* 700/736 */
-    height: 87.9%;  /* 422/480 */
+    /* Equal margins on all 4 sides so the frame appears centered around the image */
+    top: 3%;
+    left: 3%;
+    width: 94%;
+    height: 94%;
     border-radius: var(--radius-xl);
     overflow: hidden;
     background: var(--color-placeholder);
@@ -207,9 +196,15 @@ import Parallax from './Parallax.astro';
   }
 
   /* ============================================
-     STICKERS — placed per Figma original mockup.
-     Etoile + Eyes are at the TOP of the image (slightly overlapping out).
-     Peace + Galaxy are at the BOTTOM (slightly overlapping out).
+     STICKERS — placed around the image corners.
+     Each sticker overflows slightly outside the image for the
+     "applied by hand" feel from the Figma mockup.
+
+     HOW TO ADJUST:
+     - top/bottom NEGATIVE = sticker goes outside the image (above/below)
+     - top/bottom POSITIVE = sticker goes inside the image
+     - left/right NEGATIVE = goes outside the image (to the side)
+     - left/right POSITIVE = goes inside the image
      ============================================ */
   .sticker {
     position: absolute;
@@ -219,34 +214,34 @@ import Parallax from './Parallax.astro';
     will-change: transform;
   }
 
-  /* Etoile — TOP LEFT, slightly above the image */
+  /* Etoile — slightly above-left of the image */
   .sticker--etoile {
-    top: calc(-30 * var(--unit));
-    left: calc(40 * var(--unit));
+    top: calc(-50 * var(--unit));
+    left: calc(20 * var(--unit));
     width: calc(109 * var(--unit));
     transform: rotate(-15deg);
   }
 
-  /* Eyes — TOP RIGHT, slightly above the image */
+  /* Eyes — slightly above-right of the image */
   .sticker--eyes {
-    top: calc(-30 * var(--unit));
-    right: calc(60 * var(--unit));
+    top: calc(-50 * var(--unit));
+    right: calc(40 * var(--unit));
     width: calc(134 * var(--unit));
     transform: rotate(-8deg);
   }
 
-  /* Peace — BOTTOM LEFT, slightly below the image */
+  /* Peace — slightly below-left of the image */
   .sticker--peace {
-    bottom: calc(-30 * var(--unit));
-    left: calc(80 * var(--unit));
+    bottom: calc(-50 * var(--unit));
+    left: calc(60 * var(--unit));
     width: calc(112 * var(--unit));
     transform: rotate(12deg);
   }
 
-  /* Galaxy — BOTTOM RIGHT, slightly below the image */
+  /* Galaxy — slightly below-right of the image */
   .sticker--galaxy {
-    bottom: calc(-30 * var(--unit));
-    right: calc(60 * var(--unit));
+    bottom: calc(-50 * var(--unit));
+    right: calc(30 * var(--unit));
     width: calc(151 * var(--unit));
     transform: rotate(8deg);
   }
