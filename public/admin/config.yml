@@ -3,13 +3,16 @@
 # Maps your "projets" content collection to a visual admin UI
 # =====================================================
 
-# Backend: where the content lives (your GitHub repo via Git Gateway)
+# Backend: GitHub OAuth (uses Netlify as the OAuth broker via its API).
+# Requires:
+#  - A GitHub OAuth App registered with callback URL https://api.netlify.com/auth/done
+#  - The OAuth provider installed on this Netlify site with the App's Client ID + Secret
 backend:
-  name: git-gateway
+  name: github
+  repo: Kilowgrame/loick-portfolio       # ← FORMAT: <github-username>/<repo-name>
   branch: main
-  # Optional: enable editorial workflow (drafts/review/publish)
-  # Uncomment if you want a "draft" stage before publishing
-  # publish_mode: editorial_workflow
+  base_url: https://api.netlify.com            # uses Netlify as the OAuth proxy
+  auth_endpoint: auth                          # default for Netlify OAuth flow
 
 # Media: where uploaded images/videos are stored in the repo
 media_folder: "public/images/uploads"
