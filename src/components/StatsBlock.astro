@@ -1,0 +1,129 @@
+---
+// Intro statement + 4 key numbers
+const stats = [
+  { value: '7', label: 'ans d\'expériences' },
+  { value: '+50', label: 'clients accompagnés' },
+  { value: '+30', label: 'ateliers réalisés' },
+  { value: '+120', label: 'heures de formations données' },
+];
+---
+
+<section class="intro fade-in">
+  <p class="intro__text">
+    Le design ne doit plus être seulement esthétique mais répondre à des objectifs clairs. En vous accompagnant, je me base sur des datas solides pour proposer une expérience utilisateur réussie.
+  </p>
+
+  <div class="intro__stats">
+    {stats.map((stat) => (
+      <div class="stat">
+        <p class="stat__value display">{stat.value}</p>
+        <div class="stat__line"></div>
+        <p class="stat__label">{stat.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* DESKTOP */
+  .intro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-16);
+    padding: var(--space-30) var(--container-padding);
+    background: var(--color-white);
+  }
+
+  .intro__text {
+    flex: 1;
+    max-width: calc(686 * var(--unit));
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--color-text-dark);
+  }
+
+  .intro__stats {
+    flex: 1;
+    max-width: calc(569 * var(--unit));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-16) var(--space-20);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    text-align: center;
+  }
+
+  .stat__value {
+    font-size: var(--text-2xl);
+    line-height: 1;
+    color: var(--color-aubergine);
+    margin: 0;
+  }
+
+  .stat__line {
+    width: calc(186 * var(--unit));
+    max-width: 100%;
+    height: 1px;
+    background: var(--color-aubergine);
+    opacity: 0.3;
+  }
+
+  .stat__label {
+    font-size: var(--text-base);
+    color: var(--color-aubergine);
+    opacity: 0.7;
+  }
+
+  /* MOBILE — match Figma 375px mockup */
+  @media (max-width: 768px) {
+    .intro {
+      /* Figma: gap 64px, padding 64px X (X fluid) */
+      flex-direction: column;
+      gap: 64px;
+      padding: 64px var(--container-padding);
+    }
+
+    .intro__text {
+      max-width: 100%;
+      font-size: 18px;
+    }
+
+    .intro__stats {
+      /* Figma: 1 column, gap 40px */
+      max-width: 100%;
+      width: 100%;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .stat {
+      /* Figma: width 215-216px, gap 12px */
+      width: 215px;
+      max-width: 100%;
+      gap: 12px;
+      align-self: flex-start;
+    }
+
+    .stat__value {
+      font-size: 60px;
+      line-height: 60px;
+    }
+
+    .stat__line {
+      width: 186px;
+    }
+
+    .stat__label {
+      font-size: 18px;
+    }
+  }
+</style>

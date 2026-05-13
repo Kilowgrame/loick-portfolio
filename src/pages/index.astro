@@ -1,0 +1,129 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import StatsBlock from '../components/StatsBlock.astro';
+import ProjectBlock from '../components/ProjectBlock.astro';
+import CtaProjects from '../components/CtaProjects.astro';
+import ResourcesSection from '../components/ResourcesSection.astro';
+
+const featured = (await getCollection('projets'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 5);
+---
+
+<Layout>
+  <Hero />
+
+  <StatsBlock />
+
+  <!--
+    STACK SECTION
+    ===========
+    Each .stack-item is position: sticky to top: 0.
+    They naturally pile up: the next one slides over the previous one as you scroll.
+    The .stack-container is taller than the viewport so there's room to scroll.
+
+    `--stack-height` controls each block's height (70vh as chosen).
+    The container is `N * --stack-height` tall, where N = number of blocks.
+
+    `data-stack-index` is the z-index — last block on top.
+  -->
+  <section
+    class="stack-section"
+    aria-label="Projets en avant"
+    style={`--stack-count: ${featured.length}`}
+  >
+    {featured.map((project, index) => (
+      <div
+        class="stack-item"
+        style={`z-index: ${index + 1}`}
+      >
+        <ProjectBlock
+          title={project.data.title}
+          description={project.data.description ?? ''}
+          tags={project.data.fields}
+          bgColor={project.data.bgColor}
+          textColor={project.data.textColor}
+          href={`/projets/${project.slug}`}
+        />
+      </div>
+    ))}
+  </section>
+
+  <CtaProjects />
+
+  <ResourcesSection />
+</Layout>
+
+<style>
+  /* ============================================
+     STACK SECTION — sticky-card animation
+     Inspired by serious.business
+     ============================================ */
+
+  /* The height of one "card slot" in the stack.
+     Lower = faster transition. Higher = slower. */
+  .stack-section {
+    --stack-height: 70vh;
+
+    /* Position relative so sticky children are anchored to this section */
+    position: relative;
+
+    /* The section is N times taller than one card — this is the scroll
+       distance available. Without this, sticky would have nothing to scroll over. */
+    height: calc(var(--stack-count, 5) * var(--stack-height));
+  }
+
+  /* Each stack item is sticky at the top of the viewport.
+     When the next one's top reaches the viewport top, it covers the previous one. */
+  .stack-item {
+    position: sticky;
+    top: 0;
+    height: var(--stack-height);
+    /* Hide overflow so the inner ProjectBlock (which might be taller than 70vh
+       on certain screens) doesn't break the layout */
+    overflow: hidden;
+  }
+
+  /* Make the inner ProjectBlock fill the sticky slot fully */
+  .stack-item :global(.project-block) {
+    min-height: 100%;
+    /* Vertically center the content inside the sticky slot since the block
+       may be shorter than the slot */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mobile: also fluid. We keep the stack effect, but allow the block content
+     to scroll if it's taller than the slot (column layout adds height). */
+  @media (max-width: 768px) {
+    .stack-section {
+      /* Slightly taller slots on mobile to give content room (image + text stacked) */
+      --stack-height: 80vh;
+    }
+
+    .stack-item {
+      /* Allow the block to be taller than the slot on small screens */
+      overflow: visible;
+    }
+
+    .stack-item :global(.project-block) {
+      min-height: 100%;
+      align-items: flex-start;
+    }
+  }
+
+  /* Respect reduced motion: disable the sticky effect entirely */
+  @media (prefers-reduced-motion: reduce) {
+    .stack-section {
+      height: auto;
+    }
+    .stack-item {
+      position: static;
+      height: auto;
+      overflow: visible;
+    }
+  }
+</style>

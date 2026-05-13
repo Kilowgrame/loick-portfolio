@@ -1,0 +1,83 @@
+---
+// Parallax script.
+//
+// Any element with `data-parallax="0.3"` will translate vertically as the user
+// scrolls. The number is the SPEED FACTOR:
+//   - 0    = no parallax (element scrolls normally)
+//   - 0.3  = element moves at 30% of scroll speed (appears to lag behind)
+//   - -0.3 = element moves in the opposite direction (looks "fixed in air")
+//
+// The effect is anchored to the parallax container (`data-parallax-container`).
+// Animation only runs while the container is in view (perf-friendly).
+//
+// Honors `prefers-reduced-motion: reduce`.
+---
+
+<script>
+  // Initialize parallax after DOM is ready
+  function initParallax() {
+    // Respect reduced motion preference — skip entirely
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const containers = document.querySelectorAll<HTMLElement>('[data-parallax-container]');
+    if (!containers.length) return;
+
+    // Collect all parallax items once at init (perf)
+    const items: { el: HTMLElement; speed: number; rotation: string; container: HTMLElement }[] = [];
+
+    containers.forEach((container) => {
+      container.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+        items.push({
+          el,
+          speed: parseFloat(el.dataset.parallax || '0'),
+          rotation: el.dataset.rotation || '0',
+          container,
+        });
+      });
+    });
+
+    let ticking = false;
+
+    const update = () => {
+      const viewportHeight = window.innerHeight;
+
+      items.forEach(({ el, speed, rotation, container }) => {
+        const rect = container.getBoundingClientRect();
+
+        // Skip if container is out of view (perf)
+        if (rect.bottom < -200 || rect.top > viewportHeight + 200) return;
+
+        // Scroll progress relative to container top entering viewport
+        const scrolled = viewportHeight - rect.top;
+        const translateY = scrolled * speed;
+
+        // Combine translateY + rotation (preserves both)
+        el.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rotation}deg)`;
+      });
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    // Apply rotation immediately so we don't see a "jump" on first scroll
+    update();
+
+    // Use passive listener for best scroll perf
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+  }
+
+  // Run on initial load AND on Astro view transitions if you add them later
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initParallax);
+  } else {
+    initParallax();
+  }
+</script>

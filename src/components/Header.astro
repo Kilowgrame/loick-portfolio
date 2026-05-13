@@ -1,0 +1,131 @@
+---
+// Floating glassmorphism navigation header
+---
+
+<header class="header">
+  <nav class="menu" aria-label="Navigation principale">
+    <a href="/" class="menu__logo" aria-label="Accueil">
+      <svg width="100%" height="100%" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2"/>
+        <path d="M16 16 L16 32 M16 32 L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+
+    <ul class="menu__list">
+      <li><a href="/projets">Work</a></li>
+      <li><a href="/a-propos">A propos</a></li>
+      <li><a href="/ressources">Ressources</a></li>
+      <li><a href="mailto:legallais.loick@gmail.com">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  /* DESKTOP */
+  .header {
+    position: fixed;
+    top: calc(28 * var(--unit));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .menu {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: calc(28 * var(--unit));
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(49, 36, 61, 0.08);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .menu:hover {
+    box-shadow: 0 12px 40px rgba(49, 36, 61, 0.15);
+  }
+
+  .menu__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(48 * var(--unit));
+    height: calc(48 * var(--unit));
+    min-width: 32px;
+    min-height: 32px;
+    color: var(--color-aubergine);
+    transition: transform var(--transition-base);
+  }
+
+  .menu__logo:hover {
+    transform: rotate(-8deg);
+  }
+
+  .menu__list {
+    display: flex;
+    align-items: center;
+    gap: calc(28 * var(--unit));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu__list a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    color: #000;
+    position: relative;
+    padding: var(--space-1) 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .menu__list a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform var(--transition-base);
+  }
+
+  .menu__list a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* MOBILE — slightly more compact */
+  @media (max-width: 768px) {
+    .header {
+      top: 16px;
+      /* Add side margin so it never touches screen edges */
+      max-width: calc(100vw - 32px);
+    }
+
+    .menu {
+      gap: 16px;
+      padding: 10px 14px 10px 10px;
+    }
+
+    .menu__logo {
+      width: 36px;
+      height: 36px;
+    }
+
+    .menu__list {
+      gap: 14px;
+    }
+
+    .menu__list a {
+      font-size: 13px;
+    }
+  }
+</style>
