@@ -1,93 +1,83 @@
 ---
-// Hero — precise Figma sticker positions + scroll parallax
+// Hero — simple text-centered hero with 5 floating stickers around.
+// No image, no frame. Text "LOICK LEGALLAIS" big and centered, with
+// "UI / UX Designer · Freelance" subtitle below.
 import Parallax from './Parallax.astro';
 ---
 
 <section class="hero" data-parallax-container>
   <div class="hero__inner">
-    <!--
-      IMAGE STACK — image + frame move together at VERY SLOW parallax (-0.05).
-      Stickers are ALSO inside this wrap so they stay anchored to the image,
-      but each has its OWN parallax speed (overriding the wrap's).
-    -->
-    <div class="hero__image-wrap">
-      <div
-        class="hero__image"
-        data-parallax="-0.05"
-        data-rotation="-1.86"
-      >
-        <div class="hero__placeholder">Ton image ici</div>
-      </div>
+    <!-- The 5 stickers, positioned absolutely around the text -->
 
-      <!--
-        STICKERS — inside the wrap so they stay anchored to the image
-        when the window is resized vertically.
-      -->
-      <img
-        src="/images/stickers/etoile.svg"
-        alt=""
-        class="sticker sticker--etoile"
-        data-parallax="-0.40"
-        data-rotation="-15"
-        aria-hidden="true"
-      />
+    <img
+      src="/images/stickers/etoile.svg"
+      alt=""
+      class="sticker sticker--etoile"
+      data-parallax="-0.40"
+      data-rotation="19.32"
+      aria-hidden="true"
+    />
 
-      <img
-        src="/images/stickers/eyes.svg"
-        alt=""
-        class="sticker sticker--eyes"
-        data-parallax="-0.55"
-        data-rotation="-8"
-        aria-hidden="true"
-      />
+    <img
+      src="/images/stickers/eyes.svg"
+      alt=""
+      class="sticker sticker--eyes"
+      data-parallax="-0.55"
+      data-rotation="-6.11"
+      aria-hidden="true"
+    />
 
-      <img
-        src="/images/stickers/peace.svg"
-        alt=""
-        class="sticker sticker--peace"
-        data-parallax="-0.30"
-        data-rotation="12"
-        aria-hidden="true"
-      />
+    <img
+      src="/images/stickers/galaxy.svg"
+      alt=""
+      class="sticker sticker--galaxy"
+      data-parallax="-0.45"
+      data-rotation="0"
+      aria-hidden="true"
+    />
 
-      <img
-        src="/images/stickers/galaxy.svg"
-        alt=""
-        class="sticker sticker--galaxy"
-        data-parallax="-0.45"
-        data-rotation="8"
-        aria-hidden="true"
-      />
+    <img
+      src="/images/stickers/peace.svg"
+      alt=""
+      class="sticker sticker--peace"
+      data-parallax="-0.30"
+      data-rotation="24.81"
+      aria-hidden="true"
+    />
+
+    <img
+      src="/images/stickers/planete.svg"
+      alt=""
+      class="sticker sticker--planete"
+      data-parallax="-0.35"
+      data-rotation="-6.28"
+      aria-hidden="true"
+    />
+
+    <!-- Centered text -->
+    <div class="hero__title">
+      <span class="hero__name display">LOICK</span>
+      <span class="hero__name display">LEGALLAIS</span>
     </div>
 
-    <!-- Bottom block: title + meta, anchored to the bottom of the hero -->
-    <div class="hero__bottom">
-      <div class="hero__title">
-        <span class="hero__name display">LOICK</span>
-        <span class="hero__name display">LEGALLAIS</span>
-      </div>
-
-      <div class="hero__meta">
-        <span>UI / UX Designer</span>
-        <span>Freelance</span>
-        <span>2026</span>
-      </div>
+    <div class="hero__meta">
+      <span>UI / UX Designer</span>
+      <span>Freelance</span>
     </div>
   </div>
 </section>
 
-<!-- Parallax script (only loaded once on the page) -->
+<!-- Parallax script -->
 <Parallax />
 
 <style>
   /* ============================================
-     DESKTOP — fluid, scales from 1512px Figma.
-     Hero adapts to its content (no forced 100vh) so the image and
-     its stickers stay together at a predictable height.
+     HERO — text-centered with floating stickers
+     Figma: 1512px wide artboard, padding 40px Y / 60px X
      ============================================ */
   .hero {
     background-color: var(--color-violet);
-    padding: calc(200 * var(--unit)) var(--container-padding) calc(60 * var(--unit));
+    padding: calc(200 * var(--unit)) var(--container-padding) calc(80 * var(--unit));
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
@@ -95,208 +85,122 @@ import Parallax from './Parallax.astro';
 
   .hero__inner {
     position: relative;
+    /* Inner content area = 1392px wide in Figma (1512 - 60*2 padding) */
     max-width: calc(1392 * var(--unit));
     margin: 0 auto;
     width: 100%;
+    /* Reserve space for stickers (image hero was 540px tall in Figma area;
+       we keep ~620px so the stickers have room to spread around the title) */
+    min-height: calc(620 * var(--unit));
+    /* Center the text vertically in this space */
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-
-  /* Image stack — sits in the upper portion */
-  .hero__image-wrap {
-    position: relative;
-    /* Reduced from 736 to 620 — image is smaller now */
-    width: min(calc(620 * var(--unit)), 75vw);
-    aspect-ratio: 620 / 404;
-    margin: 0 auto calc(60 * var(--unit));
-  }
-
-  /* Bottom block: title + meta */
-  .hero__bottom {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-  }
-
-
-  .hero__image {
-    position: absolute;
-    /* Equal margins on all 4 sides so the frame appears centered around the image */
-    top: 3%;
-    left: 3%;
-    width: 94%;
-    height: 94%;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    background: var(--color-placeholder);
-    /* Image rotation (visual tilt, same as frame so they stay aligned) */
-    transform: rotate(-1.86deg);
-    transition: transform 0.6s var(--ease-out);
-  }
-
-  .hero__image:hover {
-    transform: rotate(-1.86deg) scale(1.02);
-  }
-
-  .hero__placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-aubergine);
-    font-style: italic;
-    background: linear-gradient(135deg, #d9d9d9 0%, #c0c0c0 100%);
-    font-size: var(--text-sm);
+    gap: calc(2 * var(--unit));
   }
 
+  /* Title — big LC Mogi text */
   .hero__title {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-10);
     color: var(--color-aubergine);
     text-align: center;
-    flex-wrap: wrap;
+    position: relative;
+    z-index: 10;
   }
 
   .hero__name {
     font-size: var(--text-display);
     letter-spacing: 0.05em;
-    line-height: 1;
+    line-height: 1.2;
   }
 
+  /* Meta line below the title */
   .hero__meta {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: calc(1156 * var(--unit));
-    margin: 0 auto;
+    justify-content: center;
+    gap: var(--space-5);
     font-size: var(--text-sm);
     font-weight: 500;
     color: var(--color-aubergine);
-    padding: 0 calc(50 * var(--unit));
-    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 10;
   }
 
   /* ============================================
-     STICKERS — placed around the image corners.
-     Each sticker overflows slightly outside the image for the
-     "applied by hand" feel from the Figma mockup.
-
-     HOW TO ADJUST:
-     - top/bottom NEGATIVE = sticker goes outside the image (above/below)
-     - top/bottom POSITIVE = sticker goes inside the image
-     - left/right NEGATIVE = goes outside the image (to the side)
-     - left/right POSITIVE = goes inside the image
+     STICKERS — positions from Figma 1512px artboard
+     Reference inner area = 1392px wide.
+     All fluid via var(--unit). z-index 5 so they sit behind text.
      ============================================ */
   .sticker {
     position: absolute;
     pointer-events: none;
-    z-index: 50;
+    z-index: 5;
     height: auto;
     will-change: transform;
   }
 
-  /* Etoile — slightly above-left of the image */
+  /* Etoile — LEFT side, slightly above center
+     Figma: left 322, top 160, size 109px, rotation 19.32° */
   .sticker--etoile {
-    top: calc(-50 * var(--unit));
-    left: calc(20 * var(--unit));
+    top: calc(160 * var(--unit));
+    left: calc(322 * var(--unit));
     width: calc(109 * var(--unit));
-    transform: rotate(-15deg);
+    transform: rotate(19.32deg);
   }
 
-  /* Eyes — slightly above-right of the image */
+  /* Eyes — RIGHT side, slightly above center
+     Figma: left 1066, top 160, size 133px wide, rotation -6.11° */
   .sticker--eyes {
-    top: calc(-50 * var(--unit));
-    right: calc(40 * var(--unit));
-    width: calc(134 * var(--unit));
-    transform: rotate(-8deg);
+    top: calc(160 * var(--unit));
+    /* From left in Figma: 1066. From right in 1392 container: 1392-1066-133 = 193px */
+    right: calc(193 * var(--unit));
+    width: calc(133 * var(--unit));
+    transform: rotate(-6.11deg);
   }
 
-  /* Peace — slightly below-left of the image */
-  .sticker--peace {
-    bottom: calc(-50 * var(--unit));
-    left: calc(60 * var(--unit));
-    width: calc(112 * var(--unit));
-    transform: rotate(12deg);
-  }
-
-  /* Galaxy — slightly below-right of the image */
+  /* Galaxy — LEFT side, bottom
+     Figma: left 241, top 595, size 150x107 */
   .sticker--galaxy {
-    bottom: calc(-50 * var(--unit));
-    right: calc(30 * var(--unit));
-    width: calc(151 * var(--unit));
-    transform: rotate(8deg);
+    top: calc(595 * var(--unit));
+    left: calc(241 * var(--unit));
+    width: calc(150 * var(--unit));
+    transform: rotate(0deg);
+  }
+
+  /* Peace — RIGHT side, bottom
+     Figma: approximate position based on container percentages */
+  .sticker--peace {
+    top: calc(630 * var(--unit));
+    right: calc(280 * var(--unit));
+    width: calc(110 * var(--unit));
+    transform: rotate(24.81deg);
+  }
+
+  /* Planète — CENTER, bottom
+     Figma: left 691, top 689, size 130x104, rotation -6.28° */
+  .sticker--planete {
+    top: calc(689 * var(--unit));
+    left: calc(691 * var(--unit));
+    width: calc(130 * var(--unit));
+    transform: rotate(-6.28deg);
   }
 
   /* ============================================
-     MOBILE — Figma 375px mockup
-     Hero NOT forced to 100vh on mobile: it adapts to its content
-     to avoid huge empty space between menu and image.
+     MOBILE
      ============================================ */
   @media (max-width: 768px) {
     .hero {
-      /* Override desktop min-height: 100vh */
-      min-height: auto;
-      padding: 133px var(--container-padding) 40px;
+      padding: 133px var(--container-padding) 60px;
     }
 
     .hero__inner {
-      display: flex;
-      flex-direction: column;
-      /* Reset desktop flex distribution: blocks just stack naturally */
-      flex: none;
       min-height: auto;
-      width: 100%;
-      max-width: none;
-      gap: 59px;
-    }
-
-    .hero__image-wrap {
-      width: 100%;
-      max-width: 328px;
-      aspect-ratio: 328 / 177;
-      /* Center horizontally only — no vertical auto margin needed anymore */
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .hero__frame {
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      left: 0;
-      transform: rotate(-1.86deg);
-    }
-
-    .hero__image {
-      /* Equal margins on all 4 sides — same as desktop */
-      top: 3%;
-      left: 3%;
-      width: 94%;
-      height: 94%;
-      max-width: none;
-      border-radius: 40px;
-      transform: rotate(-1.86deg);
-    }
-
-    .hero__image:hover {
-      transform: rotate(-1.86deg) scale(1.02);
-    }
-
-    .hero__bottom {
-      /* No auto margin — bottom block sits right after the image */
-      margin-top: 0;
-      gap: 8px;
-    }
-
-    .hero__title {
-      flex-direction: column;
-      gap: 4px;
-      width: 100%;
     }
 
     .hero__name {
@@ -305,24 +209,12 @@ import Parallax from './Parallax.astro';
     }
 
     .hero__meta {
-      padding: 0;
-      max-width: none;
-      margin-top: 8px;
-      width: 100%;
       font-size: 16px;
     }
 
-    /* Hide all stickers on mobile per Figma */
+    /* Hide stickers on mobile for clean look */
     .sticker {
       display: none;
-    }
-  }
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .sticker,
-    .hero__image-wrap {
-      transition: none !important;
     }
   }
 </style>
