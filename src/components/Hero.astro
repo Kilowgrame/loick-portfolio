@@ -207,9 +207,9 @@ import Parallax from './Parallax.astro';
   }
 
   /* ============================================
-     STICKERS — placed at the 4 corners of the image wrap.
-     Positions in fluid units, INSIDE the image area.
-     z-index high enough to appear above other elements.
+     STICKERS — placed per Figma original mockup.
+     Etoile + Eyes are at the TOP of the image (slightly overlapping out).
+     Peace + Galaxy are at the BOTTOM (slightly overlapping out).
      ============================================ */
   .sticker {
     position: absolute;
@@ -219,34 +219,34 @@ import Parallax from './Parallax.astro';
     will-change: transform;
   }
 
-  /* Eyes — TOP LEFT corner of the image */
+  /* Etoile — TOP LEFT, slightly above the image */
+  .sticker--etoile {
+    top: calc(-30 * var(--unit));
+    left: calc(40 * var(--unit));
+    width: calc(109 * var(--unit));
+    transform: rotate(-15deg);
+  }
+
+  /* Eyes — TOP RIGHT, slightly above the image */
   .sticker--eyes {
-    top: calc(20 * var(--unit));
-    left: calc(20 * var(--unit));
+    top: calc(-30 * var(--unit));
+    right: calc(60 * var(--unit));
     width: calc(134 * var(--unit));
     transform: rotate(-8deg);
   }
 
-  /* Peace — TOP RIGHT corner */
+  /* Peace — BOTTOM LEFT, slightly below the image */
   .sticker--peace {
-    top: calc(20 * var(--unit));
-    right: calc(20 * var(--unit));
+    bottom: calc(-30 * var(--unit));
+    left: calc(80 * var(--unit));
     width: calc(112 * var(--unit));
     transform: rotate(12deg);
   }
 
-  /* Etoile — BOTTOM LEFT corner */
-  .sticker--etoile {
-    bottom: calc(20 * var(--unit));
-    left: calc(20 * var(--unit));
-    width: calc(104 * var(--unit));
-    transform: rotate(-15deg);
-  }
-
-  /* Galaxy — BOTTOM RIGHT corner */
+  /* Galaxy — BOTTOM RIGHT, slightly below the image */
   .sticker--galaxy {
-    bottom: calc(20 * var(--unit));
-    right: calc(20 * var(--unit));
+    bottom: calc(-30 * var(--unit));
+    right: calc(60 * var(--unit));
     width: calc(151 * var(--unit));
     transform: rotate(8deg);
   }
