@@ -7,24 +7,27 @@ import Parallax from './Parallax.astro';
   <div class="hero__inner">
     <!--
       IMAGE STACK — image + frame move together at VERY SLOW parallax (-0.05).
-      Stickers are POSITIONED RELATIVE to this wrap so they stay anchored to the
-      image even when the hero height changes (resizing the window vertically
-      no longer moves the stickers away from the image).
+      Stickers are ALSO inside this wrap so they stay anchored to the image,
+      but each has its OWN parallax speed (overriding the wrap's).
     -->
-    <div
-      class="hero__image-wrap"
-      data-parallax="-0.05"
-      data-rotation="0"
-    >
-      <div class="hero__frame" aria-hidden="true"></div>
-      <div class="hero__image">
+    <div class="hero__image-wrap">
+      <div
+        class="hero__frame"
+        data-parallax="-0.05"
+        data-rotation="-1.86"
+        aria-hidden="true"
+      ></div>
+      <div
+        class="hero__image"
+        data-parallax="-0.05"
+        data-rotation="-1.86"
+      >
         <div class="hero__placeholder">Ton image ici</div>
       </div>
 
       <!--
-        STICKERS — positioned around the image (their parent), so they keep
-        their visual relationship even when the hero height changes.
-        Each has a `data-parallax` speed and `data-rotation` (preserved across scroll).
+        STICKERS — inside the wrap so they stay anchored to the image
+        when the window is resized vertically.
       -->
       <img
         src="/images/stickers/etoile.svg"
@@ -122,9 +125,6 @@ import Parallax from './Parallax.astro';
     aspect-ratio: 736 / 480;
     /* Vertically center between the menu and the bottom block */
     margin: auto auto 0;
-    /* The rotation is set inline by the parallax script and combined with translate */
-    transform: rotate(0deg);
-    transition: transform 0.05s linear;
   }
 
   /* Bottom block: title + meta, naturally anchored at the bottom by flex */
@@ -207,10 +207,10 @@ import Parallax from './Parallax.astro';
   }
 
   /* ============================================
-     STICKERS — positions relative to the IMAGE WRAP (their new parent)
-     Reference: image wrap = 736px wide × 480px tall (Figma desktop).
-     Use negative values to make stickers OVERFLOW the image (overlay corners).
-     Positions/sizes are fluid via var(--unit).
+     STICKERS — positioned relative to .hero__image-wrap.
+     Sizes/positions in fluid units (--unit). Negative values make
+     stickers overflow the image for an "applied by hand" look.
+     They stay anchored to the image at any window size.
      ============================================ */
   .sticker {
     position: absolute;
@@ -220,34 +220,34 @@ import Parallax from './Parallax.astro';
     will-change: transform;
   }
 
-  /* Eyes — top-LEFT corner, slightly overlapping the image */
+  /* Eyes — top-LEFT, slightly above the image */
   .sticker--eyes {
-    top: calc(-30 * var(--unit));
-    left: calc(-60 * var(--unit));
+    top: calc(-40 * var(--unit));
+    left: calc(-50 * var(--unit));
     width: calc(134 * var(--unit));
     transform: rotate(-8deg);
   }
 
-  /* Peace — top-RIGHT corner */
+  /* Peace — top-RIGHT */
   .sticker--peace {
-    top: calc(-30 * var(--unit));
-    right: calc(-50 * var(--unit));
+    top: calc(-50 * var(--unit));
+    right: calc(-40 * var(--unit));
     width: calc(112 * var(--unit));
     transform: rotate(12deg);
   }
 
-  /* Etoile — bottom-LEFT corner */
+  /* Etoile — bottom-LEFT */
   .sticker--etoile {
-    bottom: calc(-30 * var(--unit));
-    left: calc(-50 * var(--unit));
+    bottom: calc(-40 * var(--unit));
+    left: calc(-40 * var(--unit));
     width: calc(104 * var(--unit));
     transform: rotate(-15deg);
   }
 
-  /* Galaxy — bottom-RIGHT corner */
+  /* Galaxy — bottom-RIGHT */
   .sticker--galaxy {
     bottom: calc(-30 * var(--unit));
-    right: calc(-70 * var(--unit));
+    right: calc(-60 * var(--unit));
     width: calc(151 * var(--unit));
     transform: rotate(8deg);
   }
