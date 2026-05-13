@@ -12,12 +12,6 @@ import Parallax from './Parallax.astro';
     -->
     <div class="hero__image-wrap">
       <div
-        class="hero__frame"
-        data-parallax="-0.05"
-        data-rotation="-1.86"
-        aria-hidden="true"
-      ></div>
-      <div
         class="hero__image"
         data-parallax="-0.05"
         data-rotation="-1.86"
@@ -126,14 +120,6 @@ import Parallax from './Parallax.astro';
     gap: var(--space-1);
   }
 
-  .hero__frame {
-    position: absolute;
-    inset: 0;
-    border: 2px solid var(--color-violet-border);
-    border-radius: calc(52 * var(--unit));
-    /* Frame rotation (visual tilt, independent of parallax) */
-    transform: rotate(-1.86deg);
-  }
 
   .hero__image {
     position: absolute;
