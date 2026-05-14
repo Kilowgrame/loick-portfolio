@@ -1,16 +1,56 @@
 ---
 // Hero — 100vh, text centered, 5 stickers positioned around in %
-// No parallax, simple and predictable.
+// Stickers have a scroll-driven parallax (vertical only).
+import Parallax from './Parallax.astro';
 ---
 
 <section class="hero">
   <div class="hero__inner">
-    <!-- 5 stickers — positioned in % so they scale with the hero size -->
-    <img src="/images/stickers/etoile.svg"  alt="" class="sticker sticker--etoile"  aria-hidden="true" />
-    <img src="/images/stickers/eyes.svg"    alt="" class="sticker sticker--eyes"    aria-hidden="true" />
-    <img src="/images/stickers/galaxy.svg"  alt="" class="sticker sticker--galaxy"  aria-hidden="true" />
-    <img src="/images/stickers/peace.svg"   alt="" class="sticker sticker--peace"   aria-hidden="true" />
-    <img src="/images/stickers/planete.svg" alt="" class="sticker sticker--planete" aria-hidden="true" />
+    <!--
+      5 stickers — each has a different parallax speed.
+      Speed values (0 to 1): higher = sticker moves up faster as you scroll.
+      The text title does NOT have parallax — it scrolls normally.
+    -->
+    <img
+      src="/images/stickers/etoile.svg"
+      alt=""
+      class="sticker sticker--etoile"
+      data-parallax-speed="0.25"
+      data-rotation="19.32"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/eyes.svg"
+      alt=""
+      class="sticker sticker--eyes"
+      data-parallax-speed="0.35"
+      data-rotation="-6.11"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/galaxy.svg"
+      alt=""
+      class="sticker sticker--galaxy"
+      data-parallax-speed="0.15"
+      data-rotation="0"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/peace.svg"
+      alt=""
+      class="sticker sticker--peace"
+      data-parallax-speed="0.20"
+      data-rotation="24.81"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/planete.svg"
+      alt=""
+      class="sticker sticker--planete"
+      data-parallax-speed="0.10"
+      data-rotation="-6.28"
+      aria-hidden="true"
+    />
 
     <!-- Centered text -->
     <div class="hero__title">
@@ -24,6 +64,9 @@
     </div>
   </div>
 </section>
+
+<!-- Parallax script — loaded once -->
+<Parallax />
 
 <style>
   /* ============================================
@@ -138,7 +181,8 @@
      ============================================ */
   @media (max-width: 768px) {
     .hero {
-      height: auto;
+      /* 90vh on mobile, gives a subtle "more below" hint */
+      height: 90vh;
       min-height: auto;
       padding: 160px var(--container-padding) 80px;
     }
