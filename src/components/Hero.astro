@@ -181,14 +181,14 @@ import Parallax from './Parallax.astro';
      ============================================ */
   @media (max-width: 768px) {
     .hero {
-      /* 90vh on mobile, gives a subtle "more below" hint */
-      height: 90vh;
+      /* 80vh on mobile */
+      height: 80vh;
       min-height: auto;
       padding: 160px var(--container-padding) 80px;
     }
 
     .hero__inner {
-      height: auto;
+      height: 100%;
     }
 
     .hero__name {
@@ -200,9 +200,32 @@ import Parallax from './Parallax.astro';
       font-size: 16px;
     }
 
-    /* Hide stickers on mobile for a clean text-only hero */
-    .sticker {
+    /* Hide Galaxy and Peace on mobile — too crowded */
+    .sticker--galaxy,
+    .sticker--peace {
       display: none;
+    }
+
+    /* Keep 3 stickers visible: Etoile, Eyes, Planète */
+    .sticker--etoile {
+      top: 18%;
+      left: 8%;
+      right: auto;
+      width: 70px;
+    }
+
+    .sticker--eyes {
+      top: 18%;
+      right: 8%;
+      left: auto;
+      width: 85px;
+    }
+
+    .sticker--planete {
+      bottom: 12%;
+      left: 50%;
+      width: 85px;
+      /* Keep horizontal centering via translateX */
     }
   }
 </style>
