@@ -12,7 +12,7 @@ fields:
   - UI Design
   - UX Design
 category: UI / UX Design
-order: 4
+order: 1
 draft: false
 liveUrl: https://www.wikit.ai/
 metaItems:
