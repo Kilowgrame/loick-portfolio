@@ -1,7 +1,7 @@
 ---
 title: Manerty
 slug: manerty
-description: uillaume et Stéphane Marquier souhaitent être accompagnés dans la
+description: Guillaume et Stéphane Marquier souhaitent être accompagnés dans la
   création de leur application métier. Celle-ci a pour objectif d'aider les
   cabinets d'experts-comptables dans la gestion locative.
 cover: /images/uploads/manerty/manerty/screen-projet.webp
