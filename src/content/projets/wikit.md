@@ -30,21 +30,27 @@ blocs:
       Valentine s’est occupé de toute la partie branding, tandis que de mon coté
       j’ai travaillé sur la nouvelle arborescence, le parcours utilisateur et
       l’UI du site.
+
   - type: image
     src: /images/uploads/wikit/mockup-wikit.webp
     alt: Mockup projet Wikit
+
   - type: image
     src: /images/uploads/wikit/screens-mockup-wikit.webp
     alt: Ecrans du site
+
   - type: image
     src: /images/uploads/wikit/bento-wikit.webp
     alt: Section bento du site wikit
+
   - type: image
     src: /images/uploads/wikit/page-connecteurs-wikit.webp
     alt: Page connecteurs du site Wikit
+
   - type: image
     src: /images/uploads/wikit/ecran-responsive-wikit.webp
     alt: Mockup responsive du site Wikit sur mobile
+
   - type: galerie
     colonnes: 2
     images:
@@ -52,6 +58,7 @@ blocs:
         alt: card ressource
       - src: /images/uploads/wikit/cards-ressoruces-hover.webp
         alt: card ressource survolée
+        
   - type: image
     src: /images/uploads/wikit/sections-wikit.webp
     alt: Sélection des sections du site Wikit

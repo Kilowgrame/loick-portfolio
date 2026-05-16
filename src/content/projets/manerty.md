@@ -23,6 +23,7 @@ blocs:
   - type: image
     src: /images/uploads/manerty/screen-projet.webp
     alt: Image maison projet Manerty
+
   - type: text
     contenu: Pour répondre au mieux au besoin d’un MVP, nous allons devoir prioriser
       les fonctionnalités que les fondateurs souhaitent intégrer au sein de
@@ -32,12 +33,15 @@ blocs:
       liés à la comptabilité de gestion locative.Nous avons également organisé
       un atelier de Crazy Eight pour faire émerger des idées auprès des
       utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
+
   - type: image
     src: /images/uploads/manerty/screens-atelier-01.webp
     alt: Screen Atelier
+
   - type: image
     src: /images/uploads/manerty/screens-atelier-02.webp
     alt: Atelier de priorisation des fonctionnalités
+
   - type: text
     contenu: >-
       Une fois les tâches priorisées, nous avons commencé la conception de
@@ -47,16 +51,24 @@ blocs:
       graphique de Manerty.
 
       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
+
   - type: image
     src: /images/uploads/manerty/screens-general.webp
     alt: Ecrans d'applications
+
   - type: image
     src: /images/uploads/manerty/screen-intro-projet.webp
+    alt: Écran détention propriétaire Manerty
+
   - type: image
     src: /images/uploads/manerty/screen-connexion.webp
+    alt: Écran de connexion
+
   - type: image
     src: /images/uploads/manerty/screen-dashboard.webp
+    alt: Écran de dashboard propriétaire
+
   - type: image
     src: /images/uploads/manerty/screens-mockup.webp
-    alt: Scree
+    alt: Screen gamifié d'ajout de détention
 ---
