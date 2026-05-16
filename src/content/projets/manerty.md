@@ -12,7 +12,7 @@ fields:
   - Product Design
 category: Product Design
 order: 2
-draft: true
+draft: false
 metaItems:
   - label: Année
     value: "2024"
