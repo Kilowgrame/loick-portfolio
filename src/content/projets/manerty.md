@@ -21,13 +21,39 @@ metaItems:
 showStats: false
 blocs:
   - type: text
-    contenu: Le marché de la gestion locative pour experts-comptables est dominé par
-      des outils anciens et complexes. Manerty veut proposer une alternative
-      moderne, claire et axée sur l'automatisation.
+    contenu: Pour répondre au mieux au besoin d’un MVP, nous allons devoir prioriser
+      les fonctionnalités que les fondateurs souhaitent intégrer au sein de
+      l’application. L’objectif est de placer les futurs utilisateurs au centre
+      du projet. Nous avons donc récolté des données afin de déterminer les
+      tâches les plus importantes et voir quelles sont les problèmes actuels
+      liés à la comptabilité de gestion locative.  Nous avons également organisé
+      un atelier de Crazy Eight pour faire émerger des idées auprès des
+      utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
+  - type: image
+    src: /images/uploads/screens-atelier-01.webp
+    alt: "Screen Atelier "
+  - type: image
+    src: /images/uploads/screens-atelier-02.webp
+    alt: Atelier de priorisation des fonctionnalités
   - type: text
-    contenu: Plusieurs ateliers avec les fondateurs et 8 entretiens utilisateurs
-      (experts-comptables, assistants de gestion) pour cartographier la chaîne
-      de valeur et les pain points.
+    contenu: >-
+      Une fois les tâches priorisées, nous avons commencé la conception de
+      l’application. Pour gagner du temps, nous sommes passés directement au
+      webdesign sans phase de wireframes. L’objectif était de créer des
+      composants basés sur Tailwind et de les personnaliser selon la charte
+      graphique de Manerty.
+
+       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
+  - type: image
+    src: /images/uploads/screens-general.webp
+    alt: Ecrans d'applications
   - type: image
     src: /images/uploads/screen-intro-projet.webp
+  - type: image
+    src: /images/uploads/screen-connexion.webp
+  - type: image
+    src: /images/uploads/screen-dashboard.webp
+  - type: image
+    src: /images/uploads/screens-mockup.webp
+    alt: Scree
 ---
