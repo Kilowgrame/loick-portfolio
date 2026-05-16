@@ -21,7 +21,7 @@ blocs:
     src: /images/uploads/likewatt/screen-projet-likewatt.webp
     alt: Mise en avant projet Likewatt
   - type: text
-    contenu: Lors de nos échanges avec les équipes de Likewatt, plusieurs problèmes signalés par leurs clients sont ressortis : une navigation peu intuitive, un scroll qui ne permettait pas de comprendre qu’il restait des informations à découvrir, ainsi qu’un système de drag-and-drop peu clair pour organiser les données. Nous sommes donc repartis sur des bases solides en simplifiant la navigation, en supprimant le scroll au profit d’onglets plus explicites et en créant de micro-interactions destinées à faciliter l’export des données.
+    contenu: Lors de nos échanges avec les équipes de Likewatt, plusieurs problèmes signalés par leurs clients sont ressortis ":" une navigation peu intuitive, un scroll qui ne permettait pas de comprendre qu’il restait des informations à découvrir, ainsi qu’un système de drag-and-drop peu clair pour organiser les données. Nous sommes donc repartis sur des bases solides en simplifiant la navigation, en supprimant le scroll au profit d’onglets plus explicites et en créant de micro-interactions destinées à faciliter l’export des données.
   - type: image
     src: /images/uploads/likewatt/screen-atelier.webp
     alt: User Flow
