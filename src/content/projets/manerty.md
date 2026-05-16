@@ -18,7 +18,7 @@ metaItems:
     value: "2024"
   - label: Secteurs
     value: Comptabilité, Immobilier
-showStats: true
+showStats: false
 blocs:
   - type: text
     contenu: Le marché de la gestion locative pour experts-comptables est dominé par
