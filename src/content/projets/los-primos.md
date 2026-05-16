@@ -6,7 +6,7 @@ bgColor: "#c0acfb"
 textColor: "#31243d"
 fields: ["Ateliers client", "UI Design", "UX Design", "E-commerce"]
 category: "UI / UX Design"
-order: 3
+order: 2
 
 metaItems:
   - label: "Année"
@@ -17,11 +17,12 @@ metaItems:
 showStats: false
 
 blocs:
-  - type: text
-    contenu: Nous avons pensé à un ensemble de micros-interactions et de détails pour fluidifier la navigation et permettre à l'utilisateur de naviguer sereinement. L'objectif était aussi de rendre le café pédagogique en donnant des informations précises sur la provenance, les arômes etc...
   - type: image
     src: /images/uploads/los-primos/screen-projet.webp
     alt: Mise en avant projet Los Primos
+
+  - type: text
+    contenu: Nous avons pensé à un ensemble de micros-interactions et de détails pour fluidifier la navigation et permettre à l'utilisateur de naviguer sereinement. L'objectif était aussi de rendre le café pédagogique en donnant des informations précises sur la provenance, les arômes etc...
 
   - type: image
     src: /images/uploads/los-primos/screen-section-hero-single.webp

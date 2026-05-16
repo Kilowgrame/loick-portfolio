@@ -11,7 +11,7 @@ fields:
   - Ateliers client
   - Product Design
 category: Product Design
-order: 2
+order: 5
 draft: false
 metaItems:
   - label: Année

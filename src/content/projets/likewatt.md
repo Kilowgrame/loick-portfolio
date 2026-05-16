@@ -6,7 +6,7 @@ bgColor: "#31243d"
 textColor: "#ffffff"
 fields: ["Ateliers client", "Product Design"]
 category: "Product Design"
-order: 5
+order: 3
 
 metaItems:
   - label: "Année"
