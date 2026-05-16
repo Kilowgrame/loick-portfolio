@@ -25,4 +25,16 @@ blocs:
     contenu: Wikit propose une plateforme de création d'agents conversationnels.
       L'identité visuelle, datée, ne reflétait plus le caractère novateur de la
       solution.
+  - type: image
+    src: /images/uploads/mockup-wikit.jpg
+    alt: Mockup projet Wikit
+  - type: image
+    src: /images/uploads/screens-mockup-wikit.webp
+  - type: galerie
+    colonnes: 2
+    images:
+      - src: /images/uploads/cards-ressources.webp
+        alt: card ressource
+      - src: /images/uploads/cards-ressoruces-hover.webp
+        alt: card ressource survolée
 ---
