@@ -34,7 +34,7 @@ blocs:
       utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
   - type: image
     src: /images/uploads/manerty/screens-atelier-01.webp
-    alt: "Screen Atelier "
+    alt: Screen Atelier
   - type: image
     src: /images/uploads/manerty/screens-atelier-02.webp
     alt: Atelier de priorisation des fonctionnalités
