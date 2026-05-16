@@ -20,6 +20,9 @@ metaItems:
     value: Comptabilité, Immobilier
 showStats: false
 blocs:
+  - type: image
+    src: /images/uploads/screen-projet.webp
+    alt: Image maison projet Manerty
   - type: text
     contenu: Pour répondre au mieux au besoin d’un MVP, nous allons devoir prioriser
       les fonctionnalités que les fondateurs souhaitent intégrer au sein de
