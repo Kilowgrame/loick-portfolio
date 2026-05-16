@@ -34,7 +34,7 @@ blocs:
     src: /images/uploads/mockup-wikit.webp
     alt: Mockup projet Wikit
   - type: image
-    src: /images/uploads/screens-mockup-wikit.webp
+    src: /images/uploads/page-connecteurs-wikit.webp
     alt: Ecrans du site
   - type: image
     src: /images/uploads/bento-wikit.webp
