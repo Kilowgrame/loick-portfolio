@@ -4,7 +4,7 @@ slug: manerty
 description: Guillaume et Stéphane Marquier souhaitent être accompagnés dans la
   création de leur application métier. Celle-ci a pour objectif d'aider les
   cabinets d'experts-comptables dans la gestion locative.
-cover: /images/uploads/screen-projet.webp
+cover: /images/uploads/manerty/manerty/screen-projet.webp
 bgColor: "#1dd183"
 textColor: "#06535e"
 fields:
@@ -21,7 +21,7 @@ metaItems:
 showStats: false
 blocs:
   - type: image
-    src: /images/uploads/screen-projet.webp
+    src: /images/uploads/manerty/screen-projet.webp
     alt: Image maison projet Manerty
   - type: text
     contenu: Pour répondre au mieux au besoin d’un MVP, nous allons devoir prioriser
@@ -33,10 +33,10 @@ blocs:
       un atelier de Crazy Eight pour faire émerger des idées auprès des
       utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
   - type: image
-    src: /images/uploads/screens-atelier-01.webp
+    src: /images/uploads/manerty/screens-atelier-01.webp
     alt: "Screen Atelier "
   - type: image
-    src: /images/uploads/screens-atelier-02.webp
+    src: /images/uploads/manerty/manertyscreens-atelier-02.webp
     alt: Atelier de priorisation des fonctionnalités
   - type: text
     contenu: >-
@@ -48,15 +48,15 @@ blocs:
 
       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
   - type: image
-    src: /images/uploads/screens-general.webp
+    src: /images/uploads/manerty/manertyscreens-general.webp
     alt: Ecrans d'applications
   - type: image
-    src: /images/uploads/screen-intro-projet.webp
+    src: /images/uploads/manerty/manertyscreen-intro-projet.webp
   - type: image
-    src: /images/uploads/screen-connexion.webp
+    src: /images/uploads/manerty/manertyscreen-connexion.webp
   - type: image
-    src: /images/uploads/screen-dashboard.webp
+    src: /images/uploads/manerty/manerty/screen-dashboard.webp
   - type: image
-    src: /images/uploads/screens-mockup.webp
+    src: /images/uploads/manerty/manerty/screens-mockup.webp
     alt: Scree
 ---
