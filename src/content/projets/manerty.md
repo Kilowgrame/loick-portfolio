@@ -29,7 +29,7 @@ blocs:
       l’application. L’objectif est de placer les futurs utilisateurs au centre
       du projet. Nous avons donc récolté des données afin de déterminer les
       tâches les plus importantes et voir quelles sont les problèmes actuels
-      liés à la comptabilité de gestion locative.  Nous avons également organisé
+      liés à la comptabilité de gestion locative.Nous avons également organisé
       un atelier de Crazy Eight pour faire émerger des idées auprès des
       utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
   - type: image
@@ -46,7 +46,7 @@ blocs:
       composants basés sur Tailwind et de les personnaliser selon la charte
       graphique de Manerty.
 
-       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
+      Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
   - type: image
     src: /images/uploads/screens-general.webp
     alt: Ecrans d'applications

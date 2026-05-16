@@ -25,7 +25,7 @@ blocs:
   - type: text
     contenu: Wikit est une entreprise spécialisé dans la génération d’applications
       IA. L’entreprise possédait une identité visuelle vieillissante et
-      souhaitait donner un aspect plus moderne à son image.   Avec Valentine
+      souhaitait donner un aspect plus moderne à son image. Avec Valentine
       Carre nous avons travaillé ensemble sur la réalisation de ce beau projet.
       Valentine s’est occupé de toute la partie branding, tandis que de mon coté
       j’ai travaillé sur la nouvelle arborescence, le parcours utilisateur et
