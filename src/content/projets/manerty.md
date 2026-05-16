@@ -36,7 +36,7 @@ blocs:
     src: /images/uploads/manerty/screens-atelier-01.webp
     alt: "Screen Atelier "
   - type: image
-    src: /images/uploads/manerty/manertyscreens-atelier-02.webp
+    src: /images/uploads/manerty/screens-atelier-02.webp
     alt: Atelier de priorisation des fonctionnalités
   - type: text
     contenu: >-
@@ -48,15 +48,15 @@ blocs:
 
       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
   - type: image
-    src: /images/uploads/manerty/manertyscreens-general.webp
+    src: /images/uploads/manerty/screens-general.webp
     alt: Ecrans d'applications
   - type: image
-    src: /images/uploads/manerty/manertyscreen-intro-projet.webp
+    src: /images/uploads/manerty/screen-intro-projet.webp
   - type: image
-    src: /images/uploads/manerty/manertyscreen-connexion.webp
+    src: /images/uploads/manerty/screen-connexion.webp
   - type: image
-    src: /images/uploads/manerty/manerty/screen-dashboard.webp
+    src: /images/uploads/manerty/screen-dashboard.webp
   - type: image
-    src: /images/uploads/manerty/manerty/screens-mockup.webp
+    src: /images/uploads/manerty/screens-mockup.webp
     alt: Scree
 ---
