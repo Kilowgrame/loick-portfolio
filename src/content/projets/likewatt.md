@@ -14,7 +14,7 @@ metaItems:
   - label: "Secteurs"
     value: "Énergie"
 
-showStats: true
+showStats: false
 
 blocs:
   - type: image
