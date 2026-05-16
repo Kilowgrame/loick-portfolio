@@ -20,18 +20,18 @@ metaItems:
 showStats: false
 blocs:
   - type: image
-    src: /images/uploads/sbg-systems/projet-sbg.webp
+    src: /images/uploads/sbg-systems/projet-sbg.jpg
     alt: Page d'accueil SBG Systems
 
   - type: text
     contenu: Refondre ce site en ligne depuis plusieurs années a été un challenge en terme de dispatch des informations. En effet l'ancienne navigation mettait l'accent sur les gammes de produits. Or celle-ci ne correspondait pas forcément avec les usages clients et pouvaient même prêter à confusion. Nous avons donc recentrer l'expérience utilisateur sur la fonctionnalité d'un produit ainsi que de son usage.
 
   - type: image
-    src: /images/projets/sbg-systems/projet-sbg.webp
+    src: /images/projets/sbg-systems/home-sbg.webp
     alt: Cas d'usage défense
 
   - type: image
-    src: /images/projets/sbg-systems/projet-sbg.webp
+    src: /images/projets/sbg-systems/projet-sbg.jpg
     alt: Cas d'usage automobile
 
   - type: image
