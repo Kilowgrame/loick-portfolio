@@ -39,7 +39,7 @@
 
   /* Typography sizes — fluid with safe minimums */
   --text-xs: max(11px, calc(14 * var(--unit)));
-  --text-sm: max(12px, calc(16 * var(--unit)));
+  --text-sm: max(10px, calc(14 * var(--unit)));
   --text-base: max(14px, calc(18 * var(--unit)));
   --text-md: max(16px, calc(24 * var(--unit)));
   --text-lg: max(18px, calc(28 * var(--unit)));
@@ -49,9 +49,9 @@
 
   /* Page-specific fluid sizes
      clamp(min mobile, fluid via Figma value, max desktop) */
-  --text-body-single: clamp(16px, calc(22 * var(--unit)), 22px);   /* paragraphs in single content */
+  --text-body-single: clamp(16px, calc(22 * var(--unit)), 18px);   /* paragraphs in single content */
   --text-title-single: clamp(28px, calc(40 * var(--unit)), 40px);  /* single project title */
-  --text-desc-single: clamp(16px, calc(20 * var(--unit)), 20px);   /* single description */
+  --text-desc-single: clamp(16px, calc(20 * var(--unit)), 16px);   /* single description */
   --text-card-title: clamp(18px, calc(24 * var(--unit)), 24px);    /* archive card titles */
   --text-filter: clamp(14px, calc(16 * var(--unit)), 16px);        /* archive filter buttons */
   --text-archive-hero: clamp(48px, calc(102 * var(--unit)), 102px); /* PROJETS hero title */

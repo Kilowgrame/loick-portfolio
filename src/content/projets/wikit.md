@@ -22,6 +22,11 @@ metaItems:
     value: Tech, IA
 showStats: false
 blocs:
+
+  - type: image
+    src: /images/uploads/wikit/mockup-wikit.webp
+    alt: Mockup projet Wikit
+
   - type: text
     contenu: Wikit est une entreprise spécialisé dans la génération d’applications
       IA. L’entreprise possédait une identité visuelle vieillissante et
@@ -30,11 +35,7 @@ blocs:
       Valentine s’est occupé de toute la partie branding, tandis que de mon coté
       j’ai travaillé sur la nouvelle arborescence, le parcours utilisateur et
       l’UI du site.
-
-  - type: image
-    src: /images/uploads/wikit/mockup-wikit.webp
-    alt: Mockup projet Wikit
-
+      
   - type: image
     src: /images/uploads/wikit/screens-mockup-wikit.webp
     alt: Ecrans du site
