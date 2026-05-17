@@ -12,8 +12,8 @@
     </a>
 
     <ul class="menu__list">
-      <li><a href="/projets">Work</a></li>
-      <li><a href="/a-propos">A propos</a></li>
+      <li><a href="/projets">Projets</a></li>
+      <!-- <li><a href="/a-propos">A propos</a></li> -->
       <li><a href="/ressources">Ressources</a></li>
       <li><a href="mailto:legallais.loick@gmail.com">Contact</a></li>
     </ul>
@@ -85,7 +85,7 @@
     content: '';
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -4px;
     height: 1px;
     width: 100%;
     background: currentColor;
@@ -105,11 +105,15 @@
       top: 16px;
       /* Add side margin so it never touches screen edges */
       max-width: calc(100vw - 32px);
+      width: calc(100vw - 32px);
     }
 
     .menu {
       gap: 16px;
-      padding: 10px 14px 10px 10px;
+      padding: 10px 16px 10px 10px;
+      width: 100%;
+      justify-content: space-evenly; 
+      border-radius: var(--radius-xl);
     }
 
     .menu__logo {
@@ -118,7 +122,9 @@
     }
 
     .menu__list {
-      gap: 14px;
+      flex: 1;
+    justify-content: space-evenly;
+    gap: 0;
     }
 
     .menu__list a {

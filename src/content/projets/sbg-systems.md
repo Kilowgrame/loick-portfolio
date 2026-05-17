@@ -17,7 +17,7 @@ metaItems:
   - label: Année
     value: "2025"
   - label: Secteurs
-    value: Défense, automobile
+    value: Véhicule autonome, Industry
 showStats: false
 blocs:
   - type: image

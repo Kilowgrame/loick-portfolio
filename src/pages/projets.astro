@@ -19,6 +19,22 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
   <section class="projects-hero">
     <div class="projects-hero__inner">
       <h1 class="projects-hero__title display">PROJETS</h1>
+      <img
+  src="/images/stickers/peace.svg"
+  alt=""
+  class="sticker sticker--etoile"
+  data-parallax-speed="0.3"
+  data-rotation="19.32"
+  aria-hidden="true"
+/>
+<img
+  src="/images/stickers/galaxy.svg"
+  alt=""
+  class="sticker sticker--peace"
+  data-parallax-speed="0.3"
+  data-rotation="19.32"
+  aria-hidden="true"
+/>
     </div>
   </section>
 
@@ -128,6 +144,30 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
     background: var(--color-white);
   }
 
+  .sticker {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    height: auto;
+    will-change: transform;
+  }
+
+  /* Etoile — TOP LEFT zone, around 1/4 in from the left */
+  .sticker--etoile {
+    top: 18%;
+    left: 22%;
+    width: calc(90 * var(--unit));
+    transform: rotate(19.32deg);
+  }
+
+
+  /* Peace — BOTTOM RIGHT zone */
+  .sticker--peace {
+    bottom: 18%;
+    right: 18%;
+    width: calc(120 * var(--unit));
+    transform: rotate(-20deg);
+  }
   /* Filters */
   .filters {
     display: none;
