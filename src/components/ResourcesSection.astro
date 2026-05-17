@@ -7,6 +7,11 @@ interface Resource {
   image?: string;
 }
 
+interface Props {          
+  showTitle?: boolean;
+}
+const { showTitle = true } = Astro.props; 
+
 const resources: Resource[] = [
   { title: 'WebP Manager', category: 'Plugin Figma', href: '#' },
   { title: 'Template Application de discussion', category: 'Fichier figma', href: '#' },
@@ -15,9 +20,11 @@ const resources: Resource[] = [
 ---
 
 <section class="resources">
+ {showTitle && (
   <h2 class="resources__heading display fade-in" style="word-spacing: 4px;">
     Quelques  ressources  à  disposition
   </h2>
+)}
 
   <div class="resources__grid">
     {resources.map((resource) => (
