@@ -47,6 +47,7 @@ const featured = (await getCollection('projets'))
           bgColor={project.data.bgColor}
           textColor={project.data.textColor}
           href={`/projets/${project.slug}`}
+          image={project.data.cover}
         />
       </div>
     ))}

@@ -41,8 +41,8 @@
   --text-xs: max(11px, calc(14 * var(--unit)));
   --text-sm: max(10px, calc(14 * var(--unit)));
   --text-base: max(14px, calc(18 * var(--unit)));
-  --text-md: max(16px, calc(24 * var(--unit)));
-  --text-lg: max(18px, calc(28 * var(--unit)));
+  --text-md: max(16px, calc(20 * var(--unit)));
+  --text-lg: max(18px, calc(24 * var(--unit)));
   --text-xl: max(28px, calc(40 * var(--unit)));
   --text-2xl: max(36px, calc(60 * var(--unit)));
   --text-display: max(40px, calc(106 * var(--unit)));

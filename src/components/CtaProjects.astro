@@ -6,10 +6,10 @@
   <a href="/projets" class="cta__button">
     <span>Voir tous les projets</span>
     <span class="cta__arrow" aria-hidden="true">
-      <svg width="100%" height="100%" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="18" cy="18" r="17" stroke="#31243D" stroke-width="1.5"/>
-        <path d="M14 12 L20 18 L14 24" stroke="#31243D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 0C26.3372 0 30.5059 0.000457093 33.1543 2.51758C33.2664 2.62416 33.3758 2.73357 33.4824 2.8457C35.9995 5.49411 36 9.66282 36 18C36 26.3372 35.9995 30.5059 33.4824 33.1543C33.3758 33.2664 33.2664 33.3758 33.1543 33.4824C30.5059 35.9995 26.3372 36 18 36C9.66282 36 5.49411 35.9995 2.8457 33.4824C2.73357 33.3758 2.62416 33.2664 2.51758 33.1543C0.000457093 30.5059 0 26.3372 0 18C0 9.66282 0.000457059 5.49411 2.51758 2.8457C2.62416 2.73357 2.73357 2.62416 2.8457 2.51758C5.49411 0.000457059 9.66282 0 18 0Z" fill="white"/>
+<path d="M10 17.5C9.72386 17.5 9.5 17.7239 9.5 18C9.5 18.2761 9.72386 18.5 10 18.5V18V17.5ZM26.3536 18.3536C26.5488 18.1583 26.5488 17.8417 26.3536 17.6464L23.1716 14.4645C22.9763 14.2692 22.6597 14.2692 22.4645 14.4645C22.2692 14.6597 22.2692 14.9763 22.4645 15.1716L25.2929 18L22.4645 20.8284C22.2692 21.0237 22.2692 21.3403 22.4645 21.5355C22.6597 21.7308 22.9763 21.7308 23.1716 21.5355L26.3536 18.3536ZM10 18V18.5H26V18V17.5H10V18Z" fill="#31243D"/>
+</svg>
     </span>
   </a>
 </section>
@@ -21,7 +21,7 @@
     align-items: center;
     justify-content: center;
     padding: calc(10 * var(--unit)) calc(10 * var(--unit)) var(--space-15);
-    background: var(--color-aubergine);
+    background: var(--color-green);
   }
 
   .cta__button {
@@ -30,8 +30,8 @@
     justify-content: center;
     gap: var(--space-3);
     padding: var(--space-3) var(--space-4);
-    background: var(--color-white);
-    color: #000;
+    background: var(--color-aubergine);
+    color: #ffffff;
     border-radius: var(--radius-sm);
     font-size: var(--text-sm);
     font-weight: 400;
@@ -39,7 +39,6 @@
   }
 
   .cta__button:hover {
-    transform: translateY(-2px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
   }
 
@@ -50,10 +49,8 @@
     min-width: 24px;
     min-height: 24px;
     transition: transform var(--transition-base);
-  }
-
-  .cta__button:hover .cta__arrow {
-    transform: translateX(4px);
+    align-items: center;
+    justify-content: center;
   }
 
   /* MOBILE — Figma: padding 10px 10px 60px 10px */
