@@ -2,6 +2,7 @@
 title: Likewatt
 slug: likewatt
 description: "Likewatt est une entreprise spécialisée dans le secteur de l'énergie. Elle permet aux particuliers comme aux professionnels d'estimer les économies réalisables grâce à l'installation de différentes solutions (solaire, éolien, etc.)."
+cover: /images/uploads/likewatt/screen-projet-likewatt.webp
 bgColor: "#31243d"
 textColor: "#ffffff"
 fields: ["Ateliers client", "Product Design"]
@@ -39,7 +40,7 @@ blocs:
   - type: image
     src: /images/uploads/likewatt/screen-application.webp
     alt: Maquette de plusierus écrans de l'application
-    
+
   - type: image
     src: /images/uploads/likewatt/screen-parametres.webp
     alt: Écran de paramétrage du compte
