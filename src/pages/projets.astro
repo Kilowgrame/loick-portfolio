@@ -91,7 +91,7 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
      ============================================ */
   .projects-hero {
     background-color: var(--color-green);
-    padding: calc(200 * var(--unit)) var(--container-padding) calc(60 * var(--unit));
+    padding: calc(250 * var(--unit)) var(--container-padding) calc(150 * var(--unit));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,7 +130,7 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
 
   /* Filters */
   .filters {
-    display: flex;
+    display: none;
     gap: calc(28 * var(--unit));
     align-items: center;
     flex-wrap: wrap;
@@ -225,8 +225,8 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
      ============================================ */
   @media (max-width: 768px) {
     .projects-hero {
-      padding: 200px var(--container-padding) 60px;
-      min-height: 599px;
+      padding: 140px var(--container-padding) 60px;
+      min-height: 300px;
     }
 
     .projects-archive {
