@@ -1,7 +1,7 @@
 ---
 title: Los Primos
 slug: los-primos
-description: "Los Primos souhaité transformé un site static en site e-commerce. Pour cela il a fallu revoir l'ensemble de l'arborescence, comprendre leurs produits, gammes, variants... Une aventure riche en échange qui débouche sur un site orienté utilisateurs et qui facilite l'achat à chaque étape de la navigation."
+description: "Los Primos souhaitait transformer un site vitrine en site e-commerce. Pour cela il a fallu revoir l'ensemble de l'arborescence, comprendre leurs produits, gammes, variants... Une aventure riche en échange qui débouche sur un site orienté utilisateurs."
 cover: /images/uploads/los-primos/screen-projet.webp
 bgColor: "#c0acfb"
 textColor: "#31243d"
