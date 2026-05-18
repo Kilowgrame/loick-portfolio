@@ -102,16 +102,16 @@ const stats = [
       max-width: 100%;
       width: 100%;
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 60px;
     }
 
     .stat {
-      /* Figma: width 215-216px, gap 12px */
-      width: 215px;
-      max-width: 100%;
-      gap: 12px;
-      align-self: flex-start;
-    }
+  width: 100%;        /* ← pleine largeur au lieu de 215px fixe */
+  max-width: 100%;
+  gap: 12px;
+  text-align: left;
+  align-items: flex-start;  /* ← flex-start au lieu de "left" */
+}
 
     .stat__value {
       font-size: 60px;
@@ -119,8 +119,8 @@ const stats = [
     }
 
     .stat__line {
-      width: 186px;
-    }
+  width: 80%;        /* ← pleine largeur */
+}
 
     .stat__label {
       font-size: 18px;

@@ -156,10 +156,9 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
   .sticker--etoile {
     top: 18%;
     left: 22%;
-    width: calc(90 * var(--unit));
+    width: calc(133 * var(--unit));
     transform: rotate(19.32deg);
   }
-
 
   /* Peace — BOTTOM RIGHT zone */
   .sticker--peace {
@@ -266,7 +265,7 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
   @media (max-width: 768px) {
     .projects-hero {
       padding: 140px var(--container-padding) 60px;
-      min-height: 300px;
+      min-height: 350px;
     }
 
     .projects-archive {
@@ -295,5 +294,21 @@ const categories = ['Tout', ...Array.from(categoriesSet)];
     .project-card__image {
       border-radius: 20px;
     }
+
+    /* Keep 3 stickers visible: Etoile, Eyes, Planète */
+    .sticker--etoile {
+      top: 22%;
+      left: 8%;
+      right: auto;
+      width: 70px;
+    }
+
+    .sticker--peace {
+      bottom: 2%;
+      right: 8%;
+      left: auto;
+      width: 85px;
+    }
+
   }
 </style>

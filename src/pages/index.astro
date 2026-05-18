@@ -100,10 +100,17 @@ const featured = (await getCollection('projets'))
   /* Mobile: also fluid. We keep the stack effect, but allow the block content
      to scroll if it's taller than the slot (column layout adds height). */
   @media (max-width: 768px) {
-    .stack-section {
-      /* Slightly taller slots on mobile to give content room (image + text stacked) */
-      --stack-height: 80vh;
-    }
+  /* Désactive le stack sur mobile — blocs normaux */
+  .stack-section {
+    height: auto;
+  }
+  
+  .stack-item {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+}
 
     .stack-item {
       /* Allow the block to be taller than the slot on small screens */
@@ -114,7 +121,7 @@ const featured = (await getCollection('projets'))
       min-height: 100%;
       align-items: flex-start;
     }
-  }
+  
 
   /* Respect reduced motion: disable the sticky effect entirely */
   @media (prefers-reduced-motion: reduce) {
