@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="À propos — Loïck Legallais">
+  <section class="placeholder">
+    <h1 class="display">À propos</h1>
+    <p>Cette page sera construite quand tu m'enverras la maquette Figma 🎨</p>
+  </section>
+</Layout>
+
+<style>
+  .placeholder {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    padding: calc(200 * var(--unit)) var(--container-padding) var(--space-30);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+    margin: 0;
+    color: var(--color-aubergine);
+  }
+
+  p {
+    font-size: var(--text-base);
+    color: var(--color-aubergine);
+    opacity: 0.7;
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+// Scroll-driven parallax script.
+//
+// Any element with `data-parallax-speed="X"` will translate vertically based on
+// the page's scroll position. The number is the SPEED FACTOR (0 to 1):
+//   - 0    = no parallax (element scrolls normally with the page)
+//   - 0.1  = subtle (moves up slowly as you scroll down)
+//   - 0.3  = marked
+//   - 0.5  = strong (the element seems to "stay up" while page scrolls down)
+//
+// IMPORTANT: This is purely SCROLL-BASED, not viewport-height-based.
+// 100px of page scroll = X * 100px of element movement, no matter the screen size.
+//
+// Honors `prefers-reduced-motion: reduce`.
+---
+
+<script>
+  function initScrollParallax() {
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Collect all parallax items once
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-parallax-speed]')
+    ).map((el) => ({
+      el,
+      speed: parseFloat(el.dataset.parallaxSpeed || '0'),
+      rotation: el.dataset.rotation || '0',
+    }));
+
+    if (!items.length) return;
+
+    let ticking = false;
+
+    const update = () => {
+      const scrollY = window.scrollY;
+
+      items.forEach(({ el, speed, rotation }) => {
+        // Element moves UP as the page scrolls DOWN (negative translateY)
+        // speed * scrollY pixels of vertical translation
+        const translateY = -scrollY * speed;
+        el.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rotation}deg)`;
+      });
+
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    // Initial paint (so rotations are applied even before any scroll)
+    update();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollParallax);
+  } else {
+    initScrollParallax();
+  }
+</script>

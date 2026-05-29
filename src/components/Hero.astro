@@ -1,0 +1,231 @@
+---
+// Hero — 100vh, text centered, 5 stickers positioned around in %
+// Stickers have a scroll-driven parallax (vertical only).
+import Parallax from './Parallax.astro';
+---
+
+<section class="hero">
+  <div class="hero__inner">
+    <!--
+      5 stickers — each has a different parallax speed.
+      Speed values (0 to 1): higher = sticker moves up faster as you scroll.
+      The text title does NOT have parallax — it scrolls normally.
+    -->
+    <img
+      src="/images/stickers/etoile.svg"
+      alt=""
+      class="sticker sticker--etoile"
+      data-parallax-speed="0.65"
+      data-rotation="19.32"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/eyes.svg"
+      alt=""
+      class="sticker sticker--eyes"
+      data-parallax-speed="0.95"
+      data-rotation="-6.11"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/galaxy.svg"
+      alt=""
+      class="sticker sticker--galaxy"
+      data-parallax-speed="0.85"
+      data-rotation="0"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/peace.svg"
+      alt=""
+      class="sticker sticker--peace"
+      data-parallax-speed="0.40"
+      data-rotation="24.81"
+      aria-hidden="true"
+    />
+    <img
+      src="/images/stickers/planete.svg"
+      alt=""
+      class="sticker sticker--planete"
+      data-parallax-speed="0.20"
+      data-rotation="-6.28"
+      aria-hidden="true"
+    />
+
+    <!-- Centered text -->
+    <div class="hero__title">
+      <span class="hero__name display">LOICK</span>
+      <span class="hero__name display">LEGALLAIS</span>
+    </div>
+
+    <div class="hero__meta">
+      <span>UI / UX Designer</span>
+      <span>Freelance</span>
+    </div>
+  </div>
+</section>
+
+<!-- Parallax script — loaded once -->
+<Parallax />
+
+<style>
+  /* ============================================
+     HERO — exactly 100vh, text centered
+     ============================================ */
+  .hero {
+    background-color: var(--color-violet);
+    height: 100vh;
+    padding: 0 var(--container-padding);
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .hero__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* Center the text vertically and horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: calc(2 * var(--unit));
+  }
+
+  /* Title */
+  .hero__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-aubergine);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hero__name {
+    font-size: var(--text-display);
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+  }
+
+  /* Meta line */
+  .hero__meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    font-size: var(--text-md);
+    font-weight: 500;
+    color: var(--color-aubergine);
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ============================================
+     STICKERS — percentage-based positions
+     They stay anchored relative to the hero corners/edges.
+     ============================================ */
+  .sticker {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    height: auto;
+    will-change: transform;
+  }
+
+  /* Etoile — TOP LEFT zone, around 1/4 in from the left */
+  .sticker--etoile {
+    top: 18%;
+    left: 22%;
+    width: calc(109 * var(--unit));
+    transform: rotate(19.32deg);
+  }
+
+  /* Eyes — TOP RIGHT zone */
+  .sticker--eyes {
+    top: 18%;
+    right: 14%;
+    width: calc(133 * var(--unit));
+    transform: rotate(-6.11deg);
+  }
+
+  /* Galaxy — BOTTOM LEFT zone */
+  .sticker--galaxy {
+    bottom: 18%;
+    left: 16%;
+    width: calc(150 * var(--unit));
+    transform: rotate(0deg);
+  }
+
+  /* Peace — BOTTOM RIGHT zone */
+  .sticker--peace {
+    bottom: 18%;
+    right: 18%;
+    width: calc(110 * var(--unit));
+    transform: rotate(24.81deg);
+  }
+
+  /* Planète — BOTTOM CENTER */
+  .sticker--planete {
+    bottom: 8%;
+    left: 50%;
+    width: calc(130 * var(--unit));
+    transform: translateX(-50%) rotate(-6.28deg);
+  }
+
+  /* ============================================
+     MOBILE
+     ============================================ */
+  @media (max-width: 768px) {
+    .hero {
+      /* 80vh on mobile */
+      height: 80vh;
+      min-height: auto;
+      padding: 160px var(--container-padding) 80px;
+    }
+
+    .hero__inner {
+      height: 100%;
+    }
+
+    .hero__name {
+      font-size: 48px;
+      letter-spacing: 2.4px;
+    }
+
+    .hero__meta {
+      font-size: 16px;
+    }
+
+    /* Hide Galaxy and Peace on mobile — too crowded */
+    .sticker--galaxy,
+    .sticker--peace {
+      display: none;
+    }
+
+    /* Keep 3 stickers visible: Etoile, Eyes, Planète */
+    .sticker--etoile {
+      top: -8%;
+      left: 8%;
+      right: auto;
+      width: 70px;
+    }
+
+    .sticker--eyes {
+      top: -6%;
+      right: 8%;
+      left: auto;
+      width: 85px;
+    }
+
+    .sticker--planete {
+      bottom: -9%;
+      left: 50%;
+      width: 85px;
+      /* Keep horizontal centering via translateX */
+    }
+  }
+</style>
