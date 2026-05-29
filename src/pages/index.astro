@@ -1,70 +1,60 @@
 ---
-// V2 Home page — pixel-faithful Figma implementation
-// Artboard: 1512px. All values fluid via var(--unit).
+// V2 Home page
 // Sections:
-//   1. Menu (teal, top-rounded, sticky)
-//   2. Hero (teal, bottom-rounded, 671px)
-//   3. Projets (2 rows × 3 cols, asymmetric grid)
-//   4. Méthodologie (cream bg, 3 cards)
+//   1. Menu (sticky header)
+//   2. Hero (teal, with stickers + badge + title + subtitle)
+//   3. Projets (afternow.co style — vertical list with hover image reveal)
+//   4. Méthodologie (3 cards)
 //   5. Ils me font confiance (logo grid)
 //   6. Ressources (3 cards)
 //   7. Footer
 
-const projetsRow1 = [
+// --- Projects data (edit here or connect to Content Collections) ---
+const projets = [
   {
-    title: 'LikeWatt',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
+    num: '01',
+    title: 'Likewatt',
+    description: 'Refonte technique et design du site de Likewatt, pionnier des solutions d\'énergie verte.',
     tags: ['UI / UX Design', 'Product Design'],
     slug: 'likewatt',
-    bgColor: '#d9d9d9',
-    wide: true,
+    bgColor: '#31243d',
   },
   {
+    num: '02',
     title: 'SBG Systems',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
+    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation.',
     tags: ['UI / UX Design'],
     slug: 'sbg-systems',
     bgColor: '#03223f',
-    wide: false,
   },
   {
+    num: '03',
     title: 'Wikit',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
+    description: 'Plateforme de création d\'agents conversationnels — identité et expérience repensées.',
     tags: ['UI / UX Design'],
     slug: 'wikit',
     bgColor: '#e1ecfd',
-    wide: false,
   },
-];
-
-const projetsRow2 = [
   {
+    num: '04',
     title: 'Manerty',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
+    description: 'Accompagner des cabinets d\'experts-comptables dans la gestion locative.',
     tags: ['UI / UX Design', 'Product Design'],
     slug: 'manerty',
     bgColor: '#3662e3',
-    wide: false,
   },
   {
+    num: '05',
     title: 'Los Primos',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
+    description: 'Nouvelle identité et site e-commerce pour une épicerie fine mexicaine.',
     tags: ['UI / UX Design'],
     slug: 'los-primos',
-    bgColor: '#d9d9d9',
-    wide: true,
-  },
-  {
-    title: 'Le Spot',
-    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.',
-    tags: ['UI / UX Design', 'Branding'],
-    slug: 'le-spot',
-    bgColor: '#4b3c32',
-    wide: false,
+    bgColor: '#2d4a1e',
   },
 ];
 
-const methodo = [
+// --- Méthodo steps ---
+const steps = [
   {
     title: 'Analyser',
     text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.',
@@ -75,18 +65,21 @@ const methodo = [
   },
   {
     title: 'Ajuster',
-    text: 'Livrer le webdesign, le Design System analyser les nouvelles metrics, ajuster en fonction des retours.',
+    text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.',
   },
 ];
 
-// 9 logos (5 on row 1, 4 on row 2) — placeholder until real logos are provided
-const logosRow1 = [1, 2, 3, 4, 5];
-const logosRow2 = [6, 7, 8, 9];
+// --- Clients (placeholders — replace with real logos) ---
+const clients = [
+  'Client 01', 'Client 02', 'Client 03', 'Client 04', 'Client 05',
+  'Client 06', 'Client 07', 'Client 08', 'Client 09',
+];
 
+// --- Resources ---
 const ressources = [
   { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager' },
-  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager-2' },
-  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager-3' },
+  { tag: 'Plugin Figma', title: 'Contrast Checker', slug: 'contrast-checker' },
+  { tag: 'Article', title: 'Design System Tips', slug: 'design-system' },
 ];
 ---
 
@@ -99,75 +92,77 @@ const ressources = [
   <meta name="description" content="Designer UI/UX Freelance basé à Lyon. Je crée des interfaces pensées pour vos objectifs." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
 </head>
 <body>
 
 <!-- ============================================================
-     1. MENU
-     Figma: top 109px (below header bar), px 16px, container teal
-     border-radius: 20px 20px 0 0 (top only)
+     MENU
      ============================================================ -->
-<header class="menu-wrap">
-  <div class="menu">
-    <!-- Logo + Nom + Status -->
-    <div class="menu-brand">
-      <div class="menu-logo" aria-hidden="true">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="48" rx="10" fill="white" fill-opacity="0.15"/>
-          <text x="24" y="31" text-anchor="middle" font-family="Inter" font-size="20" font-weight="600" fill="white">L</text>
+<header class="menu">
+  <div class="menu__inner">
+    <!-- Logo + Nom + Statut -->
+    <div class="menu__brand">
+      <div class="menu__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="white" fill-opacity="0.15"/>
+          <text x="16" y="22" text-anchor="middle" font-family="Inter" font-size="16" font-weight="600" fill="white">L</text>
         </svg>
       </div>
-      <div class="menu-identity">
-        <span class="menu-name">Loïck Legallais</span>
-        <span class="menu-status">
-          <span class="menu-dot" aria-hidden="true"></span>
+      <div class="menu__identity">
+        <span class="menu__name">Loïck Legallais</span>
+        <span class="menu__status">
+          <span class="menu__dot" aria-hidden="true"></span>
           Freelance basé à Lyon
         </span>
       </div>
     </div>
 
-    <!-- Nav links in pill -->
-    <nav class="menu-nav" aria-label="Navigation principale">
+    <!-- Navigation -->
+    <nav class="menu__nav" aria-label="Navigation principale">
       <a href="/projets">Work</a>
-      <a href="/a-propos">A propos</a>
+      <a href="/a-propos">À propos</a>
       <a href="/ressources">Ressources</a>
     </nav>
 
     <!-- CTA -->
-    <a href="mailto:legallais.loick@gmail.com" class="menu-cta">Contact</a>
+    <a href="mailto:legallais.loick@gmail.com" class="menu__cta">
+      Contact
+    </a>
   </div>
 </header>
 
 
 <!-- ============================================================
-     2. HERO
-     Figma: px 16px, container teal 671px tall, rounded bottom
-     Content: badge + h1 76px + subtitle 20px, centered
-     Stickers: etoile (left 149px top 227px), eyes (right ~170px top ~115px), peace (bottom center)
+     HERO
      ============================================================ -->
-<section class="hero-wrap">
-  <div class="hero">
-    <!-- Sticker étoile -->
-    <img src="/images/stickers/etoile.svg" alt="" class="sticker sticker-etoile" aria-hidden="true" />
-    <!-- Sticker eyes (deux yeux côte à côte dans Figma) -->
-    <img src="/images/stickers/eyes.svg" alt="" class="sticker sticker-eyes" aria-hidden="true" />
-    <!-- Sticker peace -->
-    <img src="/images/stickers/peace.svg" alt="" class="sticker sticker-peace" aria-hidden="true" />
+<section class="hero" aria-label="Introduction">
+  <div class="hero__container">
 
-    <div class="hero-content">
+    <!-- Stickers -->
+    <img src="/images/stickers/etoile.svg" alt="" class="sticker sticker--etoile" aria-hidden="true" />
+    <img src="/images/stickers/eyes.svg"   alt="" class="sticker sticker--eyes"   aria-hidden="true" />
+    <img src="/images/stickers/peace.svg"  alt="" class="sticker sticker--peace"  aria-hidden="true" />
+
+    <!-- Content -->
+    <div class="hero__content">
       <!-- Badge disponibilité -->
-      <div class="hero-badge">
-        <span class="hero-badge-dot" aria-hidden="true"></span>
-        UI / UX Designer Freelance - Disponible
+      <div class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        <span>UI / UX Designer Freelance — Disponible</span>
       </div>
 
-      <!-- Titre principal — 76px dans Figma -->
-      <h1 class="hero-title">Des interfaces pensées pour vos objectifs</h1>
+      <!-- Titre -->
+      <h1 class="hero__title">
+        Des interfaces pensées<br>pour vos objectifs
+      </h1>
 
-      <!-- Sous-titre — 20px, 655px wide, opacity 0.8 -->
-      <p class="hero-subtitle">
-        Le design ne doit plus être seulement esthétique mais répondre à des objectifs clairs. En vous accompagnant, je me base sur des datas solides pour proposer une expérience utilisateur réussie.
+      <!-- Sous-titre -->
+      <p class="hero__subtitle">
+        Le design ne doit plus être seulement esthétique mais répondre à des objectifs clairs.
+        En vous accompagnant, je me base sur des datas solides pour proposer
+        une expérience utilisateur réussie.
       </p>
     </div>
   </div>
@@ -175,79 +170,66 @@ const ressources = [
 
 
 <!-- ============================================================
-     3. PROJETS
-     Figma: padding 64px 80px, 2 rows × 3 cols, gap 40px
-     Row 1: LikeWatt (wide 655px) + SBG + Wikit (flex 1)
-     Row 2: Manerty (flex 1) + Los Primos (wide 655px) + Le Spot (flex 1)
-     Each project: image + title 24px + desc 16px + tags
+     PROJETS — style afternow.co
+     Vertical list: each item reveals its image on hover
      ============================================================ -->
-<section class="projets">
-  <div class="projets-header">
+<section class="projets" aria-label="Derniers projets">
+  <div class="projets__header">
     <h2 class="section-title">Des projets qui ont du sens.</h2>
-    <a href="/projets" class="section-link">Tout découvrir</a>
+    <a href="/projets" class="projets__link">Tout découvrir</a>
   </div>
 
-  <div class="projets-grid">
-    <!-- ROW 1 -->
-    <div class="projets-row">
-      {projetsRow1.map((p) => (
-        <a
-          href={`/projets/${p.slug}`}
-          class={`projet-card ${p.wide ? 'projet-card--wide' : ''}`}
-        >
-          <div class="projet-card-img" style={`background-color: ${p.bgColor}`}></div>
-          <div class="projet-card-content">
-            <div class="projet-card-text">
-              <span class="projet-card-title">{p.title}</span>
-              <span class="projet-card-desc">{p.description}</span>
-            </div>
-            <div class="projet-card-tags">
-              {p.tags.map((t) => <span class="tag">{t}</span>)}
-            </div>
-          </div>
-        </a>
-      ))}
-    </div>
+  <ul class="projets__list">
+    {projets.map((projet) => (
+      <li class="projet-item">
+        <a href={`/projets/${projet.slug}`} class="projet-item__inner">
+          <!-- Numéro -->
+          <span class="projet-item__num">{projet.num}</span>
 
-    <!-- ROW 2 -->
-    <div class="projets-row">
-      {projetsRow2.map((p) => (
-        <a
-          href={`/projets/${p.slug}`}
-          class={`projet-card ${p.wide ? 'projet-card--wide' : ''}`}
-        >
-          <div class="projet-card-img" style={`background-color: ${p.bgColor}`}></div>
-          <div class="projet-card-content">
-            <div class="projet-card-text">
-              <span class="projet-card-title">{p.title}</span>
-              <span class="projet-card-desc">{p.description}</span>
-            </div>
-            <div class="projet-card-tags">
-              {p.tags.map((t) => <span class="tag">{t}</span>)}
-            </div>
+          <!-- Image (révélée au hover) -->
+          <div class="projet-item__image" aria-hidden="true">
+            <div class="projet-item__image-bg" style={`background-color: ${projet.bgColor}`}></div>
           </div>
+
+          <!-- Infos -->
+          <div class="projet-item__info">
+            <span class="projet-item__title">{projet.title}</span>
+            <span class="projet-item__desc">{projet.description}</span>
+          </div>
+
+          <!-- Tags -->
+          <div class="projet-item__tags">
+            {projet.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+
+          <!-- Flèche -->
+          <span class="projet-item__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
         </a>
-      ))}
-    </div>
-  </div>
+      </li>
+    ))}
+  </ul>
 </section>
 
 
 <!-- ============================================================
-     4. MÉTHODOLOGIE
-     Figma: outer padding 28px 16px, inner bg #ebf1f1 border-radius 20px
-     Inner padding: 64px 80px, gap 64px
-     3 cards blanc, height ~428px, padding 28px, justify-between
-     Title (Analyser etc.) en haut, texte gris en bas
+     MÉTHODOLOGIE
      ============================================================ -->
-<section class="methodo-wrap">
-  <div class="methodo">
+<section class="methodo" aria-label="Méthodologie">
+  <div class="methodo__inner">
     <h2 class="section-title">Une méthodologie efficace et sur mesure.</h2>
-    <div class="methodo-grid">
-      {methodo.map((step) => (
+
+    <div class="methodo__grid">
+      {steps.map((step, i) => (
         <div class="methodo-card">
-          <span class="methodo-card-title">{step.title}</span>
-          <p class="methodo-card-text">{step.text}</p>
+          <span class="methodo-card__num">0{i + 1}</span>
+          <h3 class="methodo-card__title">{step.title}</h3>
+          <p class="methodo-card__text">{step.text}</p>
         </div>
       ))}
     </div>
@@ -256,54 +238,37 @@ const ressources = [
 
 
 <!-- ============================================================
-     5. ILS ME FONT CONFIANCE
-     Figma: padding 64px 80px, titre centré 46px
-     Grille: row 1 = 5 logos flex-1, row 2 = 4 logos 270px fixed
-     Chaque cellule: bg white, border #ebf1f1, padding 64px 28px
+     ILS ME FONT CONFIANCE
      ============================================================ -->
-<section class="clients">
-  <h2 class="section-title clients-title">Ils me font confiance</h2>
-  <div class="clients-grid">
-    <!-- Row 1: 5 logos -->
-    <div class="clients-row">
-      {logosRow1.map((i) => (
-        <div class="client-cell">
-          <div class="client-logo-placeholder" aria-label={`Client ${i}`}>
-            <span class="client-logo-text">Logo {i}</span>
-          </div>
-        </div>
-      ))}
-    </div>
-    <!-- Row 2: 4 logos (fixed 270px each) -->
-    <div class="clients-row clients-row--small">
-      {logosRow2.map((i) => (
-        <div class="client-cell client-cell--fixed">
-          <div class="client-logo-placeholder" aria-label={`Client ${i}`}>
-            <span class="client-logo-text">Logo {i}</span>
-          </div>
-        </div>
-      ))}
-    </div>
+<section class="clients" aria-label="Clients">
+  <h2 class="section-title clients__title">Ils me font confiance</h2>
+
+  <div class="clients__grid">
+    {clients.map((client) => (
+      <div class="client-cell">
+        <!-- Remplacer par un vrai logo <img> quand disponible -->
+        <span class="client-cell__placeholder">{client}</span>
+      </div>
+    ))}
   </div>
 </section>
 
 
 <!-- ============================================================
-     6. RESSOURCES
-     Figma: padding 64px 60px, titre left + "Tout découvrir" underline right
-     3 cards flex-1: image 300px + tag + title 24px
+     RESSOURCES
      ============================================================ -->
-<section class="ressources">
-  <div class="ressources-header">
+<section class="ressources" aria-label="Ressources">
+  <div class="ressources__header">
     <h2 class="section-title">Quelques ressources à disposition</h2>
-    <a href="/ressources" class="section-link">Tout découvrir</a>
+    <a href="/ressources" class="projets__link">Tout découvrir</a>
   </div>
-  <div class="ressources-grid">
+
+  <div class="ressources__grid">
     {ressources.map((r) => (
       <a href={`/ressources/${r.slug}`} class="ressource-card">
-        <div class="ressource-card-img"></div>
+        <div class="ressource-card__image"></div>
         <span class="tag">{r.tag}</span>
-        <span class="ressource-card-title">{r.title}</span>
+        <span class="ressource-card__title">{r.title}</span>
       </a>
     ))}
   </div>
@@ -311,246 +276,169 @@ const ressources = [
 
 
 <!-- ============================================================
-     7. FOOTER
-     Figma: padding 24px 60px, border-top #f4f2fd
-     Left: logo 48px + nav links gap 40px
-     Right: email + LinkedIn pill + Figma pill
+     FOOTER
      ============================================================ -->
 <footer class="footer">
-  <div class="footer-left">
-    <div class="footer-logo" aria-hidden="true">
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect width="48" height="48" rx="10" fill="#075056"/>
-        <text x="24" y="31" text-anchor="middle" font-family="Inter" font-size="20" font-weight="600" fill="white">L</text>
-      </svg>
+  <div class="footer__inner">
+    <!-- Left: logo + nav -->
+    <div class="footer__left">
+      <div class="menu__logo footer__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#075056"/>
+          <text x="16" y="22" text-anchor="middle" font-family="Inter" font-size="16" font-weight="600" fill="white">L</text>
+        </svg>
+      </div>
+      <nav class="footer__nav" aria-label="Navigation pied de page">
+        <a href="/projets">Projets</a>
+        <a href="/a-propos">À propos</a>
+        <a href="/ressources">Ressources</a>
+        <a href="mailto:legallais.loick@gmail.com">Contact</a>
+      </nav>
     </div>
-    <nav class="footer-nav" aria-label="Navigation pied de page">
-      <a href="/projets">Projets</a>
-      <a href="/a-propos">A propos</a>
-      <a href="/ressources">Ressources</a>
-      <a href="mailto:legallais.loick@gmail.com">Contact</a>
-    </nav>
-  </div>
-  <div class="footer-right">
-    <a href="mailto:legallais.loick@gmail.com" class="footer-email">legallais.loick@gmail.com</a>
-    <div class="footer-socials">
-      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social">Linkedin</a>
-      <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="footer-social">Figma</a>
+
+    <!-- Right: email + socials -->
+    <div class="footer__right">
+      <a href="mailto:legallais.loick@gmail.com" class="footer__email">
+        legallais.loick@gmail.com
+      </a>
+      <div class="footer__socials">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer__social-btn">
+          LinkedIn
+        </a>
+        <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="footer__social-btn">
+          Figma
+        </a>
+      </div>
     </div>
   </div>
 </footer>
 
 
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
 <style>
-  /* ============================================================
-     DESIGN TOKENS — V2
-     Fluid unit: 1512px artboard
-     ============================================================ */
-  :root {
-    --vw: clamp(360px, 100vw, 1800px);
-    --unit: calc(var(--vw) / 1512);
-
-    /* Palette */
-    --teal:         #075056;
-    --teal-mid:     #206267;
-    --teal-border:  #397378;
-    --cream:        #ebf1f1;
-    --white:        #ffffff;
-    --dark:         #16232b;
-    --muted:        #737a7a;
-    --purple:       #31243d;
-    --dot-green:    #4fe89b;
-    --border-light: #f4f2fd;
-    --border-cream: #ebf1f1;
-
-    /* Font */
-    --font: 'Inter', system-ui, sans-serif;
-
-    /* Fluid sizes */
-    --t-xs:   max(10px, calc(12 * var(--unit)));
-    --t-sm:   max(12px, calc(14 * var(--unit)));
-    --t-base: max(14px, calc(16 * var(--unit)));
-    --t-md:   max(16px, calc(20 * var(--unit)));
-    --t-lg:   max(20px, calc(24 * var(--unit)));
-    --t-xl:   max(28px, calc(46 * var(--unit)));
-    --t-hero: clamp(36px, calc(76 * var(--unit)), 76px);
-
-    /* Spacing */
-    --s-1:  calc(4  * var(--unit));
-    --s-2:  calc(8  * var(--unit));
-    --s-3:  calc(12 * var(--unit));
-    --s-4:  calc(16 * var(--unit));
-    --s-5:  calc(20 * var(--unit));
-    --s-6:  calc(24 * var(--unit));
-    --s-7:  calc(28 * var(--unit));
-    --s-10: calc(40 * var(--unit));
-    --s-12: calc(48 * var(--unit));
-    --s-16: calc(64 * var(--unit));
-    --s-20: calc(80 * var(--unit));
-
-    /* Layout */
-    --outer-pad: 16px;
-    --inner-pad-x: clamp(32px, calc(80 * var(--unit)), 80px);
-    --inner-pad-y: clamp(32px, calc(64 * var(--unit)), 64px);
-
-    /* Radii */
-    --r-sm: 8px;
-    --r-lg: 20px;
-
-    /* Ease */
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* Reset */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-  body { font-family: var(--font); color: var(--dark); background: var(--white); overflow-x: hidden; }
-  img { display: block; max-width: 100%; }
-  a { color: inherit; text-decoration: none; }
-  ul, li { list-style: none; }
-
-  /* Tag utility */
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 16px;
-    background: var(--cream);
-    color: var(--dark);
-    font-size: var(--t-xs);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-radius: var(--r-sm);
-    white-space: nowrap;
-  }
-
-  .section-title {
-    font-size: var(--t-xl);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--dark);
-  }
-
-  .section-link {
-    font-size: var(--t-base);
-    color: var(--dark);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: opacity 0.2s;
-  }
-  .section-link:hover { opacity: 0.6; }
-
-  /* ============================================================
-     MENU
-     ============================================================ */
-  .menu-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: var(--outer-pad) var(--outer-pad) 0;
-    background: var(--white);
-  }
-
+  /* ---- MENU ---- */
   .menu {
-    background: var(--teal);
-    border-bottom: 1px solid var(--teal-border);
-    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px var(--container-padding);
+  }
+
+  .menu__inner {
+    background: var(--color-teal);
+    border: 1px solid var(--color-teal-border);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: calc(20 * var(--unit));
   }
 
-  .menu-brand {
+  .menu__brand {
     display: flex;
     align-items: center;
     gap: calc(16 * var(--unit));
   }
 
-  .menu-logo { width: 48px; height: 48px; flex-shrink: 0; }
+  .menu__logo {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
 
-  .menu-identity {
+  .menu__identity {
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: calc(165 * var(--unit));
   }
 
-  .menu-name {
-    font-size: var(--t-base);
+  .menu__name {
+    font-size: var(--text-base);
     font-weight: 500;
-    color: var(--white);
+    color: var(--color-white);
     line-height: 1.2;
   }
 
-  .menu-status {
+  .menu__status {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: var(--t-sm);
+    font-size: var(--text-sm);
     color: #cddcdd;
     line-height: 1.2;
   }
 
-  .menu-dot {
+  .menu__dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--dot-green);
+    background: var(--color-dot);
     flex-shrink: 0;
     animation: pulse 2s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.85); }
   }
 
-  .menu-nav {
+  .menu__nav {
     display: flex;
     align-items: center;
     gap: calc(40 * var(--unit));
-    background: var(--teal-mid);
+    background: var(--color-teal-mid);
     padding: calc(16 * var(--unit)) calc(24 * var(--unit));
-    border-radius: calc(12 * var(--unit));
-    font-size: var(--t-base);
-    color: var(--white);
+    border-radius: var(--radius-md);
   }
 
-  .menu-nav a { transition: opacity 0.2s; }
-  .menu-nav a:hover { opacity: 0.7; }
+  .menu__nav a {
+    font-size: var(--text-base);
+    color: var(--color-white);
+    transition: opacity var(--transition-base);
+  }
 
-  .menu-cta {
-    background: var(--white);
-    color: var(--dark);
-    font-size: var(--t-base);
+  .menu__nav a:hover {
+    opacity: 0.7;
+  }
+
+  .menu__cta {
+    background: var(--color-white);
+    color: var(--color-dark);
+    font-size: var(--text-base);
     padding: calc(16 * var(--unit)) calc(24 * var(--unit));
-    border-radius: calc(12 * var(--unit));
-    transition: background 0.2s;
-  }
-  .menu-cta:hover { background: var(--cream); }
-
-  /* ============================================================
-     HERO
-     ============================================================ */
-  .hero-wrap {
-    padding: 0 var(--outer-pad);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-base), color var(--transition-base);
   }
 
+  .menu__cta:hover {
+    background: var(--color-cream);
+  }
+
+  /* ---- HERO ---- */
   .hero {
+    padding-top: calc(109px + 16px); /* account for fixed header */
+    padding-left: 16px;
+    padding-right: 16px;
+    background: var(--color-white);
+  }
+
+  .hero__container {
     position: relative;
-    height: calc(671 * var(--unit));
-    min-height: 400px;
-    background: linear-gradient(135deg, #0a767f 0%, var(--teal) 60%);
-    border-radius: 0 0 var(--r-lg) var(--r-lg);
+    background: linear-gradient(135deg, #0a767f 0%, var(--color-teal) 100%);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: calc(100 * var(--unit)) var(--container-padding) calc(120 * var(--unit));
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(100 * var(--unit)) calc(80 * var(--unit)) calc(120 * var(--unit));
-    overflow: hidden;
+    min-height: calc(671 * var(--unit));
   }
 
-  .hero-content {
+  .hero__content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -561,442 +449,618 @@ const ressources = [
     z-index: 2;
   }
 
-  .hero-badge {
+  .hero__badge {
     display: inline-flex;
     align-items: center;
-    gap: calc(12 * var(--unit));
-    background: var(--teal-mid);
-    color: var(--white);
-    font-size: var(--t-base);
+    gap: 8px;
+    background: var(--color-teal-mid);
+    color: var(--color-white);
+    font-size: var(--text-base);
     padding: 8px 16px;
-    border-radius: var(--r-sm);
+    border-radius: var(--radius-sm);
   }
 
-  .hero-badge-dot {
+  .hero__badge-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--dot-green);
-    flex-shrink: 0;
+    background: var(--color-dot);
     animation: pulse 2s ease-in-out infinite;
   }
 
-  .hero-title {
-    font-size: var(--t-hero);
+  .hero__title {
+    font-size: var(--text-hero);
     font-weight: 400;
     line-height: 1.1;
-    color: var(--white);
-    letter-spacing: -0.01em;
+    color: var(--color-white);
+    letter-spacing: -0.02em;
   }
 
-  .hero-subtitle {
-    font-size: clamp(15px, calc(20 * var(--unit)), 20px);
-    font-weight: 400;
+  .hero__subtitle {
+    font-size: clamp(16px, calc(20 * var(--unit)), 20px);
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.8);
     max-width: calc(655 * var(--unit));
   }
 
-  /* Stickers */
+  /* Stickers in hero */
   .sticker {
     position: absolute;
     pointer-events: none;
     z-index: 3;
+    height: auto;
   }
 
-  /* Figma: left 149px, top 227px, size ~109px, rotate 19.32deg */
-  .sticker-etoile {
-    left: calc(149 * var(--unit));
+  .sticker--etoile {
     top: calc(227 * var(--unit));
+    left: calc(149 * var(--unit));
     width: calc(90 * var(--unit));
     transform: rotate(19.32deg);
   }
 
-  /* Figma: left ~1217px, top ~115px, size ~117px, rotate -6.11deg */
-  .sticker-eyes {
-    right: calc(180 * var(--unit));
+  .sticker--eyes {
     top: calc(115 * var(--unit));
-    width: calc(117 * var(--unit));
+    right: calc(170 * var(--unit));
+    width: calc(120 * var(--unit));
     transform: rotate(-6.11deg);
   }
 
-  /* Figma: bottom ~8.6% from bottom, centered ~52-59% from left */
-  .sticker-peace {
-    left: 52%;
-    bottom: calc(58 * var(--unit));
+  .sticker--peace {
+    bottom: calc(60 * var(--unit));
+    left: 40%;
     width: calc(80 * var(--unit));
     transform: rotate(24.81deg);
   }
 
-  /* ============================================================
-     PROJETS
-     ============================================================ */
+  /* ---- PROJETS — afternow.co style ---- */
   .projets {
-    padding: var(--inner-pad-y) var(--inner-pad-x);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-16);
+    padding: var(--section-padding-y) var(--container-padding);
   }
 
-  .projets-header {
+  .projets__header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+    margin-bottom: calc(48 * var(--unit));
   }
 
-  .projets-grid {
+  .projets__link {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity var(--transition-base);
+  }
+
+  .projets__link:hover {
+    opacity: 0.6;
+  }
+
+  .projets__list {
     display: flex;
     flex-direction: column;
-    gap: var(--s-10);
+    border-top: 1px solid var(--color-cream);
   }
 
-  .projets-row {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--s-10);
+  /* Each project row */
+  .projet-item {
+    border-bottom: 1px solid var(--color-cream);
   }
 
-  /* Default card: flex 1 */
-  .projet-card {
-    flex: 1 0 0;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-5);
+  .projet-item__inner {
+    display: grid;
+    /* num | image | info | tags | arrow */
+    grid-template-columns: calc(80 * var(--unit)) calc(180 * var(--unit)) 1fr auto calc(48 * var(--unit));
+    align-items: center;
+    gap: calc(40 * var(--unit));
+    padding: calc(28 * var(--unit)) 0;
     cursor: pointer;
-    text-decoration: none;
+    transition: background var(--transition-base);
   }
 
-  /* Wide card: 655px fixed — Figma row1 col1, row2 col2 */
-  .projet-card--wide {
-    flex: 0 0 calc(655 * var(--unit));
-    max-width: calc(655 * var(--unit));
+  .projet-item__inner:hover {
+    background: transparent;
   }
 
-  /* Image area */
-  .projet-card-img {
-    width: 100%;
-    border-radius: var(--r-sm);
-    aspect-ratio: 16 / 11;
-    overflow: hidden;
-    transition: transform 0.4s var(--ease);
-  }
-
-  .projet-card:hover .projet-card-img {
-    transform: scale(1.02);
-  }
-
-  /* Wide card: specific aspect ratio from Figma (424/300 ≈ 1.41) */
-  .projet-card--wide .projet-card-img {
-    aspect-ratio: 424 / 300;
-  }
-
-  /* Content below image */
-  .projet-card-content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-6);
-  }
-
-  .projet-card-text {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s-2);
-  }
-
-  .projet-card-title {
-    font-size: var(--t-lg);
+  /* Numéro */
+  .projet-item__num {
+    font-size: var(--text-project-num);
     font-weight: 400;
-    color: var(--dark);
-    line-height: 1.3;
-    transition: color 0.2s;
+    color: var(--color-cream);
+    line-height: 1;
+    transition: color var(--transition-base);
   }
 
-  .projet-card:hover .projet-card-title {
-    color: var(--teal);
+  .projet-item:hover .projet-item__num {
+    color: var(--color-dark);
   }
 
-  .projet-card-desc {
-    font-size: var(--t-base);
-    color: var(--muted);
+  /* Image reveal */
+  .projet-item__image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    /* Hidden by default, revealed on hover */
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    will-change: transform, opacity;
+  }
+
+  .projet-item:hover .projet-item__image {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .projet-item__image-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-slow);
+  }
+
+  .projet-item:hover .projet-item__image-bg {
+    transform: scale(1.05);
+  }
+
+  /* Info */
+  .projet-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .projet-item__title {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--color-dark);
+    transition: color var(--transition-base);
+  }
+
+  .projet-item:hover .projet-item__title {
+    color: var(--color-teal);
+  }
+
+  .projet-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
     line-height: 1.5;
+    max-width: 36ch;
   }
 
-  .projet-card-tags {
+  /* Tags */
+  .projet-item__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--s-5);
+    gap: 8px;
+    justify-content: flex-end;
   }
 
-  /* ============================================================
-     MÉTHODOLOGIE
-     ============================================================ */
-  .methodo-wrap {
-    padding: calc(28 * var(--unit)) var(--outer-pad);
+  /* Arrow */
+  .projet-item__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-muted);
+    transform: rotate(0deg);
+    transition: transform var(--transition-base), color var(--transition-base);
   }
 
+  .projet-item:hover .projet-item__arrow {
+    transform: rotate(-45deg);
+    color: var(--color-teal);
+  }
+
+  /* ---- MÉTHODOLOGIE ---- */
   .methodo {
-    background: var(--cream);
-    border-radius: var(--r-lg);
-    padding: var(--inner-pad-y) var(--inner-pad-x);
+    padding: var(--section-padding-y) calc(16 * var(--unit));
+  }
+
+  .methodo__inner {
+    background: var(--color-cream);
+    border-radius: var(--radius-lg);
+    padding: var(--section-padding-y) var(--container-padding);
     display: flex;
     flex-direction: column;
-    gap: var(--s-16);
+    gap: calc(64 * var(--unit));
   }
 
-  .methodo-grid {
+  .methodo__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-10);
+    gap: calc(40 * var(--unit));
   }
 
   .methodo-card {
-    background: var(--white);
-    border-radius: var(--r-sm);
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
     padding: calc(28 * var(--unit));
-    height: calc(428 * var(--unit));
-    min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s var(--ease);
+    gap: calc(24 * var(--unit));
+    min-height: calc(428 * var(--unit));
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
   }
 
   .methodo-card:hover {
     transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(7, 80, 86, 0.1);
   }
 
-  .methodo-card-title {
-    font-size: var(--t-lg);
+  .methodo-card__num {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
     font-weight: 500;
-    color: var(--purple);
-    line-height: 1.5;
+    letter-spacing: 0.06em;
   }
 
-  .methodo-card-text {
+  .methodo-card__title {
+    font-size: clamp(18px, calc(24 * var(--unit)), 24px);
+    font-weight: 500;
+    color: var(--color-purple);
+    line-height: 1.5;
+    margin-top: auto;
+  }
+
+  .methodo-card__text {
     font-size: clamp(14px, calc(20 * var(--unit)), 20px);
-    font-weight: 400;
-    color: var(--muted);
+    color: var(--color-muted);
     line-height: 1.5;
   }
 
-  /* ============================================================
-     CLIENTS
-     ============================================================ */
+  /* ---- CLIENTS ---- */
   .clients {
-    padding: var(--inner-pad-y) var(--inner-pad-x);
+    padding: var(--section-padding-y) var(--container-padding);
     display: flex;
     flex-direction: column;
-    gap: var(--s-16);
+    gap: calc(64 * var(--unit));
   }
 
-  .clients-title {
+  .clients__title {
     text-align: center;
   }
 
-  .clients-grid {
-    display: flex;
-    flex-direction: column;
+  .clients__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--color-cream);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
   }
 
-  .clients-row {
-    display: flex;
-    align-items: stretch;
-  }
-
-  /* Row 1: 5 cells flex-1 */
   .client-cell {
-    flex: 1 0 0;
-    min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--s-16) calc(28 * var(--unit));
-    border: 1px solid var(--border-cream);
-    background: var(--white);
-    transition: background 0.2s;
+    padding: calc(48 * var(--unit)) calc(28 * var(--unit));
+    border-right: 1px solid var(--color-cream);
+    border-bottom: 1px solid var(--color-cream);
+    background: var(--color-white);
+    transition: background var(--transition-base);
+    min-height: calc(100 * var(--unit));
   }
 
   .client-cell:hover {
-    background: var(--cream);
+    background: var(--color-cream);
   }
 
-  /* Row 2: 4 cells fixed 270.4px */
-  .client-cell--fixed {
-    flex: 0 0 calc(270.4 * var(--unit));
-    max-width: calc(270.4 * var(--unit));
+  .client-cell:nth-child(5n) {
+    border-right: none;
   }
 
-  .client-logo-placeholder {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .client-logo-text {
-    font-size: var(--t-sm);
-    color: var(--muted);
+  .client-cell__placeholder {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
     font-weight: 500;
-    /* Replace with real <img> logo */
+    /* Replace with <img> once logos are available */
   }
 
-  /* ============================================================
-     RESSOURCES
-     ============================================================ */
+  /* ---- RESSOURCES ---- */
   .ressources {
-    padding: var(--inner-pad-y) clamp(32px, calc(60 * var(--unit)), 60px);
+    padding: var(--section-padding-y) var(--container-padding);
     display: flex;
     flex-direction: column;
-    gap: var(--s-16);
+    gap: calc(64 * var(--unit));
   }
 
-  .ressources-header {
+  .ressources__header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
   }
 
-  .ressources-grid {
+  .ressources__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-10);
+    gap: calc(40 * var(--unit));
   }
 
   .ressource-card {
     display: flex;
     flex-direction: column;
-    gap: var(--s-5);
+    gap: calc(20 * var(--unit));
     cursor: pointer;
   }
 
-  .ressource-card-img {
+  .ressource-card__image {
     width: 100%;
-    height: calc(300 * var(--unit));
-    min-height: 160px;
-    border-radius: var(--r-sm);
-    background: #d9d9d9;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-sm);
+    background: var(--color-cream);
     overflow: hidden;
-    transition: transform 0.4s var(--ease);
+    transition: transform var(--transition-slow);
   }
 
-  .ressource-card:hover .ressource-card-img {
+  .ressource-card:hover .ressource-card__image {
     transform: scale(1.02);
   }
 
-  .ressource-card-title {
-    font-size: var(--t-lg);
+  .ressource-card__title {
+    font-size: clamp(18px, calc(24 * var(--unit)), 24px);
     font-weight: 400;
-    color: var(--purple);
+    color: var(--color-purple);
     line-height: 1.3;
   }
 
-  /* ============================================================
-     FOOTER
-     ============================================================ */
+  /* ---- FOOTER ---- */
   .footer {
+    border-top: 1px solid var(--color-cream);
+    padding: calc(24 * var(--unit)) var(--container-padding);
+  }
+
+  .footer__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: calc(24 * var(--unit)) clamp(32px, calc(60 * var(--unit)), 60px);
-    border-top: 1px solid var(--border-light);
+    gap: var(--space-10);
   }
 
-  .footer-left {
+  .footer__left {
     display: flex;
     align-items: center;
-    gap: var(--s-12);
+    gap: calc(48 * var(--unit));
   }
 
-  .footer-logo { flex-shrink: 0; }
+  .footer__logo {
+    flex-shrink: 0;
+  }
 
-  .footer-nav {
+  .footer__nav {
     display: flex;
     align-items: center;
-    gap: var(--s-10);
-    font-size: var(--t-base);
-    color: var(--dark);
+    gap: calc(40 * var(--unit));
   }
 
-  .footer-nav a { transition: opacity 0.2s; }
-  .footer-nav a:hover { opacity: 0.6; }
+  .footer__nav a {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    transition: opacity var(--transition-base);
+  }
 
-  .footer-right {
+  .footer__nav a:hover {
+    opacity: 0.6;
+  }
+
+  .footer__right {
     display: flex;
     align-items: center;
-    gap: var(--s-12);
+    gap: calc(48 * var(--unit));
   }
 
-  .footer-email {
-    font-size: var(--t-base);
-    color: var(--dark);
-    transition: opacity 0.2s;
+  .footer__email {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    transition: opacity var(--transition-base);
   }
-  .footer-email:hover { opacity: 0.6; }
 
-  .footer-socials {
+  .footer__email:hover {
+    opacity: 0.6;
+  }
+
+  .footer__socials {
     display: flex;
     align-items: center;
-    gap: var(--s-12);
+    gap: calc(48 * var(--unit));
   }
 
-  .footer-social {
-    background: var(--cream);
-    color: var(--dark);
-    font-size: var(--t-xs);
+  .footer__social-btn {
+    background: var(--color-cream);
+    color: var(--color-dark);
+    font-size: var(--text-xs);
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     padding: 8px 16px;
-    border-radius: var(--r-sm);
-    transition: background 0.2s;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-base);
   }
-  .footer-social:hover { background: #d1dede; }
+
+  .footer__social-btn:hover {
+    background: #d1dede;
+  }
 
   /* ============================================================
-     MOBILE (≤ 768px)
+     RESPONSIVE — MOBILE
      ============================================================ */
   @media (max-width: 768px) {
     /* Menu */
-    .menu-wrap { padding: 12px 12px 0; }
-    .menu { padding: 12px 16px; }
-    .menu-identity { display: none; }
-    .menu-nav { gap: 20px; padding: 10px 14px; font-size: 14px; }
-    .menu-cta { padding: 10px 14px; font-size: 14px; }
+    .menu {
+      padding: 12px;
+    }
+
+    .menu__inner {
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      gap: 12px;
+    }
+
+    .menu__identity {
+      display: none;
+    }
+
+    .menu__nav {
+      gap: 20px;
+      padding: 10px 16px;
+    }
+
+    .menu__nav a {
+      font-size: 14px;
+    }
+
+    .menu__cta {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
 
     /* Hero */
-    .hero-wrap { padding: 0 12px; }
-    .hero { height: auto; min-height: 80vh; padding: 60px 24px 80px; }
-    .hero-title { font-size: clamp(28px, 8vw, 48px); }
-    .hero-subtitle { font-size: 16px; }
-    .sticker { display: none; }
+    .hero {
+      padding-top: calc(72px + 12px);
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .hero__container {
+      min-height: 80vh;
+      border-radius: var(--radius-lg);
+      padding: 60px 24px 80px;
+    }
+
+    .hero__title {
+      font-size: clamp(32px, 10vw, 48px);
+    }
+
+    .hero__subtitle {
+      font-size: 16px;
+    }
+
+    .sticker {
+      display: none;
+    }
 
     /* Projets */
-    .projets { padding: 40px 20px; gap: 40px; }
-    .projets-row { flex-direction: column; }
-    .projet-card, .projet-card--wide { flex: none; width: 100%; max-width: 100%; }
+    .projets {
+      padding: 40px 20px;
+    }
 
-    /* Methodo */
-    .methodo-wrap { padding: 20px 12px; }
-    .methodo { padding: 40px 24px; }
-    .methodo-grid { grid-template-columns: 1fr; gap: 16px; }
-    .methodo-card { height: auto; min-height: 160px; padding: 24px; gap: 24px; }
+    .projet-item__inner {
+      grid-template-columns: 40px 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      padding: 20px 0;
+    }
+
+    .projet-item__image {
+      display: none;
+    }
+
+    .projet-item__num {
+      font-size: 20px;
+      color: var(--color-muted);
+    }
+
+    .projet-item__info {
+      grid-column: 2;
+    }
+
+    .projet-item__tags {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+    }
+
+    .projet-item__arrow {
+      grid-row: 1;
+      grid-column: 3;
+    }
+
+    .projet-item__title {
+      font-size: 18px;
+    }
+
+    .projet-item__desc {
+      display: none;
+    }
+
+    /* Méthodologie */
+    .methodo {
+      padding: 40px 12px;
+    }
+
+    .methodo__inner {
+      padding: 40px 24px;
+      gap: 40px;
+    }
+
+    .methodo__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .methodo-card {
+      min-height: auto;
+      padding: 24px;
+    }
 
     /* Clients */
-    .clients { padding: 40px 20px; }
-    .clients-row { flex-wrap: wrap; }
-    .client-cell, .client-cell--fixed { flex: 1 0 45%; max-width: none; padding: 28px 16px; }
+    .clients {
+      padding: 40px 20px;
+    }
+
+    .clients__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .client-cell {
+      padding: 24px 16px;
+    }
+
+    .client-cell:nth-child(5n) {
+      border-right: 1px solid var(--color-cream);
+    }
+
+    .client-cell:nth-child(3n) {
+      border-right: none;
+    }
 
     /* Ressources */
-    .ressources { padding: 40px 20px; }
-    .ressources-grid { grid-template-columns: 1fr; gap: 32px; }
-    .ressource-card-img { height: 200px; }
+    .ressources {
+      padding: 40px 20px;
+    }
+
+    .ressources__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
 
     /* Footer */
-    .footer { flex-direction: column; align-items: flex-start; gap: 28px; padding: 32px 20px; }
-    .footer-left { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .footer-nav { flex-wrap: wrap; gap: 16px; }
-    .footer-right { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .footer-socials { gap: 12px; }
+    .footer {
+      padding: 32px 20px;
+    }
+
+    .footer__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .footer__left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .footer__nav {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
   }
 </style>
 
