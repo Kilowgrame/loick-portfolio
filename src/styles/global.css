@@ -1,124 +1,90 @@
-/* =====================================================
-   FONTS
-   ===================================================== */
-@font-face {
-  font-family: 'LC Mogi';
-  src: url('/fonts/LCMogi-B.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* ============================================================
+   LOÏCK LEGALLAIS — V2 DESIGN SYSTEM
+   Fluid type & spacing based on 1512px Figma artboard
+   ============================================================ */
 
-/* =====================================================
-   FLUID RESPONSIVE SYSTEM
-   ----
-   Site designed at 1512px viewport (Figma desktop).
-   Mobile-specific overrides at <= 768px to match the
-   Figma 375px mobile mockup (smaller paddings, stacked
-   layouts, smaller hero, etc.)
-   ===================================================== */
-
+/* ---- Fluid unit (same system as V1) ---- */
 :root {
-  /* Fluid viewport width — clamped between 360px and 1800px */
   --vw: clamp(360px, 100vw, 1800px);
   --unit: calc(var(--vw) / 1512);
 
-  /* Brand colors */
-  --color-aubergine: #31243d;
-  --color-violet: #c0acfb;
-  --color-violet-border: #9879f5;
-  --color-teal: #06535e;
-  --color-green: #1dd183;
-  --color-lime: #c8f74d;
+  /* ---- Palette V2 ---- */
+  --color-teal:         #075056;   /* Hero bg, menu bg */
+  --color-teal-mid:     #206267;   /* Menu nav bg, badge bg */
+  --color-teal-border:  #397378;   /* Menu border */
+  --color-cream:        #ebf1f1;   /* Section bg, tags */
+  --color-white:        #ffffff;
+  --color-dark:         #16232b;   /* Primary text */
+  --color-muted:        #737a7a;   /* Secondary text */
+  --color-purple:       #31243d;   /* Accent text on cards */
+  --color-dot:          #4fe89b;   /* Green dot (available) */
 
-  /* Neutrals */
-  --color-white: #ffffff;
-  --color-text-dark: #232224;
-  --color-border-light: #f4f2fd;
-  --color-placeholder: #d9d9d9;
+  /* ---- Typography (fluid) ---- */
+  --font-body: 'Inter', system-ui, sans-serif;
 
-  /* Typography sizes — fluid with safe minimums */
-  --text-xs: max(11px, calc(14 * var(--unit)));
-  --text-sm: max(10px, calc(14 * var(--unit)));
-  --text-base: max(14px, calc(18 * var(--unit)));
-  --text-md: max(16px, calc(20 * var(--unit)));
-  --text-lg: max(18px, calc(24 * var(--unit)));
-  --text-xl: max(28px, calc(40 * var(--unit)));
-  --text-2xl: max(36px, calc(60 * var(--unit)));
-  --text-display: max(40px, calc(106 * var(--unit)));
+  /* Font sizes — fluid with safe minimums */
+  --text-xs:       max(10px, calc(12 * var(--unit)));
+  --text-sm:       max(12px, calc(14 * var(--unit)));
+  --text-base:     max(14px, calc(16 * var(--unit)));
+  --text-md:       max(16px, calc(20 * var(--unit)));
+  --text-lg:       max(18px, calc(24 * var(--unit)));
+  --text-xl:       max(24px, calc(32 * var(--unit)));
+  --text-2xl:      max(28px, calc(46 * var(--unit)));
+  --text-hero:     clamp(36px, calc(76 * var(--unit)), 76px);
+  --text-project-num: clamp(32px, calc(56 * var(--unit)), 56px);
 
-  /* Page-specific fluid sizes
-     clamp(min mobile, fluid via Figma value, max desktop) */
-  --text-body-single: clamp(16px, calc(22 * var(--unit)), 18px);   /* paragraphs in single content */
-  --text-title-single: clamp(28px, calc(40 * var(--unit)), 40px);  /* single project title */
-  --text-desc-single: clamp(16px, calc(20 * var(--unit)), 16px);   /* single description */
-  --text-card-title: clamp(18px, calc(24 * var(--unit)), 24px);    /* archive card titles */
-  --text-filter: clamp(14px, calc(16 * var(--unit)), 16px);        /* archive filter buttons */
-  --text-archive-hero: clamp(48px, calc(102 * var(--unit)), 102px); /* PROJETS hero title */
-
-  /* Fonts */
-  --font-display: 'LC Mogi', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Spacing scale — fluid */
-  --space-1: calc(4 * var(--unit));
-  --space-2: calc(8 * var(--unit));
-  --space-3: calc(12 * var(--unit));
-  --space-4: calc(16 * var(--unit));
-  --space-5: calc(20 * var(--unit));
-  --space-6: calc(24 * var(--unit));
-  --space-7: calc(28 * var(--unit));
-  --space-8: calc(32 * var(--unit));
+  /* ---- Spacing ---- */
+  --space-1:  calc(4  * var(--unit));
+  --space-2:  calc(8  * var(--unit));
+  --space-3:  calc(12 * var(--unit));
+  --space-4:  calc(16 * var(--unit));
+  --space-5:  calc(20 * var(--unit));
+  --space-6:  calc(24 * var(--unit));
+  --space-8:  calc(28 * var(--unit));
   --space-10: calc(40 * var(--unit));
   --space-12: calc(48 * var(--unit));
-  --space-15: calc(60 * var(--unit));
   --space-16: calc(64 * var(--unit));
   --space-20: calc(80 * var(--unit));
-  --space-30: calc(120 * var(--unit));
 
-  /* Radii */
-  --radius-sm: calc(16 * var(--unit));
-  --radius-md: calc(20 * var(--unit));
-  --radius-lg: calc(22 * var(--unit));
-  --radius-xl: calc(40 * var(--unit));
-  --radius-pill: 100px;
+  /* ---- Radii ---- */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
 
-  /* Layout — fluid container padding
-     Min: 20px (Figma mobile), max: 60px (Figma desktop 1512px)
-     Smoothly transitions between the two with no jump */
-  --container-padding: clamp(20px, calc(60 * var(--unit)), 60px);
+  /* ---- Layout ---- */
+  --container-padding: clamp(20px, calc(80 * var(--unit)), 80px);
+  --section-padding-y: clamp(40px, calc(64 * var(--unit)), 64px);
 
-  /* Transitions */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --transition-base: 0.4s var(--ease-out);
+  /* ---- Transitions ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.3s var(--ease-out);
+  --transition-slow: 0.6s var(--ease-out);
 }
 
-/* =====================================================
-   RESET
-   ===================================================== */
+/* ---- Reset ---- */
 *, *::before, *::after {
   box-sizing: border-box;
-}
-
-html, body {
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   font-family: var(--font-body);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  color: var(--color-aubergine);
-  background-color: var(--color-white);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: var(--text-base);
+  color: var(--color-dark);
+  background: var(--color-white);
   overflow-x: hidden;
 }
 
-img, svg, video {
+img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -126,64 +92,31 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
+ul {
+  list-style: none;
 }
 
-p {
-  margin: 0;
-}
-
-/* =====================================================
-   UTILITIES
-   ===================================================== */
-
+/* ---- Shared utility classes ---- */
 .tag {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid currentColor;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-body);
+  padding: 6px 14px;
+  background: var(--color-cream);
+  color: var(--color-dark);
   font-size: var(--text-xs);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
-  letter-spacing: 0.02em;
 }
 
-.display {
-  font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1;
+.section-title {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-dark);
 }
 
-/* =====================================================
-   ANIMATIONS
-   ===================================================== */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
-}
-
-.fade-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
-  .fade-in {
-    opacity: 1;
-    transform: none;
-  }
-}
+/* ---- Google Fonts import ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');

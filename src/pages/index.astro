@@ -1,137 +1,1068 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import StatsBlock from '../components/StatsBlock.astro';
-import ProjectBlock from '../components/ProjectBlock.astro';
-import CtaProjects from '../components/CtaProjects.astro';
-import ResourcesSection from '../components/ResourcesSection.astro';
+// V2 Home page
+// Sections:
+//   1. Menu (sticky header)
+//   2. Hero (teal, with stickers + badge + title + subtitle)
+//   3. Projets (afternow.co style — vertical list with hover image reveal)
+//   4. Méthodologie (3 cards)
+//   5. Ils me font confiance (logo grid)
+//   6. Ressources (3 cards)
+//   7. Footer
 
-const featured = (await getCollection('projets'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
+// --- Projects data (edit here or connect to Content Collections) ---
+const projets = [
+  {
+    num: '01',
+    title: 'Likewatt',
+    description: 'Refonte technique et design du site de Likewatt, pionnier des solutions d\'énergie verte.',
+    tags: ['UI / UX Design', 'Product Design'],
+    slug: 'likewatt',
+    bgColor: '#31243d',
+  },
+  {
+    num: '02',
+    title: 'SBG Systems',
+    description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation.',
+    tags: ['UI / UX Design'],
+    slug: 'sbg-systems',
+    bgColor: '#03223f',
+  },
+  {
+    num: '03',
+    title: 'Wikit',
+    description: 'Plateforme de création d\'agents conversationnels — identité et expérience repensées.',
+    tags: ['UI / UX Design'],
+    slug: 'wikit',
+    bgColor: '#e1ecfd',
+  },
+  {
+    num: '04',
+    title: 'Manerty',
+    description: 'Accompagner des cabinets d\'experts-comptables dans la gestion locative.',
+    tags: ['UI / UX Design', 'Product Design'],
+    slug: 'manerty',
+    bgColor: '#3662e3',
+  },
+  {
+    num: '05',
+    title: 'Los Primos',
+    description: 'Nouvelle identité et site e-commerce pour une épicerie fine mexicaine.',
+    tags: ['UI / UX Design'],
+    slug: 'los-primos',
+    bgColor: '#2d4a1e',
+  },
+];
+
+// --- Méthodo steps ---
+const steps = [
+  {
+    title: 'Analyser',
+    text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.',
+  },
+  {
+    title: 'Co-construire',
+    text: 'Créer des wireframes, designer l\'interface, prototyper le parcours, réaliser des tests utilisateurs.',
+  },
+  {
+    title: 'Ajuster',
+    text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.',
+  },
+];
+
+// --- Clients (placeholders — replace with real logos) ---
+const clients = [
+  'Client 01', 'Client 02', 'Client 03', 'Client 04', 'Client 05',
+  'Client 06', 'Client 07', 'Client 08', 'Client 09',
+];
+
+// --- Resources ---
+const ressources = [
+  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager' },
+  { tag: 'Plugin Figma', title: 'Contrast Checker', slug: 'contrast-checker' },
+  { tag: 'Article', title: 'Design System Tips', slug: 'design-system' },
+];
 ---
 
-<Layout>
-  <Hero />
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loïck Legallais — UI / UX Designer Freelance</title>
+  <meta name="description" content="Designer UI/UX Freelance basé à Lyon. Je crée des interfaces pensées pour vos objectifs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+<body>
 
-  <StatsBlock />
+<!-- ============================================================
+     MENU
+     ============================================================ -->
+<header class="menu">
+  <div class="menu__inner">
+    <!-- Logo + Nom + Statut -->
+    <div class="menu__brand">
+      <div class="menu__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="white" fill-opacity="0.15"/>
+          <text x="16" y="22" text-anchor="middle" font-family="Inter" font-size="16" font-weight="600" fill="white">L</text>
+        </svg>
+      </div>
+      <div class="menu__identity">
+        <span class="menu__name">Loïck Legallais</span>
+        <span class="menu__status">
+          <span class="menu__dot" aria-hidden="true"></span>
+          Freelance basé à Lyon
+        </span>
+      </div>
+    </div>
 
-  <!--
-    STACK SECTION
-    ===========
-    Each .stack-item is position: sticky to top: 0.
-    They naturally pile up: the next one slides over the previous one as you scroll.
-    The .stack-container is taller than the viewport so there's room to scroll.
+    <!-- Navigation -->
+    <nav class="menu__nav" aria-label="Navigation principale">
+      <a href="/projets">Work</a>
+      <a href="/a-propos">À propos</a>
+      <a href="/ressources">Ressources</a>
+    </nav>
 
-    `--stack-height` controls each block's height (70vh as chosen).
-    The container is `N * --stack-height` tall, where N = number of blocks.
+    <!-- CTA -->
+    <a href="mailto:legallais.loick@gmail.com" class="menu__cta">
+      Contact
+    </a>
+  </div>
+</header>
 
-    `data-stack-index` is the z-index — last block on top.
-  -->
-  <section
-    class="stack-section"
-    aria-label="Projets en avant"
-    style={`--stack-count: ${featured.length}`}
-  >
-    {featured.map((project, index) => (
-      <div
-        class="stack-item"
-        style={`z-index: ${index + 1}`}
-      >
-        <ProjectBlock
-          title={project.data.title}
-          description={project.data.description ?? ''}
-          tags={project.data.fields}
-          bgColor={project.data.bgColor}
-          textColor={project.data.textColor}
-          href={`/projets/${project.slug}`}
-          image={project.data.cover}
-        />
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" aria-label="Introduction">
+  <div class="hero__container">
+
+    <!-- Stickers -->
+    <img src="/images/stickers/etoile.svg" alt="" class="sticker sticker--etoile" aria-hidden="true" />
+    <img src="/images/stickers/eyes.svg"   alt="" class="sticker sticker--eyes"   aria-hidden="true" />
+    <img src="/images/stickers/peace.svg"  alt="" class="sticker sticker--peace"  aria-hidden="true" />
+
+    <!-- Content -->
+    <div class="hero__content">
+      <!-- Badge disponibilité -->
+      <div class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        <span>UI / UX Designer Freelance — Disponible</span>
+      </div>
+
+      <!-- Titre -->
+      <h1 class="hero__title">
+        Des interfaces pensées<br>pour vos objectifs
+      </h1>
+
+      <!-- Sous-titre -->
+      <p class="hero__subtitle">
+        Le design ne doit plus être seulement esthétique mais répondre à des objectifs clairs.
+        En vous accompagnant, je me base sur des datas solides pour proposer
+        une expérience utilisateur réussie.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PROJETS — style afternow.co
+     Vertical list: each item reveals its image on hover
+     ============================================================ -->
+<section class="projets" aria-label="Derniers projets">
+  <div class="projets__header">
+    <h2 class="section-title">Des projets qui ont du sens.</h2>
+    <a href="/projets" class="projets__link">Tout découvrir</a>
+  </div>
+
+  <ul class="projets__list">
+    {projets.map((projet) => (
+      <li class="projet-item">
+        <a href={`/projets/${projet.slug}`} class="projet-item__inner">
+          <!-- Numéro -->
+          <span class="projet-item__num">{projet.num}</span>
+
+          <!-- Image (révélée au hover) -->
+          <div class="projet-item__image" aria-hidden="true">
+            <div class="projet-item__image-bg" style={`background-color: ${projet.bgColor}`}></div>
+          </div>
+
+          <!-- Infos -->
+          <div class="projet-item__info">
+            <span class="projet-item__title">{projet.title}</span>
+            <span class="projet-item__desc">{projet.description}</span>
+          </div>
+
+          <!-- Tags -->
+          <div class="projet-item__tags">
+            {projet.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+
+          <!-- Flèche -->
+          <span class="projet-item__arrow" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+
+<!-- ============================================================
+     MÉTHODOLOGIE
+     ============================================================ -->
+<section class="methodo" aria-label="Méthodologie">
+  <div class="methodo__inner">
+    <h2 class="section-title">Une méthodologie efficace et sur mesure.</h2>
+
+    <div class="methodo__grid">
+      {steps.map((step, i) => (
+        <div class="methodo-card">
+          <span class="methodo-card__num">0{i + 1}</span>
+          <h3 class="methodo-card__title">{step.title}</h3>
+          <p class="methodo-card__text">{step.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ILS ME FONT CONFIANCE
+     ============================================================ -->
+<section class="clients" aria-label="Clients">
+  <h2 class="section-title clients__title">Ils me font confiance</h2>
+
+  <div class="clients__grid">
+    {clients.map((client) => (
+      <div class="client-cell">
+        <!-- Remplacer par un vrai logo <img> quand disponible -->
+        <span class="client-cell__placeholder">{client}</span>
       </div>
     ))}
-  </section>
+  </div>
+</section>
 
-  <CtaProjects />
 
-  <ResourcesSection />
-</Layout>
+<!-- ============================================================
+     RESSOURCES
+     ============================================================ -->
+<section class="ressources" aria-label="Ressources">
+  <div class="ressources__header">
+    <h2 class="section-title">Quelques ressources à disposition</h2>
+    <a href="/ressources" class="projets__link">Tout découvrir</a>
+  </div>
 
+  <div class="ressources__grid">
+    {ressources.map((r) => (
+      <a href={`/ressources/${r.slug}`} class="ressource-card">
+        <div class="ressource-card__image"></div>
+        <span class="tag">{r.tag}</span>
+        <span class="ressource-card__title">{r.title}</span>
+      </a>
+    ))}
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <!-- Left: logo + nav -->
+    <div class="footer__left">
+      <div class="menu__logo footer__logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="8" fill="#075056"/>
+          <text x="16" y="22" text-anchor="middle" font-family="Inter" font-size="16" font-weight="600" fill="white">L</text>
+        </svg>
+      </div>
+      <nav class="footer__nav" aria-label="Navigation pied de page">
+        <a href="/projets">Projets</a>
+        <a href="/a-propos">À propos</a>
+        <a href="/ressources">Ressources</a>
+        <a href="mailto:legallais.loick@gmail.com">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Right: email + socials -->
+    <div class="footer__right">
+      <a href="mailto:legallais.loick@gmail.com" class="footer__email">
+        legallais.loick@gmail.com
+      </a>
+      <div class="footer__socials">
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer__social-btn">
+          LinkedIn
+        </a>
+        <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="footer__social-btn">
+          Figma
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     STYLES
+     ============================================================ -->
 <style>
-  /* ============================================
-     STACK SECTION — sticky-card animation
-     Inspired by serious.business
-     ============================================ */
-
-  /* The height of one "card slot" in the stack.
-     Lower = faster transition. Higher = slower. */
-  .stack-section {
-    --stack-height: 70vh;
-
-    /* Position relative so sticky children are anchored to this section */
-    position: relative;
-
-    /* The section is N times taller than one card — this is the scroll
-       distance available. Without this, sticky would have nothing to scroll over. */
-    height: calc(var(--stack-count, 5) * var(--stack-height));
+  /* ---- MENU ---- */
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 16px var(--container-padding);
   }
 
-  /* Each stack item is sticky at the top of the viewport.
-     When the next one's top reaches the viewport top, it covers the previous one. */
-  .stack-item {
-    position: sticky;
-    top: 0;
-    height: var(--stack-height);
-    /* Hide overflow so the inner ProjectBlock (which might be taller than 70vh
-       on certain screens) doesn't break the layout */
+  .menu__inner {
+    background: var(--color-teal);
+    border: 1px solid var(--color-teal-border);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(20 * var(--unit));
+  }
+
+  .menu__brand {
+    display: flex;
+    align-items: center;
+    gap: calc(16 * var(--unit));
+  }
+
+  .menu__logo {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .menu__identity {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .menu__name {
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-white);
+    line-height: 1.2;
+  }
+
+  .menu__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-sm);
+    color: #cddcdd;
+    line-height: 1.2;
+  }
+
+  .menu__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-dot);
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.85); }
+  }
+
+  .menu__nav {
+    display: flex;
+    align-items: center;
+    gap: calc(40 * var(--unit));
+    background: var(--color-teal-mid);
+    padding: calc(16 * var(--unit)) calc(24 * var(--unit));
+    border-radius: var(--radius-md);
+  }
+
+  .menu__nav a {
+    font-size: var(--text-base);
+    color: var(--color-white);
+    transition: opacity var(--transition-base);
+  }
+
+  .menu__nav a:hover {
+    opacity: 0.7;
+  }
+
+  .menu__cta {
+    background: var(--color-white);
+    color: var(--color-dark);
+    font-size: var(--text-base);
+    padding: calc(16 * var(--unit)) calc(24 * var(--unit));
+    border-radius: var(--radius-md);
+    transition: background var(--transition-base), color var(--transition-base);
+  }
+
+  .menu__cta:hover {
+    background: var(--color-cream);
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding-top: calc(109px + 16px); /* account for fixed header */
+    padding-left: 16px;
+    padding-right: 16px;
+    background: var(--color-white);
+  }
+
+  .hero__container {
+    position: relative;
+    background: linear-gradient(135deg, #0a767f 0%, var(--color-teal) 100%);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: calc(100 * var(--unit)) var(--container-padding) calc(120 * var(--unit));
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(671 * var(--unit));
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(16 * var(--unit));
+    max-width: calc(887 * var(--unit));
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-teal-mid);
+    color: var(--color-white);
+    font-size: var(--text-base);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+  }
+
+  .hero__badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-dot);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .hero__title {
+    font-size: var(--text-hero);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--color-white);
+    letter-spacing: -0.02em;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(16px, calc(20 * var(--unit)), 20px);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: calc(655 * var(--unit));
+  }
+
+  /* Stickers in hero */
+  .sticker {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+    height: auto;
+  }
+
+  .sticker--etoile {
+    top: calc(227 * var(--unit));
+    left: calc(149 * var(--unit));
+    width: calc(90 * var(--unit));
+    transform: rotate(19.32deg);
+  }
+
+  .sticker--eyes {
+    top: calc(115 * var(--unit));
+    right: calc(170 * var(--unit));
+    width: calc(120 * var(--unit));
+    transform: rotate(-6.11deg);
+  }
+
+  .sticker--peace {
+    bottom: calc(60 * var(--unit));
+    left: 40%;
+    width: calc(80 * var(--unit));
+    transform: rotate(24.81deg);
+  }
+
+  /* ---- PROJETS — afternow.co style ---- */
+  .projets {
+    padding: var(--section-padding-y) var(--container-padding);
+  }
+
+  .projets__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: calc(48 * var(--unit));
+  }
+
+  .projets__link {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: opacity var(--transition-base);
+  }
+
+  .projets__link:hover {
+    opacity: 0.6;
+  }
+
+  .projets__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-cream);
+  }
+
+  /* Each project row */
+  .projet-item {
+    border-bottom: 1px solid var(--color-cream);
+  }
+
+  .projet-item__inner {
+    display: grid;
+    /* num | image | info | tags | arrow */
+    grid-template-columns: calc(80 * var(--unit)) calc(180 * var(--unit)) 1fr auto calc(48 * var(--unit));
+    align-items: center;
+    gap: calc(40 * var(--unit));
+    padding: calc(28 * var(--unit)) 0;
+    cursor: pointer;
+    transition: background var(--transition-base);
+  }
+
+  .projet-item__inner:hover {
+    background: transparent;
+  }
+
+  /* Numéro */
+  .projet-item__num {
+    font-size: var(--text-project-num);
+    font-weight: 400;
+    color: var(--color-cream);
+    line-height: 1;
+    transition: color var(--transition-base);
+  }
+
+  .projet-item:hover .projet-item__num {
+    color: var(--color-dark);
+  }
+
+  /* Image reveal */
+  .projet-item__image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    /* Hidden by default, revealed on hover */
+    opacity: 0;
+    transform: scale(0.92) translateY(8px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    will-change: transform, opacity;
+  }
+
+  .projet-item:hover .projet-item__image {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .projet-item__image-bg {
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-slow);
+  }
+
+  .projet-item:hover .projet-item__image-bg {
+    transform: scale(1.05);
+  }
+
+  /* Info */
+  .projet-item__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .projet-item__title {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    color: var(--color-dark);
+    transition: color var(--transition-base);
+  }
+
+  .projet-item:hover .projet-item__title {
+    color: var(--color-teal);
+  }
+
+  .projet-item__desc {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    line-height: 1.5;
+    max-width: 36ch;
+  }
+
+  /* Tags */
+  .projet-item__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  /* Arrow */
+  .projet-item__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-muted);
+    transform: rotate(0deg);
+    transition: transform var(--transition-base), color var(--transition-base);
+  }
+
+  .projet-item:hover .projet-item__arrow {
+    transform: rotate(-45deg);
+    color: var(--color-teal);
+  }
+
+  /* ---- MÉTHODOLOGIE ---- */
+  .methodo {
+    padding: var(--section-padding-y) calc(16 * var(--unit));
+  }
+
+  .methodo__inner {
+    background: var(--color-cream);
+    border-radius: var(--radius-lg);
+    padding: var(--section-padding-y) var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: calc(64 * var(--unit));
+  }
+
+  .methodo__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(40 * var(--unit));
+  }
+
+  .methodo-card {
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+    padding: calc(28 * var(--unit));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: calc(24 * var(--unit));
+    min-height: calc(428 * var(--unit));
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .methodo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(7, 80, 86, 0.1);
+  }
+
+  .methodo-card__num {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+
+  .methodo-card__title {
+    font-size: clamp(18px, calc(24 * var(--unit)), 24px);
+    font-weight: 500;
+    color: var(--color-purple);
+    line-height: 1.5;
+    margin-top: auto;
+  }
+
+  .methodo-card__text {
+    font-size: clamp(14px, calc(20 * var(--unit)), 20px);
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  /* ---- CLIENTS ---- */
+  .clients {
+    padding: var(--section-padding-y) var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: calc(64 * var(--unit));
+  }
+
+  .clients__title {
+    text-align: center;
+  }
+
+  .clients__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--color-cream);
+    border-radius: var(--radius-sm);
     overflow: hidden;
   }
 
-  /* Make the inner ProjectBlock fill the sticky slot fully */
-  .stack-item :global(.project-block) {
-    min-height: 100%;
-    /* Vertically center the content inside the sticky slot since the block
-       may be shorter than the slot */
+  .client-cell {
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: calc(48 * var(--unit)) calc(28 * var(--unit));
+    border-right: 1px solid var(--color-cream);
+    border-bottom: 1px solid var(--color-cream);
+    background: var(--color-white);
+    transition: background var(--transition-base);
+    min-height: calc(100 * var(--unit));
   }
 
-  /* Mobile: also fluid. We keep the stack effect, but allow the block content
-     to scroll if it's taller than the slot (column layout adds height). */
+  .client-cell:hover {
+    background: var(--color-cream);
+  }
+
+  .client-cell:nth-child(5n) {
+    border-right: none;
+  }
+
+  .client-cell__placeholder {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+    font-weight: 500;
+    /* Replace with <img> once logos are available */
+  }
+
+  /* ---- RESSOURCES ---- */
+  .ressources {
+    padding: var(--section-padding-y) var(--container-padding);
+    display: flex;
+    flex-direction: column;
+    gap: calc(64 * var(--unit));
+  }
+
+  .ressources__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .ressources__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(40 * var(--unit));
+  }
+
+  .ressource-card {
+    display: flex;
+    flex-direction: column;
+    gap: calc(20 * var(--unit));
+    cursor: pointer;
+  }
+
+  .ressource-card__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-sm);
+    background: var(--color-cream);
+    overflow: hidden;
+    transition: transform var(--transition-slow);
+  }
+
+  .ressource-card:hover .ressource-card__image {
+    transform: scale(1.02);
+  }
+
+  .ressource-card__title {
+    font-size: clamp(18px, calc(24 * var(--unit)), 24px);
+    font-weight: 400;
+    color: var(--color-purple);
+    line-height: 1.3;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    border-top: 1px solid var(--color-cream);
+    padding: calc(24 * var(--unit)) var(--container-padding);
+  }
+
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-10);
+  }
+
+  .footer__left {
+    display: flex;
+    align-items: center;
+    gap: calc(48 * var(--unit));
+  }
+
+  .footer__logo {
+    flex-shrink: 0;
+  }
+
+  .footer__nav {
+    display: flex;
+    align-items: center;
+    gap: calc(40 * var(--unit));
+  }
+
+  .footer__nav a {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    transition: opacity var(--transition-base);
+  }
+
+  .footer__nav a:hover {
+    opacity: 0.6;
+  }
+
+  .footer__right {
+    display: flex;
+    align-items: center;
+    gap: calc(48 * var(--unit));
+  }
+
+  .footer__email {
+    font-size: var(--text-base);
+    color: var(--color-dark);
+    transition: opacity var(--transition-base);
+  }
+
+  .footer__email:hover {
+    opacity: 0.6;
+  }
+
+  .footer__socials {
+    display: flex;
+    align-items: center;
+    gap: calc(48 * var(--unit));
+  }
+
+  .footer__social-btn {
+    background: var(--color-cream);
+    color: var(--color-dark);
+    font-size: var(--text-xs);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-base);
+  }
+
+  .footer__social-btn:hover {
+    background: #d1dede;
+  }
+
+  /* ============================================================
+     RESPONSIVE — MOBILE
+     ============================================================ */
   @media (max-width: 768px) {
-  /* Désactive le stack sur mobile — blocs normaux */
-  .stack-section {
-    height: auto;
-  }
-  
-  .stack-item {
-    position: relative;
-    height: auto;
-    overflow: visible;
-  }
-}
-
-    .stack-item {
-      /* Allow the block to be taller than the slot on small screens */
-      overflow: visible;
+    /* Menu */
+    .menu {
+      padding: 12px;
     }
 
-    .stack-item :global(.project-block) {
-      min-height: 100%;
+    .menu__inner {
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      gap: 12px;
+    }
+
+    .menu__identity {
+      display: none;
+    }
+
+    .menu__nav {
+      gap: 20px;
+      padding: 10px 16px;
+    }
+
+    .menu__nav a {
+      font-size: 14px;
+    }
+
+    .menu__cta {
+      padding: 10px 16px;
+      font-size: 14px;
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: calc(72px + 12px);
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+
+    .hero__container {
+      min-height: 80vh;
+      border-radius: var(--radius-lg);
+      padding: 60px 24px 80px;
+    }
+
+    .hero__title {
+      font-size: clamp(32px, 10vw, 48px);
+    }
+
+    .hero__subtitle {
+      font-size: 16px;
+    }
+
+    .sticker {
+      display: none;
+    }
+
+    /* Projets */
+    .projets {
+      padding: 40px 20px;
+    }
+
+    .projet-item__inner {
+      grid-template-columns: 40px 1fr auto;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      padding: 20px 0;
+    }
+
+    .projet-item__image {
+      display: none;
+    }
+
+    .projet-item__num {
+      font-size: 20px;
+      color: var(--color-muted);
+    }
+
+    .projet-item__info {
+      grid-column: 2;
+    }
+
+    .projet-item__tags {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+    }
+
+    .projet-item__arrow {
+      grid-row: 1;
+      grid-column: 3;
+    }
+
+    .projet-item__title {
+      font-size: 18px;
+    }
+
+    .projet-item__desc {
+      display: none;
+    }
+
+    /* Méthodologie */
+    .methodo {
+      padding: 40px 12px;
+    }
+
+    .methodo__inner {
+      padding: 40px 24px;
+      gap: 40px;
+    }
+
+    .methodo__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .methodo-card {
+      min-height: auto;
+      padding: 24px;
+    }
+
+    /* Clients */
+    .clients {
+      padding: 40px 20px;
+    }
+
+    .clients__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .client-cell {
+      padding: 24px 16px;
+    }
+
+    .client-cell:nth-child(5n) {
+      border-right: 1px solid var(--color-cream);
+    }
+
+    .client-cell:nth-child(3n) {
+      border-right: none;
+    }
+
+    /* Ressources */
+    .ressources {
+      padding: 40px 20px;
+    }
+
+    .ressources__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 32px 20px;
+    }
+
+    .footer__inner {
+      flex-direction: column;
       align-items: flex-start;
+      gap: 32px;
     }
-  
 
-  /* Respect reduced motion: disable the sticky effect entirely */
-  @media (prefers-reduced-motion: reduce) {
-    .stack-section {
-      height: auto;
+    .footer__left {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
     }
-    .stack-item {
-      position: static;
-      height: auto;
-      overflow: visible;
+
+    .footer__nav {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__right {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
     }
   }
 </style>
+
+</body>
+</html>
