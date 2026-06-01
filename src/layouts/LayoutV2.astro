@@ -1,0 +1,374 @@
+---
+// LayoutV2.astro — Master layout for V2
+// Contains: fonts, menu, slot (page content), footer
+// Usage:
+//   import Layout from '../layouts/LayoutV2.astro';
+//   <Layout title="Ma page" description="...">
+//     <!-- page content here -->
+//   </Layout>
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Loïck Legallais — UI / UX Designer Freelance',
+  description = 'Designer UI/UX Freelance basé à Lyon. Je crée des interfaces pensées pour vos objectifs.',
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ============================================================
+     MENU
+     ============================================================ -->
+<header class="menu-wrap">
+  <div class="menu">
+    <div class="menu-brand">
+      <a href="/" class="menu-logo" aria-label="Retour à l'accueil">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="10" fill="#075056"/>
+          <text x="24" y="31" text-anchor="middle" font-family="Inter" font-size="20" font-weight="600" fill="white">L</text>
+        </svg>
+      </a>
+      <div class="menu-identity">
+        <span class="menu-name">Loïck Legallais</span>
+        <span class="menu-status">
+          <span class="menu-dot" aria-hidden="true"></span>
+          Freelance basé à Lyon
+        </span>
+      </div>
+    </div>
+    <div class="menu-right">
+      <nav class="menu-nav" aria-label="Navigation principale">
+        <a href="/projets" class={currentPath.startsWith('/projets') ? 'active' : ''}>Work</a>
+        <a href="/a-propos" class={currentPath === '/a-propos' ? 'active' : ''}>A propos</a>
+        <a href="/ressources" class={currentPath === '/ressources' ? 'active' : ''}>Ressources</a>
+      </nav>
+      <a href="mailto:legallais.loick@gmail.com" class="menu-cta">Contact</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ============================================================
+     PAGE CONTENT — injected by each page
+     ============================================================ -->
+<main>
+  <slot />
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="footer-left">
+    <a href="/" class="footer-logo" aria-label="Retour à l'accueil">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect width="48" height="48" rx="10" fill="#075056"/>
+        <text x="24" y="31" text-anchor="middle" font-family="Inter" font-size="20" font-weight="600" fill="white">L</text>
+      </svg>
+    </a>
+    <nav class="footer-nav" aria-label="Navigation pied de page">
+      <a href="/projets">Projets</a>
+      <a href="/a-propos">A propos</a>
+      <a href="/ressources">Ressources</a>
+      <a href="mailto:legallais.loick@gmail.com">Contact</a>
+    </nav>
+  </div>
+  <div class="footer-right">
+    <a href="mailto:legallais.loick@gmail.com" class="footer-email">legallais.loick@gmail.com</a>
+    <div class="footer-socials">
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social">Linkedin</a>
+      <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="footer-social">Figma</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+<style is:global>
+  /* ============================================================
+     DESIGN TOKENS — V2
+     Shared across all pages via this layout
+     ============================================================ */
+  :root {
+    --vw: clamp(360px, 100vw, 1800px);
+    --unit: calc(var(--vw) / 1512);
+
+    --teal:         #075056;
+    --teal-mid:     #206267;
+    --teal-border:  #397378;
+    --cream:        #ebf1f1;
+    --white:        #ffffff;
+    --dark:         #16232b;
+    --muted:        #737a7a;
+    --purple:       #31243d;
+    --dot-green:    #4fe89b;
+    --border-light: #f4f2fd;
+    --border-cream: #ebf1f1;
+
+    --font: 'Inter', system-ui, sans-serif;
+
+    --t-xs:   max(10px, calc(12 * var(--unit)));
+    --t-sm:   max(12px, calc(14 * var(--unit)));
+    --t-base: max(14px, calc(16 * var(--unit)));
+    --t-md:   max(16px, calc(20 * var(--unit)));
+    --t-lg:   max(20px, calc(24 * var(--unit)));
+    --t-xl:   max(28px, calc(46 * var(--unit)));
+    --t-hero: clamp(36px, calc(76 * var(--unit)), 76px);
+
+    --s-1:  calc(4  * var(--unit));
+    --s-2:  calc(8  * var(--unit));
+    --s-3:  calc(12 * var(--unit));
+    --s-4:  calc(16 * var(--unit));
+    --s-5:  calc(20 * var(--unit));
+    --s-6:  calc(24 * var(--unit));
+    --s-7:  calc(28 * var(--unit));
+    --s-10: calc(40 * var(--unit));
+    --s-12: calc(48 * var(--unit));
+    --s-16: calc(64 * var(--unit));
+    --s-20: calc(80 * var(--unit));
+
+    --outer-pad:   16px;
+    --inner-pad-x: clamp(32px, calc(80 * var(--unit)), 80px);
+    --inner-pad-y: clamp(32px, calc(64 * var(--unit)), 64px);
+
+    --r-sm: 8px;
+    --r-lg: 20px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Reset */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--dark); background: var(--white); overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  ul, li { list-style: none; }
+
+  /* Shared tag component */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--cream);
+    color: var(--dark);
+    font-size: var(--t-xs);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: var(--r-sm);
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-size: var(--t-xl);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+
+  .section-link {
+    font-size: var(--t-base);
+    color: var(--dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+  }
+  .section-link:hover { opacity: 0.6; }
+
+  /* ============================================================
+     MENU
+     ============================================================ */
+  .menu-wrap {
+    position: relative;
+    padding: var(--outer-pad) var(--outer-pad) 0;
+  }
+
+  .menu {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-cream);
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(20 * var(--unit));
+  }
+
+  .menu-brand {
+    display: flex;
+    align-items: center;
+    gap: calc(16 * var(--unit));
+  }
+
+  .menu-logo {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .menu-identity {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .menu-name {
+    font-size: var(--t-base);
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.2;
+  }
+
+  .menu-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--t-sm);
+    color: var(--muted);
+    line-height: 1.2;
+  }
+
+  .menu-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dot-green);
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .menu-right {
+    display: flex;
+    align-items: center;
+    gap: calc(28 * var(--unit));
+  }
+
+  .menu-nav {
+    display: flex;
+    align-items: center;
+    gap: calc(40 * var(--unit));
+    background: var(--cream);
+    padding: calc(16 * var(--unit)) calc(24 * var(--unit));
+    border-radius: calc(12 * var(--unit));
+    font-size: var(--t-base);
+    color: var(--dark);
+  }
+
+  .menu-nav a { transition: opacity 0.2s; }
+  .menu-nav a:hover,
+  .menu-nav a.active { opacity: 0.5; }
+
+  .menu-cta {
+    background: var(--teal);
+    color: var(--white);
+    font-size: var(--t-base);
+    padding: calc(16 * var(--unit)) calc(24 * var(--unit));
+    border-radius: calc(12 * var(--unit));
+    transition: background 0.2s;
+  }
+  .menu-cta:hover { background: var(--teal-mid); }
+
+  /* ============================================================
+     FOOTER
+     ============================================================ */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(24 * var(--unit)) clamp(32px, calc(60 * var(--unit)), 60px);
+    border-top: 1px solid var(--border-light);
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .footer-logo { display: block; flex-shrink: 0; }
+
+  .footer-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--s-10);
+    font-size: var(--t-base);
+    color: var(--dark);
+  }
+
+  .footer-nav a { transition: opacity 0.2s; }
+  .footer-nav a:hover { opacity: 0.6; }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .footer-email {
+    font-size: var(--t-base);
+    color: var(--dark);
+    transition: opacity 0.2s;
+  }
+  .footer-email:hover { opacity: 0.6; }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    gap: var(--s-12);
+  }
+
+  .footer-social {
+    background: var(--cream);
+    color: var(--dark);
+    font-size: var(--t-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 8px 16px;
+    border-radius: var(--r-sm);
+    transition: background 0.2s;
+  }
+  .footer-social:hover { background: #d1dede; }
+
+  /* ============================================================
+     MOBILE — menu + footer
+     ============================================================ */
+  @media (max-width: 768px) {
+    .menu-wrap { padding: 12px 12px 0; }
+    .menu { padding: 12px 16px; }
+    .menu-identity { display: none; }
+    .menu-nav { gap: 20px; padding: 10px 14px; font-size: 14px; }
+    .menu-cta { padding: 10px 14px; font-size: 14px; }
+
+    .footer { flex-direction: column; align-items: flex-start; gap: 28px; padding: 32px 20px; }
+    .footer-left { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .footer-nav { flex-wrap: wrap; gap: 16px; }
+    .footer-right { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-socials { gap: 12px; }
+  }
+</style>
