@@ -1,35 +1,251 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../layouts/LayoutV2.astro';
+
+const stats = [
+  {
+    value: '7',
+    label: 'ans d\'expérience',
+    description: 'Amet malesuada mi augue egestas eu eget eu proin vitae. Tellus iaculis augue malesuada vitae. Nulla dolor varius ut nec felis. Vulputate pretium duis fusce lorem ut. Sit faucibus luctus est consectetur ultricies.',
+  },
+  {
+    value: '+50',
+    label: 'clients accompagnés',
+    description: 'Posuere urna vulputate sed ut tincidunt dolor convallis consectetur. Faucibus ut orci est ultrices. Pretium commodo fusce in tristique vitae vulputate mi malesuada leo. Pellentesque vel cursus venenatis scelerisque varius amet arcu pharetra habitant.',
+  },
+  {
+    value: '+30',
+    label: 'ateliers réalisés',
+    description: 'In metus at quis aliquet sed. Enim sagittis adipiscing velit risus blandit. Nisl tellus imperdiet tellus dignissim turpis pulvinar lacus. Ut arcu gravida sollicitudin sit mauris quam turpis. Laoreet fringilla pulvinar urna eget non.',
+  },
+  {
+    value: '+120',
+    label: 'heures de formations',
+    description: 'Quis nunc nulla amet a pellentesque nisl. Nisl mi tellus quis a. Blandit amet ultrices nec eget ornare risus mauris feugiat sit. Justo non velit aliquam id porttitor adipiscing massa suspendisse. Dui enim et sit semper.',
+  },
+];
 ---
 
-<Layout title="À propos — Loïck Legallais">
-  <section class="placeholder">
-    <h1 class="display">À propos</h1>
-    <p>Cette page sera construite quand tu m'enverras la maquette Figma 🎨</p>
+<Layout title="À propos — Loïck Legallais" description="Designer UI/UX freelance basé à Lyon. Découvrez mon parcours et ma vision du design.">
+
+  <!-- HERO — même style que page projets -->
+  <section class="hero-wrap">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">A propos</h1>
+        <p class="hero-subtitle">
+          Designer UI/UX freelance basé à Lyon, je crée des interfaces pensées pour vos objectifs depuis plus de 7 ans.
+        </p>
+      </div>
+    </div>
   </section>
+
+  <!-- CHIFFRES CLÉS — fond teal, chiffre gauche + texte droite + séparateurs -->
+  <section class="stats-wrap">
+    <div class="stats">
+      <h2 class="stats-title">Quelques chiffres clés</h2>
+
+      <div class="stats-list">
+        {stats.map((stat, i) => (
+          <div class="stat-item">
+            <div class="stat-row">
+              <span class="stat-value">{stat.value}</span>
+              <p class="stat-desc">{stat.description}</p>
+            </div>
+            <div class="stat-sep"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DAMIER — texte gauche + photo droite -->
+  <section class="damier">
+    <div class="damier-text">
+      <h2 class="damier-title">Passionné depuis toujours</h2>
+      <p class="damier-desc">
+        Aliquam viverra tempor id pellentesque cras phasellus lacus. Euismod fringilla suscipit purus ut non. Phasellus pellentesque odio morbi lacus. Malesuada enim commodo tempus in suscipit sit. Venenatis sapien ultricies leo amet turpis at tempor.
+      </p>
+    </div>
+    <div class="damier-image">
+      <!-- Remplace le src par ta vraie photo -->
+      <div class="damier-image-placeholder"></div>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  .placeholder {
-    min-height: 60vh;
+  /* HERO — identique à la page projets */
+  .hero-wrap { padding: 0 var(--outer-pad); }
+  .hero {
+    background: var(--white);
+    border: 1px solid var(--border-cream);
+    border-top: none;
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+    height: calc(441 * var(--unit));
+    min-height: 240px;
+    padding: calc(100 * var(--unit)) var(--inner-pad-x) calc(64 * var(--unit));
+    display: flex;
+    align-items: flex-end;
+  }
+  .hero-content {
     display: flex;
     flex-direction: column;
+    gap: calc(16 * var(--unit));
+    max-width: calc(887 * var(--unit));
+    width: 100%;
+  }
+  .hero-title {
+    font-size: var(--t-hero);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+  .hero-subtitle {
+    font-size: clamp(15px, calc(20 * var(--unit)), 20px);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: calc(655 * var(--unit));
+  }
+
+  /* CHIFFRES CLÉS */
+  .stats-wrap {
+    padding: calc(28 * var(--unit)) var(--outer-pad);
+  }
+
+  .stats {
+    background: var(--teal);
+    border-radius: var(--r-lg);
+    padding: var(--inner-pad-y) var(--inner-pad-x);
+    display: flex;
+    flex-direction: column;
+    gap: calc(64 * var(--unit));
+  }
+
+  .stats-title {
+    font-size: var(--t-xl);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+  }
+
+  .stats-list {
+    display: flex;
+    flex-direction: column;
+    gap: calc(40 * var(--unit));
+    padding: 0 calc(100 * var(--unit));
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: calc(40 * var(--unit));
+  }
+
+  .stat-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(40 * var(--unit));
+    width: 100%;
+  }
+
+  .stat-value {
+    font-size: var(--t-hero);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    flex: 0 0 calc(191 * var(--unit));
+    min-width: calc(120 * var(--unit));
+  }
+
+  .stat-desc {
+    font-size: clamp(14px, calc(20 * var(--unit)), 20px);
+    line-height: 1.5;
+    color: #cddcdd;
+    flex: 1;
+    max-width: calc(772 * var(--unit));
+  }
+
+  .stat-sep {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* DAMIER */
+  .damier {
+    display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-6);
-    padding: calc(200 * var(--unit)) var(--container-padding) var(--space-30);
-    text-align: center;
+    justify-content: space-between;
+    gap: calc(40 * var(--unit));
+    padding: var(--inner-pad-y) var(--inner-pad-x);
   }
 
-  h1 {
-    font-size: var(--text-2xl);
-    margin: 0;
-    color: var(--color-aubergine);
+  .damier-text {
+    display: flex;
+    flex-direction: column;
+    gap: calc(60 * var(--unit));
+    flex: 0 0 calc(658 * var(--unit));
+    max-width: calc(658 * var(--unit));
   }
 
-  p {
-    font-size: var(--text-base);
-    color: var(--color-aubergine);
-    opacity: 0.7;
+  .damier-title {
+    font-size: var(--t-xl);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+
+  .damier-desc {
+    font-size: clamp(16px, calc(16 * var(--unit)), 24px);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: calc(568 * var(--unit));
+  }
+
+  .damier-image {
+    flex: 0 0 calc(655 * var(--unit));
+    max-width: calc(655 * var(--unit));
+    height: calc(649 * var(--unit));
+    min-height: 300px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Placeholder — remplace par <img> quand la photo est prête */
+  .damier-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--cream);
+  }
+
+  /* Pour ajouter la vraie photo, utilise cette structure dans le HTML :
+     <img src="/images/a-propos/photo.jpg" alt="Loïck Legallais"
+          style="width:100%;height:100%;object-fit:cover;object-position:center;" />
+  */
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    /* Hero */
+    .hero-wrap { padding: 0 12px; }
+    .hero { height: auto; min-height: 200px; padding: 40px 24px; align-items: flex-start; border: none; }
+    .hero-title { font-size: clamp(28px, 8vw, 48px); }
+    .hero-subtitle { font-size: 16px; }
+
+    /* Stats */
+    .stats-wrap { padding: 20px 12px; }
+    .stats { padding: 40px 24px; gap: 40px; }
+    .stats-list { padding: 0; gap: 32px; }
+    .stat-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .stat-value { font-size: clamp(36px, 10vw, 56px); }
+    .stat-desc { font-size: 16px; }
+
+    /* Damier */
+    .damier { flex-direction: column; padding: 40px 20px; gap: 40px; }
+    .damier-text { flex: none; width: 100%; max-width: 100%; gap: 32px; }
+    .damier-image { flex: none; width: 100%; max-width: 100%; height: 320px; }
   }
 </style>
