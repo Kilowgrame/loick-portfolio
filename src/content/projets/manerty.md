@@ -9,7 +9,7 @@ order: 4
 wide: false
 
 cardImage: "/images/projets/manerty/cover.svg"
-cardDescription: "Mon texte court pour la card de la home."
+cardDescription: "Créer le MVP d'une application comptable pour un congrès nationnal"
 
 metaItems:
   - label: Année

@@ -7,7 +7,7 @@ order: 2
 wide: false
 
 cardImage: "/images/projets/sbg-systems/cover.webp"
-cardDescription: "Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome."
+cardDescription: "Refondre le site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome."
 
 metaItems:
   - label: Année

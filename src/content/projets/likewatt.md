@@ -7,7 +7,7 @@ order: 1
 wide: true
 
 cardImage: "/images/projets/likewatt/cover.webp"
-cardDescription: "Mon texte court pour la card de la home."
+cardDescription: "Comprendre les points de douleurs utilisateurs, développeurs et commercial d'un logiciel d'analyse de consommation éléectrique. Améliorer le parcours utilisateurs et refondre graphiquement l'outil."
 
 metaItems:
   - label: "Année"
@@ -31,7 +31,7 @@ blocs:
   - type: image
     src: /images/projets/likewatt/screen-projet-likewatt.webp
     alt: Mise en avant projet Likewatt
-    
+
   - type: image
     src: /images/projets/likewatt/screen-login.webp
     alt: Ecrans d'applications

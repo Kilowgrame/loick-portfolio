@@ -7,7 +7,7 @@ order: 5
 wide: true
 
 cardImage: "/images/projets/los-primos/cover.webp"
-cardDescription: "Mon texte court pour la card de la home."
+cardDescription: "Transformer un site statique en site e-commerce. Revoir le positionnement à travers un design épuré simple tout en facilitant le parcours utilisateurs."
 
 metaItems:
   - label: "Année"

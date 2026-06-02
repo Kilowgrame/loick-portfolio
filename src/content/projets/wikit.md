@@ -9,7 +9,7 @@ order: 3
 wide: false
 
 cardImage: "/images/projets/wikit/ecran-responsive-wikit.webp"
-cardDescription: "Mon texte court pour la card de la home."
+cardDescription: "Moderniser l'image de marque d'une entreprise Tech et refondre l'architecture d'un site existant"
 
 metaItems:
   - label: Année
