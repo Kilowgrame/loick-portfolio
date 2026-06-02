@@ -92,9 +92,6 @@ const projetsSecondaires = allProjets.filter((p) => p.data.order > 6);
   .hero-wrap { padding: 0 var(--outer-pad); }
   .hero {
     background: var(--white);
-    border: 1px solid var(--border-cream);
-    border-top: none;
-    border-radius: 0 0 var(--r-lg) var(--r-lg);
     height: calc(441 * var(--unit));
     min-height: 240px;
     padding: calc(100 * var(--unit)) var(--inner-pad-x) calc(64 * var(--unit));
@@ -113,7 +110,7 @@ const projetsSecondaires = allProjets.filter((p) => p.data.order > 6);
   .projet-card--wide { flex: 0 0 calc(655 * var(--unit)); min-width: 0; max-width: calc(655 * var(--unit)); }
   .projets-row--secondaires { flex-wrap: wrap; }
   .projet-card--secondaire { flex: 1 0 calc(30%); max-width: calc((100% - 2 * var(--s-10)) / 3); }
-  .projet-card-img { position: relative; width: 100%; border-radius: var(--r-sm); aspect-ratio: 16/11; overflow: hidden; transition: transform 0.4s var(--ease); }
+  .projet-card-img { position: relative; width: 100%; border-radius: var(--r-sm); aspect-ratio: 6 / 5;; overflow: hidden; transition: transform 0.4s var(--ease); }
   .projet-card:hover .projet-card-img { transform: scale(1.02); }
   .projet-card--wide .projet-card-img { aspect-ratio: 424/300; }
   .projet-card--secondaire .projet-card-img { aspect-ratio: 16/11; height: auto; }

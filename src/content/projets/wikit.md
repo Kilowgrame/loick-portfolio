@@ -8,7 +8,7 @@ fields: ["UI / UX Design"]
 order: 3
 wide: false
 
-cardImage: "/images/projets/wikit/mockup-wikit.webp"
+cardImage: "/images/projets/wikit/ecran-responsive-wikit.webp"
 cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:

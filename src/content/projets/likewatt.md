@@ -6,7 +6,7 @@ fields: ["Product Design"]
 order: 1
 wide: true
 
-cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardImage: "/images/projets/likewatt/cover.webp"
 cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:
@@ -18,7 +18,7 @@ metaItems:
 
 blocs:
   - type: image
-    src: /images/projets/likewatt/screen-projet-likewatt.webp
+    src: /images/projets/likewatt/cover.webp
     alt: Mise en avant projet Likewatt
 
   - type: text
@@ -28,6 +28,10 @@ blocs:
     src: /images/projets/likewatt/screen-atelier.webp
     alt: User Flow
 
+  - type: image
+    src: /images/projets/likewatt/screen-projet-likewatt.webp
+    alt: Mise en avant projet Likewatt
+    
   - type: image
     src: /images/projets/likewatt/screen-login.webp
     alt: Ecrans d'applications

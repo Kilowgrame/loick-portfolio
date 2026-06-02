@@ -8,7 +8,7 @@ fields: ["Product Design"]
 order: 4
 wide: false
 
-cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardImage: "/images/projets/manerty/cover.svg"
 cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:
@@ -19,7 +19,7 @@ metaItems:
 
 blocs:
   - type: image
-    src: /images/uploads/manerty/screen-projet.webp
+    src: /images/projets/manerty/screen-projet.webp
     alt: Image maison projet Manerty
 
   - type: text
@@ -33,11 +33,11 @@ blocs:
       utilisateurs, puis nous les avons triées au sein d’une matrice de MoSCoW.
 
   - type: image
-    src: /images/uploads/manerty/screens-atelier-01.webp
+    src: /images/projets/manerty/screens-atelier-01.webp
     alt: Screen Atelier
 
   - type: image
-    src: /images/uploads/manerty/screens-atelier-02.webp
+    src: /images/projets/manerty/screens-atelier-02.webp
     alt: Atelier de priorisation des fonctionnalités
 
   - type: text
@@ -51,22 +51,22 @@ blocs:
       Pour chaque fonctionnalité développée, des tests utilisateurs en mode guérilla ont été réalisés auprès d’experts-comptables afin d’affiner le prototype.
 
   - type: image
-    src: /images/uploads/manerty/screens-general.webp
+    src: /images/projets/manerty/screens-general.webp
     alt: Ecrans d'applications
 
   - type: image
-    src: /images/uploads/manerty/screen-intro-projet.webp
+    src: /images/projets/manerty/screen-intro-projet.webp
     alt: Écran détention propriétaire Manerty
 
   - type: image
-    src: /images/uploads/manerty/screen-connexion.webp
+    src: /images/projets/manerty/screen-connexion.webp
     alt: Écran de connexion
 
   - type: image
-    src: /images/uploads/manerty/screen-dashboard.webp
+    src: /images/projets/manerty/screen-dashboard.webp
     alt: Écran de dashboard propriétaire
 
   - type: image
-    src: /images/uploads/manerty/screens-mockup.webp
+    src: /images/projets/manerty/screens-mockup.webp
     alt: Screen gamifié d'ajout de détention
 ---

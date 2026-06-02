@@ -8,9 +8,35 @@ const projets = (await getCollection('projets'))
   .sort((a, b) => a.data.order - b.data.order);
 
 const methodo = [
-  { title: 'Analyser', text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.' },
-  { title: 'Co-construire', text: 'Créer des wireframes, designer l\'interface, prototyper le parcours, réaliser des tests utilisateurs.' },
-  { title: 'Ajuster', text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.' },
+  {
+    title: 'Analyser',
+    text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.',
+    icon: `<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="55" cy="55" r="54" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="69.7476" r="39" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="84.7476" r="24" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55.3977" cy="99.7476" r="9" stroke="#FF6F00" stroke-width="2"/>
+    </svg>`,
+  },
+  {
+    title: 'Co-construire',
+    text: 'Créer des wireframes, designer l\'interface, prototyper le parcours, réaliser des tests utilisateurs.',
+    icon: `<svg width="167" height="104" viewBox="0 0 167 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.3527 51.0476L3.35266 26.0476L83.3527 1.04761L163.353 26.0476L83.3527 51.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 68.0476L3.35266 43.0476L83.3527 18.0476L163.353 43.0476L83.3527 68.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 85.0476L3.35266 60.0476L83.3527 35.0476L163.353 60.0476L83.3527 85.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 102.048L3.35266 77.0476L83.3527 52.0476L163.353 77.0476L83.3527 102.048Z" stroke="#31C96E" stroke-width="2"/>
+    </svg>`,
+  },
+  {
+    title: 'Ajuster',
+    text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.',
+    icon: `<svg width="130" height="100" viewBox="0 0 130 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M65 1C82.8465 1 98.956 4.11774 110.566 9.11914C116.373 11.6206 121.009 14.5737 124.179 17.8018C127.344 21.0253 129 24.4704 129 28C129 31.5296 127.344 34.9747 124.179 38.1982C121.009 41.4263 116.373 44.3794 110.566 46.8809C98.956 51.8823 82.8465 55 65 55C47.1535 55 31.044 51.8823 19.4336 46.8809C13.6267 44.3794 8.99083 41.4263 5.82129 38.1982C2.65619 34.9747 1 31.5296 1 28C1 24.4704 2.65619 21.0253 5.82129 17.8018C8.99083 14.5737 13.6267 11.6206 19.4336 9.11914C31.044 4.11774 47.1535 1 65 1Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 23C82.8465 23 98.956 26.1177 110.566 31.1191C116.373 33.6206 121.009 36.5737 124.179 39.8018C127.344 43.0253 129 46.4704 129 50C129 53.5296 127.344 56.9747 124.179 60.1982C121.009 63.4263 116.373 66.3794 110.566 68.8809C98.956 73.8823 82.8465 77 65 77C47.1535 77 31.044 73.8823 19.4336 68.8809C13.6267 66.3794 8.99083 63.4263 5.82129 60.1982C2.65619 56.9747 1 53.5296 1 50C1 46.4704 2.65619 43.0253 5.82129 39.8018C8.99083 36.5737 13.6267 33.6206 19.4336 31.1191C31.044 26.1177 47.1535 23 65 23Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 45C82.8465 45 98.956 48.1177 110.566 53.1191C116.373 55.6206 121.009 58.5737 124.179 61.8018C127.344 65.0253 129 68.4704 129 72C129 75.5296 127.344 78.9747 124.179 82.1982C121.009 85.4263 116.373 88.3794 110.566 90.8809C98.956 95.8823 82.8465 99 65 99C47.1535 99 31.044 95.8823 19.4336 90.8809C13.6267 88.3794 8.99083 85.4263 5.82129 82.1982C2.65619 78.9747 1 75.5296 1 72C1 68.4704 2.65619 65.0253 5.82129 61.8018C8.99083 58.5737 13.6267 55.6206 19.4336 53.1191C31.044 48.1177 47.1535 45 65 45Z" stroke="#075056" stroke-width="2"/>
+    </svg>`,
+  },
 ];
 
 const logosRow1 = [1, 2, 3, 4, 5];
@@ -120,7 +146,8 @@ const ressources = [
       <div class="methodo-grid">
         {methodo.map((step) => (
           <div class="methodo-card">
-            <span class="methodo-card-title">{step.title}</span>
+           <span class="methodo-card-title">{step.title}</span>
+            <div class="methodo-card-icon" set:html={step.icon}></div>
             <p class="methodo-card-text">{step.text}</p>
           </div>
         ))}
@@ -184,7 +211,7 @@ const ressources = [
     flex-direction: column;
     align-items: center;
     gap: calc(16 * var(--unit));
-    max-width: 100%;
+    max-width: 60%;
     text-align: center;
     position: relative;
     z-index: 2;
@@ -254,7 +281,7 @@ const ressources = [
     position: relative;
     width: 100%;
     border-radius: var(--r-sm);
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 6 / 5;
     overflow: hidden;
     transition: transform 0.4s var(--ease);
     background: var(--cream);
@@ -275,8 +302,8 @@ const ressources = [
     object-position: center;
   }
 
-  .projet-card-content { display: flex; flex-direction: column; gap: var(--s-6); }
-  .projet-card-text { display: flex; flex-direction: column; gap: var(--s-2); }
+  .projet-card-content { display: flex; flex-direction: column; gap: 16px; }
+  .projet-card-text { display: flex; flex-direction: column; gap: 4px; }
   .projet-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
   .projet-card:hover .projet-card-title { color: var(--teal); }
   .projet-card-desc { font-size: var(--t-base); color: var(--muted); line-height: 1.5; }
@@ -290,6 +317,17 @@ const ressources = [
   .methodo-card:hover { transform: translateY(-4px); }
   .methodo-card-title { font-size: var(--t-lg); font-weight: 500; color: var(--purple); line-height: 1.5; }
   .methodo-card-text { font-size: clamp(14px, calc(20 * var(--unit)), 20px); color: var(--muted); line-height: 1.5; }
+  .methodo-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.methodo-card-icon svg {
+  max-width: 100%;
+  height: auto;
+}
 
   /* CLIENTS */
   .clients { padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
@@ -317,6 +355,8 @@ const ressources = [
     .hero-title { font-size: clamp(28px, 8vw, 48px); }
     .hero-subtitle { font-size: 16px; }
     .sticker { display: none; }
+    .hero-content { max-width: 90%; }
+    .hero-subtitle { max-width: 70%; }
 
     .projets { padding: 40px 20px; gap: 40px; }
     .projets-header { flex-direction: column; align-items: flex-start; gap: 16px; }
