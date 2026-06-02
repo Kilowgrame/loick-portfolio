@@ -6,7 +6,7 @@ fields: ["UI / UX Design"]
 order: 5
 wide: true
 
-cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardImage: "/images/projets/los-primos/cover.webp"
 cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:
@@ -18,33 +18,33 @@ metaItems:
 
 blocs:
   - type: image
-    src: /images/uploads/los-primos/screen-projet.webp
+    src: /images/projets/los-primos/screen-projet.webp
     alt: Mise en avant projet Los Primos
 
   - type: text
     contenu: Nous avons pensé à un ensemble de micros-interactions et de détails pour fluidifier la navigation et permettre à l'utilisateur de naviguer sereinement. L'objectif était aussi de rendre le café pédagogique en donnant des informations précises sur la provenance, les arômes etc...
 
   - type: image
-    src: /images/uploads/los-primos/screen-section-hero-single.webp
+    src: /images/projets/los-primos/screen-section-hero-single.webp
     alt: Section e-commerce d'un café
 
   - type: image
-    src: /images/uploads/los-primos/screen-archive.webp
+    src: /images/projets/los-primos/screen-archive.webp
     alt: Page d'archive d'une catégorie de café
 
   - type: image
-    src: /images/uploads/los-primos/screen-home.webp
+    src: /images/projets/los-primos/screen-home.webp
     alt: Page d'accueil du site Los Primos
 
   - type: galerie
     colonnes: 2
     images:
-      - src: /images/uploads/los-primos/card-produit.webp
+      - src: /images/projets/los-primos/card-produit.webp
         alt: Carte produit par défaut
-      - src: /images/uploads/los-primos/card-produit-hover.webp
+      - src: /images/projets/los-primos/card-produit-hover.webp
         alt: Carte produit au survol
 
   - type: image
-    src: /images/uploads/los-primos/screen-shop.webp
+    src: /images/projets/los-primos/screen-shop.webp
     alt: Section slide-in panier e-commerce
 ---

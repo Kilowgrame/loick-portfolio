@@ -6,7 +6,7 @@ fields: ["UI / UX Design"]
 order: 2
 wide: false
 
-cardImage: "/images/projets/sbg-systems/projet-sbg.jpg"
+cardImage: "/images/projets/sbg-systems/cover.webp"
 cardDescription: "Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome."
 
 metaItems:
@@ -19,7 +19,7 @@ liveUrl: https://www.sbg-systems.com/
 
 blocs:
   - type: image
-    src: /images/projets/sbg-systems/projet-sbg.jpg
+    src: /images/projets/sbg-systems/cover.webp
     alt: Mise en avant du projet SBG Systems
 
   - type: text
@@ -29,31 +29,39 @@ blocs:
     src: /images/projets/sbg-systems/home-page-sbg.webp
     alt: Page d'accueil SBG Systems
 
-  - type: video
-    src: /images/videos/sbg-systems/typo.webm
-    alt: Page solutions
-
   - type: galerie-mixte
     items:
     - type: video
       src: "/images/videos/sbg-systems/Cards-solution.webm"
     - type: image
-      src: "/images/projets/sbg-systems/home-page-sbg.webp"
+      src: "/images/projets/sbg-systems/image-drone.webp"
       alt: "Capture d'écran"
 
   - type: image
-    src: /images/uploads/sbg-systems/mockup-sbg.webp
-    alt: Mockup page produit 
+    src: /images/projets/sbg-systems/solutions.webp
+    alt: Page d'accueil SBG Systems
 
-  - type: image
-    src: /images/uploads/sbg-systems/timeline.gif
-    alt: Timeline histoire SBG Systems
+  - type: video
+    src: /images/videos/sbg-systems/typo.webm
+    alt: Page solutions
 
   - type: galerie
     colonnes: 2
     images:
-      - src: /images/uploads/sbg-systems/switzer.webp
+      - src: /images/projets/sbg-systems/image-voiture-autonome.webp
         alt: Typo Switzer
-      - src: /images/uploads/sbg-systems/space-grotesk.webp
+      - src: /images/projets/sbg-systems/color.webp
         alt: Typo Space Grotesk
+
+  - type: image
+    src: /images/projets/sbg-systems/design-system.webp
+    alt: Mockup page produit 
+
+  - type: image
+    src: /images/projets/sbg-systems/timeline.gif
+    alt: Timeline histoire SBG Systems
+
+  - type: image
+    src: /images/projets/sbg-systems/mockup.webp
+    alt: Timeline histoire SBG Systems
 ---
