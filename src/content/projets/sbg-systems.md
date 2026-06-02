@@ -33,13 +33,13 @@ blocs:
     src: /images/videos/sbg-systems/typo.webm
     alt: Page solutions
 
-  - type: galerie
-    colonnes: 2
-    images:
-      - src: /images/videos/sbg-systems/Cards-solution.webm
-        alt: Card Solution par défaut
-      - src: /images/uploads/sbg-systems/card-hover.webp
-        alt: Card Solution au survol
+  - type: galerie-mixte
+    items:
+    - type: video
+      src: "/images/videos/sbg-systems/Cards-solution.webm"
+    - type: image
+      src: "/images/projets/sbg-systems/home-page-sbg.webp"
+      alt: "Capture d'écran"
 
   - type: image
     src: /images/uploads/sbg-systems/mockup-sbg.webp

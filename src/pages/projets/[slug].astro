@@ -89,6 +89,15 @@ const { data } = project;
             ))}
           </div>
         );
+        if (bloc.type === 'galerie-mixte') return (
+          <div class="bloc-galerie">
+            {bloc.items.map((item: { type: string; src: string; alt?: string }) => (
+              item.type === 'video'
+                ? <video src={item.src} autoplay loop muted playsinline class="bloc-galerie-media" />
+                : <img src={item.src} alt={item.alt ?? ''} loading="lazy" class="bloc-galerie-media" />
+            ))}
+          </div>
+        );
       })}
     </div>
 
@@ -134,6 +143,15 @@ const { data } = project;
   .bloc-video { width: 100%; height: auto; border-radius: var(--r-sm); background: var(--cream); display: block; }
   .bloc-galerie { display: grid; grid-template-columns: repeat(var(--cols, 2), 1fr); gap: calc(20 * var(--unit)); }
   .bloc-galerie img { width: 100%; height: calc(525 * var(--unit)); object-fit: cover; object-position: center; border-radius: var(--r-sm); background: var(--cream); }
+  .bloc-galerie video,
+  .bloc-galerie-media {
+    width: 100%;
+    height: calc(525 * var(--unit));
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--r-sm);
+    background: var(--cream);
+  }
 
   /* MOBILE */
   @media (max-width: 768px) {
@@ -142,8 +160,12 @@ const { data } = project;
     .sidebar-main { gap: 40px; }
     .sidebar-title { font-size: clamp(24px, 8vw, 36px); }
     .content { width: 100%; gap: 32px; }
-    .bloc-image img, .bloc-gif { height: 240px; }
+    .bloc-image img, .bloc-gif { height: auto; }
     .bloc-galerie { grid-template-columns: 1fr; }
-    .bloc-galerie img { height: 240px; }
+    .bloc-galerie img { height: auto; }
+    .bloc-galerie video,
+    .bloc-galerie-media {
+  height: auto;
+}
   }
 </style>

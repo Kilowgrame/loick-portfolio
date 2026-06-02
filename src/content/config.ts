@@ -95,6 +95,16 @@ const projetsCollection = defineCollection({
             ),
             colonnes: z.number().min(1).max(4).default(2),
           }),
+          z.object({
+            type: z.literal('galerie-mixte'),
+            items: z.array(
+              z.object({
+                type: z.string(),
+                src: z.string(),
+                alt: z.string().optional(),
+              })
+            ),
+          }),
         ])
       )
       .default([]),
