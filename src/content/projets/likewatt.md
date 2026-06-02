@@ -5,9 +5,12 @@ description: "Likewatt est une entreprise spécialisée dans le secteur de l'én
 cover: /images/uploads/likewatt/screen-projet-likewatt.webp
 bgColor: "#31243d"
 textColor: "#ffffff"
-fields: ["Ateliers client", "Product Design"]
-category: "Product Design"
-order: 3
+fields: ["Product Design"]
+order: 1
+wide: true
+
+cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:
   - label: "Année"
@@ -15,7 +18,6 @@ metaItems:
   - label: "Secteurs"
     value: "Énergie"
 
-showStats: false
 
 blocs:
   - type: image

@@ -2,23 +2,24 @@
 title: SBG Systems
 slug: sbg-systems
 description: SBG Systems est un pionnier des systèmes de navigation pour véhicules autonomes. Le site devait donc refléter leur expertise en offrant une expérience moderne, ainsi qu’une navigation fluide et intuitive à travers l’ensemble de leurs produits.
-cover: /images/uploads/sbg-systems/solutions-sbg.webp
+cover: /images/projets/sbg-systems/projet-sbg.jpg
 bgColor: "#06535e"
 textColor: "#ffffff"
-fields:
-  - Ateliers client
-  - UI Design
-  - UX Design
-category: UI / UX Design
-order: 4
-draft: false
-liveUrl: https://www.sbg-systems.com/
+fields: ["UI / UX Design"]
+order: 2
+wide: false
+
+cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardDescription: "Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome."
+
 metaItems:
   - label: Année
     value: "2025"
   - label: Secteurs
     value: Véhicule autonome, Industry
-showStats: false
+
+liveUrl: https://www.sbg-systems.com/
+
 blocs:
   - type: image
     src: /images/uploads/sbg-systems/projet-sbg.jpg

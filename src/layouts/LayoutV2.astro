@@ -1,23 +1,20 @@
 ---
-// LayoutV2.astro — Master layout for V2
-// Contains: fonts, menu, slot (page content), footer
-// Usage:
-//   import Layout from '../layouts/LayoutV2.astro';
-//   <Layout title="Ma page" description="...">
-//     <!-- page content here -->
-//   </Layout>
+import MenuTeal from '../components/MenuTeal.astro';
+import MenuWhite from '../components/MenuWhite.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  menuVariant?: 'white' | 'teal';
 }
 
 const {
   title = 'Loïck Legallais — UI / UX Designer Freelance',
   description = 'Designer UI/UX Freelance basé à Lyon. Je crée des interfaces pensées pour vos objectifs.',
+  menuVariant = 'white',
 } = Astro.props;
 
-const currentPath = Astro.url.pathname;
+const isTeal = menuVariant === 'teal';
 ---
 
 <!DOCTYPE html>
@@ -36,33 +33,7 @@ const currentPath = Astro.url.pathname;
 <!-- ============================================================
      MENU
      ============================================================ -->
-<header class="menu-wrap">
-  <div class="menu">
-    <div class="menu-brand">
-      <a href="/" class="menu-logo" aria-label="Retour à l'accueil">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <rect width="48" height="48" rx="10" fill="#075056"/>
-          <text x="24" y="31" text-anchor="middle" font-family="Inter" font-size="20" font-weight="600" fill="white">L</text>
-        </svg>
-      </a>
-      <div class="menu-identity">
-        <span class="menu-name">Loïck Legallais</span>
-        <span class="menu-status">
-          <span class="menu-dot" aria-hidden="true"></span>
-          Freelance basé à Lyon
-        </span>
-      </div>
-    </div>
-    <div class="menu-right">
-      <nav class="menu-nav" aria-label="Navigation principale">
-        <a href="/projets" class={currentPath.startsWith('/projets') ? 'active' : ''}>Work</a>
-        <a href="/a-propos" class={currentPath === '/a-propos' ? 'active' : ''}>A propos</a>
-        <a href="/ressources" class={currentPath === '/ressources' ? 'active' : ''}>Ressources</a>
-      </nav>
-      <a href="mailto:legallais.loick@gmail.com" class="menu-cta">Contact</a>
-    </div>
-  </div>
-</header>
+{isTeal ? <MenuTeal /> : <MenuWhite />}
 
 
 <!-- ============================================================
@@ -194,17 +165,39 @@ const currentPath = Astro.url.pathname;
   }
   .section-link:hover { opacity: 0.6; }
 
-  /* ============================================================
-     MENU
-     ============================================================ */
+  /* Menu — white variant (archive, single) */
+  .menu--white {
+    background: var(--white);
+    border-bottom: 1px solid var(--border-cream);
+  }
+
+  .menu--white .menu-name { color: var(--dark); }
+  .menu--white .menu-status { color: var(--muted); }
+  .menu--white .menu-nav { background: var(--cream); color: var(--dark); }
+  .menu--white .menu-nav a { color: var(--dark); }
+  .menu--white .menu-cta { background: var(--teal); color: var(--white); }
+  .menu--white .menu-cta:hover { background: var(--teal-mid); }
+
+  /* Menu — teal variant (home) */
+  .menu--teal {
+    background: var(--teal);
+    border-bottom: 1px solid var(--teal-border);
+  }
+
+  .menu--teal .menu-name { color: var(--white); }
+  .menu--teal .menu-status { color: #cddcdd; }
+  .menu--teal .menu-nav { background: var(--teal-mid); color: var(--white); }
+  .menu--teal .menu-nav a { color: var(--white); }
+  .menu--teal .menu-cta { background: var(--white); color: var(--dark); }
+  .menu--teal .menu-cta:hover { background: var(--cream); }
+
+  /* ---- Base menu layout (colors via variants above) ---- */
   .menu-wrap {
     position: relative;
     padding: var(--outer-pad) var(--outer-pad) 0;
   }
 
   .menu {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-cream);
     border-radius: var(--r-lg) var(--r-lg) 0 0;
     display: flex;
     align-items: center;
@@ -212,87 +205,42 @@ const currentPath = Astro.url.pathname;
     padding: calc(20 * var(--unit));
   }
 
-  .menu-brand {
-    display: flex;
-    align-items: center;
-    gap: calc(16 * var(--unit));
-  }
-
-  .menu-logo {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-    display: block;
-  }
-
-  .menu-identity {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  .menu-name {
-    font-size: var(--t-base);
-    font-weight: 500;
-    color: var(--dark);
-    line-height: 1.2;
-  }
-
-  .menu-status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: var(--t-sm);
-    color: var(--muted);
-    line-height: 1.2;
-  }
+  .menu-brand { display: flex; align-items: center; gap: calc(16 * var(--unit)); }
+  .menu-logo { width: 48px; height: 48px; flex-shrink: 0; display: block; }
+  .menu-identity { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; white-space: nowrap; }
+  .menu-name { font-size: var(--t-base); font-weight: 500; line-height: 1.2; }
+  .menu-status { display: flex; align-items: center; gap: 8px; font-size: var(--t-sm); line-height: 1.2; }
 
   .menu-dot {
-    width: 8px;
-    height: 8px;
+    width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--dot-green);
     flex-shrink: 0;
     animation: pulse 2s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-  .menu-right {
-    display: flex;
-    align-items: center;
-    gap: calc(28 * var(--unit));
-  }
+  .menu-right { display: flex; align-items: center; gap: calc(28 * var(--unit)); }
 
   .menu-nav {
     display: flex;
     align-items: center;
     gap: calc(40 * var(--unit));
-    background: var(--cream);
     padding: calc(16 * var(--unit)) calc(24 * var(--unit));
     border-radius: calc(12 * var(--unit));
     font-size: var(--t-base);
-    color: var(--dark);
   }
 
   .menu-nav a { transition: opacity 0.2s; }
-  .menu-nav a:hover,
-  .menu-nav a.active { opacity: 0.5; }
+  .menu-nav a:hover, .menu-nav a.active { opacity: 0.5; }
 
   .menu-cta {
-    background: var(--teal);
-    color: var(--white);
     font-size: var(--t-base);
     padding: calc(16 * var(--unit)) calc(24 * var(--unit));
     border-radius: calc(12 * var(--unit));
     transition: background 0.2s;
   }
-  .menu-cta:hover { background: var(--teal-mid); }
 
   /* ============================================================
      FOOTER

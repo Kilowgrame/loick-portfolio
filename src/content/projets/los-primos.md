@@ -5,9 +5,12 @@ description: "Los Primos souhaitait transformer un site vitrine en site e-commer
 cover: /images/uploads/los-primos/screen-projet.webp
 bgColor: "#c0acfb"
 textColor: "#31243d"
-fields: ["Ateliers client", "UI Design", "UX Design", "E-commerce"]
-category: "UI / UX Design"
-order: 2
+fields: ["UI / UX Design"]
+order: 5
+wide: true
+
+cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardDescription: "Mon texte court pour la card de la home."
 
 metaItems:
   - label: "Année"

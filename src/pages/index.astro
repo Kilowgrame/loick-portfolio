@@ -1,17 +1,11 @@
 ---
 import Layout from '../layouts/LayoutV2.astro';
+import { getCollection } from 'astro:content';
 
-const projetsRow1 = [
-  { title: 'LikeWatt', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design', 'Product Design'], slug: 'likewatt', bgColor: '#d9d9d9', wide: true, media: null },
-  { title: 'SBG Systems', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design'], slug: 'sbg-systems', bgColor: '#03223f', wide: false, media: null },
-  { title: 'Wikit', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design'], slug: 'wikit', bgColor: '#e1ecfd', wide: false, media: null },
-];
-
-const projetsRow2 = [
-  { title: 'Manerty', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design', 'Product Design'], slug: 'manerty', bgColor: '#3662e3', wide: false, media: null },
-  { title: 'Los Primos', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design'], slug: 'los-primos', bgColor: '#d9d9d9', wide: true, media: null },
-  { title: 'Le Spot', description: 'Refonte technique et design du site de SBG Systems, pionnier des systèmes de navigation pour véhicules autonome.', tags: ['UI / UX Design', 'Branding'], slug: 'le-spot', bgColor: '#4b3c32', wide: false, media: null },
-];
+// Les 6 projets principaux, triés par order
+const projets = (await getCollection('projets'))
+  .filter((p) => !p.data.draft && p.data.order <= 6)
+  .sort((a, b) => a.data.order - b.data.order);
 
 const methodo = [
   { title: 'Analyser', text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.' },
@@ -29,7 +23,7 @@ const ressources = [
 ];
 ---
 
-<Layout title="Loïck Legallais — UI / UX Designer Freelance">
+<Layout title="Loïck Legallais — UI / UX Designer Freelance" menuVariant="teal">
 
   <!-- HERO -->
   <section class="hero-wrap">
@@ -54,37 +48,64 @@ const ressources = [
       <h2 class="section-title">Des projets qui ont du sens.</h2>
       <a href="/projets" class="section-link">Tout découvrir</a>
     </div>
+
+    <!--
+      Grille asymétrique :
+      Row 1 : projet 1 (wide) + projets 2 et 3 (flex-1)
+      Row 2 : projets 4 et 6 (flex-1) + projet 5 (wide)
+
+      Pour changer quelle card est "large" → modifier wide: true dans le .md
+    -->
     <div class="projets-grid">
+      <!-- ROW 1 : projets 0, 1, 2 -->
       <div class="projets-row">
-        {projetsRow1.map((p) => (
-          <a href={`/projets/${p.slug}`} class={`projet-card ${p.wide ? 'projet-card--wide' : ''}`}>
-            <div class="projet-card-img" style={`background-color: ${p.bgColor}`}>
-              {p.media?.type === 'image' && <img src={p.media.src} alt={p.title} class="projet-card-media" />}
-              {p.media?.type === 'video' && <video src={p.media.src} class="projet-card-media" autoplay loop muted playsinline />}
+        {projets.slice(0, 3).map((p) => (
+          <a
+            href={`/projets/${p.slug}`}
+            class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}
+          >
+            <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+              {p.data.cardImage && (
+                <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />
+              )}
             </div>
             <div class="projet-card-content">
               <div class="projet-card-text">
-                <span class="projet-card-title">{p.title}</span>
-                <span class="projet-card-desc">{p.description}</span>
+                <span class="projet-card-title">{p.data.title}</span>
+                <span class="projet-card-desc">
+                  {p.data.cardDescription ?? p.data.description}
+                </span>
               </div>
-              <div class="projet-card-tags">{p.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="projet-card-tags">
+                {p.data.fields.map((t) => <span class="tag">{t}</span>)}
+              </div>
             </div>
           </a>
         ))}
       </div>
+
+      <!-- ROW 2 : projets 3, 4, 5 -->
       <div class="projets-row">
-        {projetsRow2.map((p) => (
-          <a href={`/projets/${p.slug}`} class={`projet-card ${p.wide ? 'projet-card--wide' : ''}`}>
-            <div class="projet-card-img" style={`background-color: ${p.bgColor}`}>
-              {p.media?.type === 'image' && <img src={p.media.src} alt={p.title} class="projet-card-media" />}
-              {p.media?.type === 'video' && <video src={p.media.src} class="projet-card-media" autoplay loop muted playsinline />}
+        {projets.slice(3, 6).map((p) => (
+          <a
+            href={`/projets/${p.slug}`}
+            class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}
+          >
+            <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+              {p.data.cardImage && (
+                <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />
+              )}
             </div>
             <div class="projet-card-content">
               <div class="projet-card-text">
-                <span class="projet-card-title">{p.title}</span>
-                <span class="projet-card-desc">{p.description}</span>
+                <span class="projet-card-title">{p.data.title}</span>
+                <span class="projet-card-desc">
+                  {p.data.cardDescription ?? p.data.description}
+                </span>
               </div>
-              <div class="projet-card-tags">{p.tags.map((t) => <span class="tag">{t}</span>)}</div>
+              <div class="projet-card-tags">
+                {p.data.fields.map((t) => <span class="tag">{t}</span>)}
+              </div>
             </div>
           </a>
         ))}
@@ -116,7 +137,7 @@ const ressources = [
           <div class="client-cell"><span class="client-logo-text">Logo {i}</span></div>
         ))}
       </div>
-      <div class="clients-row clients-row--small">
+      <div class="clients-row">
         {logosRow2.map((i) => (
           <div class="client-cell client-cell--fixed"><span class="client-logo-text">Logo {i}</span></div>
         ))}
@@ -185,6 +206,7 @@ const ressources = [
     flex-shrink: 0;
     animation: pulse 2s ease-in-out infinite;
   }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
   .hero-title {
     font-size: var(--t-hero);
     font-weight: 400;
@@ -207,13 +229,52 @@ const ressources = [
   .projets { padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
   .projets-header { display: flex; align-items: flex-end; justify-content: space-between; }
   .projets-grid { display: flex; flex-direction: column; gap: var(--s-10); }
-  .projets-row { display: flex; align-items: flex-start; gap: var(--s-10); }
-  .projet-card { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; gap: var(--s-5); cursor: pointer; text-decoration: none; }
-  .projet-card--wide { flex: 0 0 calc(655 * var(--unit)); max-width: calc(655 * var(--unit)); }
-  .projet-card-img { position: relative; width: 100%; border-radius: var(--r-sm); aspect-ratio: 16/11; overflow: hidden; transition: transform 0.4s var(--ease); }
+
+  /* Chaque row = flex, les cards flex-1 sauf si .projet-card--wide */
+  .projets-row { display: flex; align-items: flex-start; gap: var(--s-10); width: 100%; }
+
+  .projet-card {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  /* Card large : taille fixe 655px (Figma) */
+  .projet-card--wide {
+    flex: 0 0 calc(655 * var(--unit));
+    max-width: calc(655 * var(--unit));
+  }
+
+  /* Image de la card */
+  .projet-card-img {
+    position: relative;
+    width: 100%;
+    border-radius: var(--r-sm);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease);
+    background: var(--cream);
+  }
+
+  /* La card large a un ratio différent */
+  .projet-card--wide .projet-card-img { aspect-ratio: 16 / 11; }
+
   .projet-card:hover .projet-card-img { transform: scale(1.02); }
-  .projet-card--wide .projet-card-img { aspect-ratio: 424/300; }
-  .projet-card-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+  /* Image centrée et cadrée */
+  .projet-card-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
   .projet-card-content { display: flex; flex-direction: column; gap: var(--s-6); }
   .projet-card-text { display: flex; flex-direction: column; gap: var(--s-2); }
   .projet-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
@@ -259,8 +320,8 @@ const ressources = [
 
     .projets { padding: 40px 20px; gap: 40px; }
     .projets-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .projets-row { flex-direction: column; gap: 32px; }
     .projets-grid { gap: 32px; }
+    .projets-row { flex-direction: column; gap: 32px; }
     .projet-card, .projet-card--wide { flex: none; width: 100%; max-width: 100%; }
 
     .methodo-wrap { padding: 20px 12px; }

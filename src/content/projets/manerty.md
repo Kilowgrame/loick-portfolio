@@ -7,12 +7,13 @@ description: Guillaume et Stéphane Marquier souhaitent être accompagnés dans 
 cover: /images/uploads/manerty/screen-intro-projet.webp
 bgColor: "#1dd183"
 textColor: "#06535e"
-fields:
-  - Ateliers client
-  - Product Design
-category: Product Design
-order: 5
-draft: false
+fields: ["Product Design"]
+order: 4
+wide: false
+
+cardImage: "/images/projets/likewatt/ma-cover.jpg"
+cardDescription: "Mon texte court pour la card de la home."
+
 metaItems:
   - label: Année
     value: "2024"

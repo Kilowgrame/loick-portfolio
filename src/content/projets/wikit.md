@@ -7,24 +7,25 @@ description: Wikit est une entreprise spécialisé dans la génération
 cover: /images/uploads/wikit/mockup-wikit.webp
 bgColor: "#c8f74d"
 textColor: "#31243d"
-fields:
-  - Ateliers client
-  - UI Design
-  - UX Design
-category: UI / UX Design
-order: 1
-draft: false
+fields: ["UI / UX Design"]
+order: 3
+wide: false
+
+cardImage: "/images/projets/wikit/mockup-wikit.webp"
+cardDescription: "Mon texte court pour la card de la home."
+
 liveUrl: https://www.wikit.ai/
+
 metaItems:
   - label: Année
     value: "2025"
   - label: Secteurs
     value: Tech, IA
-showStats: false
-blocs:
 
+
+blocs:
   - type: image
-    src: /images/uploads/wikit/mockup-wikit.webp
+    src: /images/projets/wikit/mockup-wikit.webp
     alt: Mockup projet Wikit
 
   - type: text
