@@ -2,9 +2,6 @@
 title: Los Primos
 slug: los-primos
 description: "Los Primos souhaitait transformer un site vitrine en site e-commerce. Pour cela il a fallu revoir l'ensemble de l'arborescence, comprendre leurs produits, gammes, variants... Une aventure riche en échange qui débouche sur un site orienté utilisateurs."
-cover: /images/uploads/los-primos/screen-projet.webp
-bgColor: "#c0acfb"
-textColor: "#31243d"
 fields: ["UI / UX Design"]
 order: 5
 wide: true
@@ -18,7 +15,6 @@ metaItems:
   - label: "Secteurs"
     value: "E-commerce, Torréfacteur"
 
-showStats: false
 
 blocs:
   - type: image

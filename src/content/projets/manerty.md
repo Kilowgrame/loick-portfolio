@@ -4,9 +4,6 @@ slug: manerty
 description: Guillaume et Stéphane Marquier souhaitent être accompagnés dans la
   création de leur application métier. Celle-ci a pour objectif d'aider les
   cabinets d'experts-comptables dans la gestion locative.
-cover: /images/uploads/manerty/screen-intro-projet.webp
-bgColor: "#1dd183"
-textColor: "#06535e"
 fields: ["Product Design"]
 order: 4
 wide: false
@@ -19,7 +16,7 @@ metaItems:
     value: "2024"
   - label: Secteurs
     value: Comptabilité, Immobilier
-showStats: false
+
 blocs:
   - type: image
     src: /images/uploads/manerty/screen-projet.webp

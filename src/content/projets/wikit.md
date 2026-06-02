@@ -4,9 +4,6 @@ slug: wikit
 description: Wikit est une entreprise spécialisé dans la génération
   d'applications IA. L'entreprise possédait une identité visuelle vieillissante
   et souhaitait donner un aspect plus moderne à son image.
-cover: /images/uploads/wikit/mockup-wikit.webp
-bgColor: "#c8f74d"
-textColor: "#31243d"
 fields: ["UI / UX Design"]
 order: 3
 wide: false
@@ -14,14 +11,13 @@ wide: false
 cardImage: "/images/projets/wikit/mockup-wikit.webp"
 cardDescription: "Mon texte court pour la card de la home."
 
-liveUrl: https://www.wikit.ai/
-
 metaItems:
   - label: Année
     value: "2025"
   - label: Secteurs
     value: Tech, IA
 
+liveUrl: https://www.wikit.ai/
 
 blocs:
   - type: image

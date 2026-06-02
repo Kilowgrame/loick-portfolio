@@ -3,8 +3,6 @@ title: Sport dans la ville
 slug: sport-dans-la-ville
 description: Conception et déclinaison d'éléments d'identité visuelle pour
   l'association Sport dans la Ville.
-bgColor: "#06535e"
-textColor: "#ffffff"
 fields: ["UI / UX Design"]
 order: 6
 wide: false
