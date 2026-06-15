@@ -1,240 +1,154 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ResourcesSection from '../components/ResourcesSection.astro';
+import Layout from '../layouts/LayoutV2.astro';
+
+// Liste des ressources — ajoute des entrées ici pour en avoir plus.
+// La grille s'organise automatiquement par lignes de 3.
+const ressources = [
+  {
+    tag: 'Plugin Figma',
+    title: 'WebP Manager',
+    url: 'https://www.figma.com/community/plugin/1587802543036369275/webp-manager-rename-resize-export',
+    slug: 'webp-manager',
+    image: null, // ex: '/images/ressources/webp-manager.jpg'
+  },
+  {
+    tag: 'Plugin Figma',
+    title: 'Template Application (à venir)',
+    slug: 'webp-manager-2',
+    image: null,
+  },
+  {
+    tag: 'Plugin Figma',
+    title: 'Template E-Commerce (à venir)',
+    slug: 'webp-manager-3',
+    image: null,
+  },
+];
 ---
 
-<Layout title="Ressources — Loïck Legallais">
- <section class="ressources-hero">
-  <div class="ressources-hero__inner">
-    <h1 class="ressources-hero__title display">RESSOURCES</h1>
-    <img
-  src="/images/stickers/peace.svg"
-  alt=""
-  class="sticker sticker--etoile"
-  data-parallax-speed="0.3"
-  data-rotation="19.32"
-  aria-hidden="true"
-/>
-<img
-  src="/images/stickers/eyes.svg"
-  alt=""
-  class="sticker sticker--peace"
-  data-parallax-speed="0.3"
-  data-rotation="19.32"
-  aria-hidden="true"
-/>
-  </div>
-</section>
-<ResourcesSection showTitle={false} />
+<Layout title="Ressources — Loïck Legallais" description="Quelques ressources, outils et plugins utiles pour le design UI/UX.">
+
+  <!-- HERO — fond blanc, 369px (plus court que les autres pages) -->
+  <section class="hero-wrap">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Quelques ressources</h1>
+        <p class="hero-subtitle">
+          Une sélection d'outils, plugins et ressources que j'utilise au quotidien dans mon travail de designer UI/UX.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRILLE RESSOURCES — par lignes de 3 -->
+  <section class="ressources">
+    <div class="ressources-grid">
+      {ressources.map((r) => (
+        <a href={r.url} target="_blank" rel="noopener noreferrer" class="ressource-card">
+          <div class="ressource-card-img">
+            {r.image && <img src={r.image} alt={r.title} class="ressource-card-media" />}
+          </div>
+          <span class="tag">{r.tag}</span>
+          <span class="ressource-card-title">{r.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  /* ============================================
-     HERO — lime band with big title
-     ============================================ */
-  .ressources-hero {
-    background-color: var(--color-lime);
-    padding: calc(250 * var(--unit)) var(--container-padding) calc(150 * var(--unit));
+  /* HERO — fond blanc, 369px (vs 441px sur projets/a-propos) */
+  .hero-wrap { padding: 0 var(--outer-pad); }
+  .hero {
+    background: var(--white);
+    height: calc(369 * var(--unit));
+    min-height: 220px;
+    padding: calc(100 * var(--unit)) var(--inner-pad-x) calc(64 * var(--unit));
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
+    align-items: flex-end;
   }
-
-  .ressources-hero__inner {
+  .hero-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: calc(1392 * var(--unit));
-  }
-
-  .ressources-hero__title {
-    /* Fluid: 48px mobile → 102px desktop */
-    font-size: var(--text-archive-hero);
-    color: var(--color-aubergine);
-    text-align: center;
-    letter-spacing: 0.02em;
-    margin: 0;
+    gap: calc(16 * var(--unit));
+    max-width: calc(887 * var(--unit));
     width: 100%;
   }
-
-  /* ============================================
-     ARCHIVE — filters + grid
-     ============================================ */
-  .projects-archive {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-16);
-    padding: var(--space-30) var(--container-padding);
-    background: var(--color-white);
+  .hero-title {
+    font-size: var(--t-hero);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+  .hero-subtitle {
+    font-size: clamp(15px, calc(20 * var(--unit)), 20px);
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: calc(655 * var(--unit));
   }
 
-  .sticker {
-    position: absolute;
-    pointer-events: none;
-    z-index: 5;
-    height: auto;
-    will-change: transform;
+  /* GRILLE RESSOURCES */
+  .ressources {
+    padding: var(--inner-pad-y) clamp(32px, calc(60 * var(--unit)), 60px);
   }
 
-  /* Etoile — TOP LEFT zone, around 1/4 in from the left */
-  .sticker--etoile {
-    top: 18%;
-    left: 22%;
-    width: calc(90 * var(--unit));
-    transform: rotate(19.32deg);
-  }
-
-
-  /* Peace — BOTTOM RIGHT zone */
-  .sticker--peace {
-    bottom: 18%;
-    right: 18%;
-    width: calc(120 * var(--unit));
-    transform: rotate(-20deg);
-  }
-  /* Filters */
-  .filters {
-    display: none;
-    gap: calc(28 * var(--unit));
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .filter-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
-    border: 1px solid var(--color-aubergine);
-    border-radius: var(--radius-sm);
-    background: var(--color-white);
-    color: #000;
-    /* Fluid: 14px mobile → 16px desktop */
-    font-size: var(--text-filter);
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: background var(--transition-base), color var(--transition-base);
-  }
-
-  .filter-btn:hover {
-    background: var(--color-aubergine);
-    color: var(--color-white);
-  }
-
-  .filter-btn.is-active {
-    background: var(--color-aubergine);
-    color: var(--color-white);
-  }
-
-  /* Cards grid — 2 cols desktop, 1 col mobile */
-  .cards-grid {
+  /* 3 colonnes — si plus de 3 ressources, ça passe à la ligne automatiquement */
+  .ressources-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-16) var(--space-10);
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-10);
   }
 
-  .project-card {
+  .ressource-card {
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
-    text-decoration: none;
-    color: var(--color-aubergine);
-    transition: transform var(--transition-base);
+    align-items: flex-start;
+    gap: var(--s-5);
+    cursor: pointer;
   }
 
-  .project-card:hover {
-    transform: translateY(-4px);
-  }
-
-  .project-card__image {
+  .ressource-card-img {
+    position: relative;
     width: 100%;
-    aspect-ratio: 451 / 300;
-    border-radius: var(--radius-md);
+    height: calc(300 * var(--unit));
+    min-height: 160px;
+    border-radius: var(--r-sm);
+    background: #d9d9d9;
     overflow: hidden;
-    background: var(--color-placeholder);
+    transition: transform 0.4s var(--ease);
   }
 
-  .project-card__image img {
+  .ressource-card:hover .ressource-card-img {
+    transform: scale(1.02);
+  }
+
+  .ressource-card-media {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s var(--ease-out);
+    object-position: center;
   }
 
-  .project-card:hover .project-card__image img {
-    transform: scale(1.04);
+  .ressource-card-title {
+    font-size: var(--t-lg);
+    font-weight: 400;
+    color: var(--purple);
+    line-height: 1.3;
   }
 
-  .project-card__placeholder {
-    width: 100%;
-    height: 100%;
-  }
-
-  .project-card__tag {
-    color: var(--color-aubergine);
-    align-self: flex-start;
-  }
-
-  .project-card__title {
-    font-family: var(--font-body);
-    /* Fluid: 18px mobile → 24px desktop */
-    font-size: var(--text-card-title);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  /* ============================================
-     MOBILE
-     ============================================ */
+  /* MOBILE */
   @media (max-width: 768px) {
-    .ressources-hero {
-      padding: 140px var(--container-padding) 60px;
-      min-height: 350px;
-    }
+    .hero-wrap { padding: 0 12px; }
+    .hero { height: auto; min-height: 180px; padding: 40px 24px; align-items: flex-start; border: none; }
+    .hero-title { font-size: clamp(28px, 8vw, 48px); }
+    .hero-subtitle { font-size: 16px; }
 
-    .projects-archive {
-      gap: 64px;
-      padding: 60px var(--container-padding);
-    }
-
-    .filters {
-      gap: 28px;
-    }
-
-    .filter-btn {
-      padding: 16px;
-      border-radius: 16px;
-    }
-
-    .cards-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-
-    .project-card {
-      gap: 20px;
-    }
-
-    .project-card__image {
-      border-radius: 20px;
-    }
-
-    .sticker--etoile {
-      top: 22%;
-      left: 8%;
-      right: auto;
-      width: 70px;
-    }
-
-    .sticker--peace {
-      bottom: 2%;
-      right: 8%;
-      left: auto;
-      width: 65px;
-    }
+    .ressources { padding: 40px 20px; }
+    .ressources-grid { grid-template-columns: 1fr; gap: 32px; }
+    .ressource-card-img { height: 280px; }
   }
 </style>

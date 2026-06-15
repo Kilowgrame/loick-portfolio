@@ -43,9 +43,9 @@ const logosRow1 = [1, 2, 3, 4, 5];
 const logosRow2 = [6, 7, 8, 9];
 
 const ressources = [
-  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager' },
-  { tag: 'Plugin Figma', title: 'Contrast Checker', slug: 'contrast-checker' },
-  { tag: 'Article', title: 'Design System Tips', slug: 'design-system' },
+  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager', url: 'https://www.figma.com/community/plugin/1587802543036369275/webp-manager-rename-resize-export', },
+  { tag: 'Plugin Figma', title: 'Template Application (à venir)', slug: 'contrast-checker' },
+  { tag: 'Article', title: 'Template E-Commerce (à venir)', slug: 'design-system' },
 ];
 ---
 
@@ -155,7 +155,7 @@ const ressources = [
     </div>
   </section>
 
-  <!-- CLIENTS -->
+  <!-- CLIENTS 
   <section class="clients">
     <h2 class="section-title clients-title">Ils me font confiance</h2>
     <div class="clients-grid">
@@ -171,6 +171,7 @@ const ressources = [
       </div>
     </div>
   </section>
+-->
 
   <!-- RESSOURCES -->
   <section class="ressources">
@@ -180,7 +181,7 @@ const ressources = [
     </div>
     <div class="ressources-grid">
       {ressources.map((r) => (
-        <a href={`/ressources/${r.slug}`} class="ressource-card">
+        <a href={r.url} target="_blank" rel="noopener noreferrer" class="ressource-card">
           <div class="ressource-card-img"></div>
           <span class="tag">{r.tag}</span>
           <span class="ressource-card-title">{r.title}</span>
