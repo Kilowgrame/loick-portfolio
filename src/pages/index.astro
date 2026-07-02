@@ -43,9 +43,9 @@ const logosRow1 = [1, 2, 3, 4, 5];
 const logosRow2 = [6, 7, 8, 9];
 
 const ressources = [
-  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager', url: 'https://www.figma.com/community/plugin/1587802543036369275/webp-manager-rename-resize-export', },
-  { tag: 'Plugin Figma', title: 'Template Application (à venir)', slug: 'contrast-checker' },
-  { tag: 'Article', title: 'Template E-Commerce (à venir)', slug: 'design-system' },
+  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager', url: 'https://www.figma.com/community/plugin/1587802543036369275/webp-manager-rename-resize-export', image: '/images/ressources/webp-exporter.webp' },
+  { tag: 'Plugin Figma', title: 'Template Application (à venir)', slug: 'contrast-checker', image: '/images/ressources/template-application.webp' },
+  { tag: 'Article', title: 'Template E-Commerce (à venir)', slug: 'design-system', image: '/images/ressources/template-e-commerce.webp' },
 ];
 ---
 
@@ -182,7 +182,9 @@ const ressources = [
     <div class="ressources-grid">
       {ressources.map((r) => (
         <a href={r.url} target="_blank" rel="noopener noreferrer" class="ressource-card">
-          <div class="ressource-card-img"></div>
+          <div class="ressource-card-img">
+  {r.image && <img src={r.image} alt={r.title} class="ressource-card-media" />}
+</div>
           <span class="tag">{r.tag}</span>
           <span class="ressource-card-title">{r.title}</span>
         </a>
@@ -345,7 +347,7 @@ const ressources = [
   .ressources-header { display: flex; align-items: flex-end; justify-content: space-between; }
   .ressources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-10); }
   .ressource-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-5); cursor: pointer; }
-  .ressource-card-img { width: 100%; height: calc(300 * var(--unit)); min-height: 160px; border-radius: var(--r-sm); background: #d9d9d9; overflow: hidden; transition: transform 0.4s var(--ease); }
+  .ressource-card-img { width: 100%; height: calc(300 * var(--unit)); min-height: 160px; border-radius: var(--r-sm); overflow: hidden; transition: transform 0.4s var(--ease); }
   .ressource-card:hover .ressource-card-img { transform: scale(1.02); }
   .ressource-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--purple); line-height: 1.3; }
 
