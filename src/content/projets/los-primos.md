@@ -13,7 +13,7 @@ metaItems:
   - label: "Année"
     value: "2026"
   - label: "Secteurs"
-    value: "E-commerce, Torréfacteur"
+    value: "E-commerce"
 
 
 blocs:
