@@ -1,33 +1,51 @@
 ---
 import Layout from '../layouts/LayoutV2.astro';
 
+// Chiffres clés — affichés en ligne dans le hero
 const stats = [
+  { value: '7', label: 'ans d\'expériences' },
+  { value: '+50', label: 'clients accompagnés' },
+  { value: '+30', label: 'ateliers réalisés' },
+  { value: '+120', label: 'heures de formations données' },
+];
+
+// Méthodologie — identique à la home
+const methodo = [
   {
-    value: '7',
-    label: 'ans d\'expérience',
-    description: 'Amet malesuada mi augue egestas eu eget eu proin vitae. Tellus iaculis augue malesuada vitae. Nulla dolor varius ut nec felis. Vulputate pretium duis fusce lorem ut. Sit faucibus luctus est consectetur ultricies.',
+    title: 'Analyser',
+    text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.',
+    icon: `<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="55" cy="55" r="54" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="69.7476" r="39" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="84.7476" r="24" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55.3977" cy="99.7476" r="9" stroke="#FF6F00" stroke-width="2"/>
+    </svg>`,
   },
   {
-    value: '+50',
-    label: 'clients accompagnés',
-    description: 'Posuere urna vulputate sed ut tincidunt dolor convallis consectetur. Faucibus ut orci est ultrices. Pretium commodo fusce in tristique vitae vulputate mi malesuada leo. Pellentesque vel cursus venenatis scelerisque varius amet arcu pharetra habitant.',
+    title: 'Co-construire',
+    text: 'Créer des wireframes, designer l\'interface, prototyper le parcours, réaliser des tests utilisateurs.',
+    icon: `<svg width="167" height="104" viewBox="0 0 167 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.3527 51.0476L3.35266 26.0476L83.3527 1.04761L163.353 26.0476L83.3527 51.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 68.0476L3.35266 43.0476L83.3527 18.0476L163.353 43.0476L83.3527 68.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 85.0476L3.35266 60.0476L83.3527 35.0476L163.353 60.0476L83.3527 85.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 102.048L3.35266 77.0476L83.3527 52.0476L163.353 77.0476L83.3527 102.048Z" stroke="#31C96E" stroke-width="2"/>
+    </svg>`,
   },
   {
-    value: '+30',
-    label: 'ateliers réalisés',
-    description: 'In metus at quis aliquet sed. Enim sagittis adipiscing velit risus blandit. Nisl tellus imperdiet tellus dignissim turpis pulvinar lacus. Ut arcu gravida sollicitudin sit mauris quam turpis. Laoreet fringilla pulvinar urna eget non.',
-  },
-  {
-    value: '+120',
-    label: 'heures de formations',
-    description: 'Quis nunc nulla amet a pellentesque nisl. Nisl mi tellus quis a. Blandit amet ultrices nec eget ornare risus mauris feugiat sit. Justo non velit aliquam id porttitor adipiscing massa suspendisse. Dui enim et sit semper.',
+    title: 'Ajuster',
+    text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.',
+    icon: `<svg width="130" height="100" viewBox="0 0 130 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M65 1C82.8465 1 98.956 4.11774 110.566 9.11914C116.373 11.6206 121.009 14.5737 124.179 17.8018C127.344 21.0253 129 24.4704 129 28C129 31.5296 127.344 34.9747 124.179 38.1982C121.009 41.4263 116.373 44.3794 110.566 46.8809C98.956 51.8823 82.8465 55 65 55C47.1535 55 31.044 51.8823 19.4336 46.8809C13.6267 44.3794 8.99083 41.4263 5.82129 38.1982C2.65619 34.9747 1 31.5296 1 28C1 24.4704 2.65619 21.0253 5.82129 17.8018C8.99083 14.5737 13.6267 11.6206 19.4336 9.11914C31.044 4.11774 47.1535 1 65 1Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 23C82.8465 23 98.956 26.1177 110.566 31.1191C116.373 33.6206 121.009 36.5737 124.179 39.8018C127.344 43.0253 129 46.4704 129 50C129 53.5296 127.344 56.9747 124.179 60.1982C121.009 63.4263 116.373 66.3794 110.566 68.8809C98.956 73.8823 82.8465 77 65 77C47.1535 77 31.044 73.8823 19.4336 68.8809C13.6267 66.3794 8.99083 63.4263 5.82129 60.1982C2.65619 56.9747 1 53.5296 1 50C1 46.4704 2.65619 43.0253 5.82129 39.8018C8.99083 36.5737 13.6267 33.6206 19.4336 31.1191C31.044 26.1177 47.1535 23 65 23Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 45C82.8465 45 98.956 48.1177 110.566 53.1191C116.373 55.6206 121.009 58.5737 124.179 61.8018C127.344 65.0253 129 68.4704 129 72C129 75.5296 127.344 78.9747 124.179 82.1982C121.009 85.4263 116.373 88.3794 110.566 90.8809C98.956 95.8823 82.8465 99 65 99C47.1535 99 31.044 95.8823 19.4336 90.8809C13.6267 88.3794 8.99083 85.4263 5.82129 82.1982C2.65619 78.9747 1 75.5296 1 72C1 68.4704 2.65619 65.0253 5.82129 61.8018C8.99083 58.5737 13.6267 55.6206 19.4336 53.1191C31.044 48.1177 47.1535 45 65 45Z" stroke="#075056" stroke-width="2"/>
+    </svg>`,
   },
 ];
 ---
 
 <Layout title="À propos — Loïck Legallais" description="Designer UI/UX freelance basé à Lyon. Découvrez mon parcours et ma vision du design.">
 
-  <!-- HERO — même style que page projets -->
+  <!-- HERO — titre + sous-titre + chiffres clés en ligne -->
   <section class="hero-wrap">
     <div class="hero">
       <div class="hero-content">
@@ -36,22 +54,29 @@ const stats = [
           Designer UI/UX freelance basé à Lyon, je crée des interfaces pensées pour vos objectifs depuis plus de 7 ans.
         </p>
       </div>
+
+      <!-- Chiffres clés (4 colonnes) -->
+      <div class="hero-stats">
+        {stats.map((stat) => (
+          <div class="hero-stat">
+            <span class="hero-stat-value">{stat.value}</span>
+            <span class="hero-stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- CHIFFRES CLÉS — fond teal, chiffre gauche + texte droite + séparateurs -->
-  <section class="stats-wrap">
-    <div class="stats">
-      <h2 class="stats-title">Quelques chiffres clés</h2>
-
-      <div class="stats-list">
-        {stats.map((stat, i) => (
-          <div class="stat-item">
-            <div class="stat-row">
-              <span class="stat-value">{stat.value}</span>
-              <p class="stat-desc">{stat.description}</p>
-            </div>
-            <div class="stat-sep"></div>
+  <!-- MÉTHODOLOGIE — identique à la home -->
+  <section class="methodo-wrap">
+    <div class="methodo">
+      <h2 class="section-title">Une méthodologie efficace et sur mesure.</h2>
+      <div class="methodo-grid">
+        {methodo.map((step) => (
+          <div class="methodo-card">
+            <span class="methodo-card-title">{step.title}</span>
+            <div class="methodo-card-icon" set:html={step.icon}></div>
+            <p class="methodo-card-text">{step.text}</p>
           </div>
         ))}
       </div>
@@ -67,7 +92,7 @@ const stats = [
       </p>
     </div>
     <div class="damier-image">
-      <!-- Remplace le src par ta vraie photo -->
+           <img src="/images/photo-loick-legallais.jpg" alt="Loïck Legallais" class="damier-image-media" /> -->
       <div class="damier-image-placeholder"></div>
     </div>
   </section>
@@ -75,15 +100,15 @@ const stats = [
 </Layout>
 
 <style>
-  /* HERO — identique à la page projets */
+  /* HERO */
   .hero-wrap { padding: 0 var(--outer-pad); }
   .hero {
     background: var(--white);
-    height: calc(441 * var(--unit));
-    min-height: 240px;
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
     padding: calc(100 * var(--unit)) var(--inner-pad-x) calc(64 * var(--unit));
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    gap: calc(80 * var(--unit));
   }
   .hero-content {
     display: flex;
@@ -106,70 +131,41 @@ const stats = [
     max-width: calc(655 * var(--unit));
   }
 
-  /* CHIFFRES CLÉS */
-  .stats-wrap {
-    padding: calc(28 * var(--unit)) var(--outer-pad);
-  }
-
-  .stats {
-    background: var(--teal);
-    border-radius: var(--r-lg);
-    padding: var(--inner-pad-y) var(--inner-pad-x);
+  /* Chiffres clés en ligne */
+  .hero-stats {
     display: flex;
-    flex-direction: column;
-    gap: calc(64 * var(--unit));
-  }
-
-  .stats-title {
-    font-size: var(--t-xl);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--white);
-  }
-
-  .stats-list {
-    display: flex;
-    flex-direction: column;
-    gap: calc(40 * var(--unit));
-    padding: 0 calc(100 * var(--unit));
-  }
-
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    gap: calc(40 * var(--unit));
-  }
-
-  .stat-row {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
     gap: calc(40 * var(--unit));
     width: 100%;
   }
-
-  .stat-value {
+  .hero-stat {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: calc(24 * var(--unit));
+  }
+  .hero-stat-value {
     font-size: var(--t-hero);
     font-weight: 400;
     line-height: 1.1;
-    color: var(--white);
-    flex: 0 0 calc(191 * var(--unit));
-    min-width: calc(120 * var(--unit));
+    color: var(--dark);
+  }
+  .hero-stat-label {
+    font-size: clamp(14px, calc(18 * var(--unit)), 18px);
+    line-height: 1.3;
+    color: rgba(49, 36, 61, 0.7);
   }
 
-  .stat-desc {
-    font-size: clamp(14px, calc(20 * var(--unit)), 20px);
-    line-height: 1.5;
-    color: #cddcdd;
-    flex: 1;
-    max-width: calc(772 * var(--unit));
-  }
-
-  .stat-sep {
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-  }
+  /* MÉTHODOLOGIE */
+  .methodo-wrap { padding: calc(28 * var(--unit)) var(--outer-pad); }
+  .methodo { background: var(--cream); border-radius: var(--r-lg); padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
+  .methodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-10); }
+  .methodo-card { background: var(--white); border-radius: var(--r-sm); padding: calc(28 * var(--unit)); height: calc(428 * var(--unit)); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; transition: transform 0.3s var(--ease); }
+  .methodo-card:hover { transform: translateY(-4px); }
+  .methodo-card-title { font-size: var(--t-lg); font-weight: 500; color: var(--purple); line-height: 1.5; width: 100%; }
+  .methodo-card-icon { display: flex; align-items: center; justify-content: center; flex: 1; }
+  .methodo-card-icon svg { max-width: 100%; height: auto; }
+  .methodo-card-text { font-size: clamp(14px, calc(20 * var(--unit)), 20px); color: var(--muted); line-height: 1.5; width: 100%; }
 
   /* DAMIER */
   .damier {
@@ -179,7 +175,6 @@ const stats = [
     gap: calc(40 * var(--unit));
     padding: var(--inner-pad-y) var(--inner-pad-x);
   }
-
   .damier-text {
     display: flex;
     flex-direction: column;
@@ -187,21 +182,18 @@ const stats = [
     flex: 0 0 calc(658 * var(--unit));
     max-width: calc(658 * var(--unit));
   }
-
   .damier-title {
     font-size: var(--t-xl);
     font-weight: 400;
     line-height: 1.1;
     color: var(--dark);
   }
-
   .damier-desc {
-    font-size: clamp(16px, calc(16 * var(--unit)), 24px);
+    font-size: clamp(16px, calc(20 * var(--unit)), 20px);
     line-height: 1.5;
     color: var(--muted);
     max-width: calc(568 * var(--unit));
   }
-
   .damier-image {
     flex: 0 0 calc(655 * var(--unit));
     max-width: calc(655 * var(--unit));
@@ -211,38 +203,27 @@ const stats = [
     overflow: hidden;
     position: relative;
   }
-
-  /* Placeholder — remplace par <img> quand la photo est prête */
-  .damier-image-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--cream);
-  }
-
-  /* Pour ajouter la vraie photo, utilise cette structure dans le HTML :
-     <img src="/images/a-propos/photo.jpg" alt="Loïck Legallais"
-          style="width:100%;height:100%;object-fit:cover;object-position:center;" />
-  */
+  .damier-image-placeholder { width: 100%; height: 100%; background: var(--cream); }
+  .damier-image-media { width: 100%; height: 100%; object-fit: cover; object-position: bottom; }
 
   /* MOBILE */
   @media (max-width: 768px) {
-    /* Hero */
     .hero-wrap { padding: 0 12px; }
-    .hero { height: auto; min-height: 200px; padding: 40px 24px; align-items: flex-start; border: none; }
+    .hero { padding: 40px 24px; gap: 48px; }
     .hero-title { font-size: clamp(28px, 8vw, 48px); }
     .hero-subtitle { font-size: 16px; }
+    .hero-stats { flex-wrap: wrap; gap: 32px; }
+    .hero-stat { flex: 1 0 40%; }
+    .hero-stat-value { font-size: clamp(36px, 10vw, 56px); }
 
-    /* Stats */
-    .stats-wrap { padding: 20px 12px; }
-    .stats { padding: 40px 24px; gap: 40px; }
-    .stats-list { padding: 0; gap: 32px; }
-    .stat-row { flex-direction: column; align-items: flex-start; gap: 16px; }
-    .stat-value { font-size: clamp(36px, 10vw, 56px); }
-    .stat-desc { font-size: 16px; }
+    .methodo-wrap { padding: 20px 12px; }
+    .methodo { padding: 40px 24px; }
+    .methodo-grid { grid-template-columns: 1fr; gap: 16px; }
+    .methodo-card { height: auto; min-height: 160px; padding: 24px; gap: 24px; }
 
-    /* Damier */
     .damier { flex-direction: column; padding: 40px 20px; gap: 40px; }
     .damier-text { flex: none; width: 100%; max-width: 100%; gap: 32px; }
-    .damier-image { flex: none; width: 100%; max-width: 100%; height: 320px; }
+    .damier-image { flex: none; width: 100%; max-width: 100%; height: 520px; }
+    .damier-desc { flex: none; max-width: 100%; }
   }
 </style>
