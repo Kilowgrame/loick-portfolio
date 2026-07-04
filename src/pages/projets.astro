@@ -1,314 +1,135 @@
 ---
+import Layout from '../layouts/LayoutV2.astro';
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
 
-// Get all projects, filter out drafts, sort by 'order' field
-const projects = (await getCollection('projets'))
+const allProjets = (await getCollection('projets'))
   .filter((p) => !p.data.draft)
   .sort((a, b) => a.data.order - b.data.order);
 
-// Build the categories list dynamically from all projects + "Tout"
-const categoriesSet = new Set(
-  projects.map((p) => p.data.category).filter(Boolean) as string[]
-);
-const categories = ['Tout', ...Array.from(categoriesSet)];
+// Principaux = order 1-6
+const principaux = allProjets.filter((p) => p.data.order <= 6);
+const projetsRow1 = principaux.slice(0, 3);
+const projetsRow2 = principaux.slice(3, 6);
+
+// Secondaires = order 7+
+const projetsSecondaires = allProjets.filter((p) => p.data.order > 6);
 ---
 
-<Layout title="Projets — Loïck Legallais">
-  <!-- Green hero with "PROJETS" title -->
-  <section class="projects-hero">
-    <div class="projects-hero__inner">
-      <h1 class="projects-hero__title display">PROJETS</h1>
-      <img
-  src="/images/stickers/peace.svg"
-  alt=""
-  class="sticker sticker--etoile"
-  data-parallax-speed="0.3"
-  data-rotation="19.32"
-  aria-hidden="true"
-/>
-<img
-  src="/images/stickers/galaxy.svg"
-  alt=""
-  class="sticker sticker--peace"
-  data-parallax-speed="0.3"
-  data-rotation="19.32"
-  aria-hidden="true"
-/>
+<Layout title="Projets — Loïck Legallais" description="Découvrez les derniers projets de Loïck Legallais, designer UI/UX freelance.">
+
+  <!-- HERO -->
+  <section class="hero-wrap">
+    <div class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Découvrez les derniers projets</h1>
+        <p class="hero-subtitle">Branding, UI / UX Design, Product Design... Découvrez les derniers projets marquants...</p>
+      </div>
     </div>
   </section>
 
-  <!-- Main content: filters + cards grid -->
-  <section class="projects-archive">
-    <!-- Filter buttons -->
-    <div class="filters">
-      {categories.map((cat) => (
-        <button
-          class:list={['filter-btn', { 'is-active': cat === 'Tout' }]}
-          data-filter={cat}
-        >
-          {cat}
-        </button>
-      ))}
-    </div>
-
-    <!-- Cards grid -->
-    <div class="cards-grid">
-      {projects.map((project) => (
-        <a
-          href={`/projets/${project.slug}`}
-          class="project-card fade-in"
-          data-category={project.data.category}
-        >
-          <div class="project-card__image">
-            {project.data.cover ? (
-              <img src={project.data.cover} alt={project.data.coverAlt ?? project.data.title} loading="lazy" />
-            ) : (
-              <div class="project-card__placeholder" style={`background: ${project.data.bgColor}`}></div>
-            )}
+  <!-- PROJETS -->
+  <section class="projets">
+    <div class="projets-row">
+      {projetsRow1.map((p) => (
+        <a href={`/projets/${p.slug}`} class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}>
+          <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+            {p.data.cardImage && <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />}
           </div>
-          {project.data.category && (
-            <span class="tag project-card__tag">{project.data.category}</span>
-          )}
-          <h2 class="project-card__title">{project.data.title}</h2>
+          <div class="projet-card-content">
+            <div class="projet-card-text">
+              <span class="projet-card-title">{p.data.title}</span>
+              <span class="projet-card-desc">{p.data.cardDescription ?? p.data.description}</span>
+            </div>
+            <div class="projet-card-tags">{p.data.fields.map((t) => <span class="tag">{t}</span>)}</div>
+          </div>
         </a>
       ))}
     </div>
+
+    <div class="projets-row">
+      {projetsRow2.map((p) => (
+        <a href={`/projets/${p.slug}`} class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}>
+          <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+            {p.data.cardImage && <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />}
+          </div>
+          <div class="projet-card-content">
+            <div class="projet-card-text">
+              <span class="projet-card-title">{p.data.title}</span>
+              <span class="projet-card-desc">{p.data.cardDescription ?? p.data.description}</span>
+            </div>
+            <div class="projet-card-tags">{p.data.fields.map((t) => <span class="tag">{t}</span>)}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {projetsSecondaires.length > 0 && <div class="projets-separator" aria-hidden="true"></div>}
+
+    {projetsSecondaires.length > 0 && (
+      <div class="projets-row projets-row--secondaires">
+        {projetsSecondaires.map((p) => (
+          <a href={`/projets/${p.slug}`} class="projet-card projet-card--secondaire">
+            <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+              {p.data.cardImage && <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />}
+            </div>
+            <div class="projet-card-content">
+              <div class="projet-card-text">
+                <span class="projet-card-title">{p.data.title}</span>
+                <span class="projet-card-desc">{p.data.cardDescription ?? p.data.description}</span>
+              </div>
+              <div class="projet-card-tags">{p.data.fields.map((t) => <span class="tag">{t}</span>)}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
   </section>
+
 </Layout>
 
-<script>
-  // Filter cards by category when a filter button is clicked
-  document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-    const cards = document.querySelectorAll<HTMLAnchorElement>('.project-card');
-
-    filterButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-
-        // Update active button visual state
-        filterButtons.forEach((b) => b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-
-        // Show / hide cards
-        cards.forEach((card) => {
-          const matches = filter === 'Tout' || card.dataset.category === filter;
-          (card as HTMLElement).style.display = matches ? '' : 'none';
-        });
-      });
-    });
-  });
-</script>
-
 <style>
-  /* ============================================
-     HERO — green band with big title
-     ============================================ */
-  .projects-hero {
-    background-color: var(--color-green);
-    padding: calc(250 * var(--unit)) var(--container-padding) calc(150 * var(--unit));
+  /* HERO */
+  .hero-wrap { padding: 0 var(--outer-pad); }
+  .hero {
+    background: var(--white);
+    height: calc(441 * var(--unit));
+    min-height: 240px;
+    padding: calc(100 * var(--unit)) var(--inner-pad-x) calc(64 * var(--unit));
     display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
+    align-items: flex-end;
   }
+  .hero-content { display: flex; flex-direction: column; gap: calc(16 * var(--unit)); max-width: calc(887 * var(--unit)); width: 100%; }
+  .hero-title { font-size: var(--t-hero); font-weight: 400; line-height: 1.1; color: var(--dark); letter-spacing: -0.01em; }
+  .hero-subtitle { font-size: clamp(15px, calc(20 * var(--unit)), 20px); line-height: 1.5; color: var(--muted); max-width: calc(655 * var(--unit)); }
 
-  .projects-hero__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: calc(1392 * var(--unit));
-  }
+  /* PROJETS */
+  .projets { padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-10); }
+  .projets-row { display: flex; align-items: flex-start; gap: var(--s-10); width: 100%; }
+  .projets-separator { height: 1px; background: var(--border-cream); width: 100%; margin: calc(24 * var(--unit)) 0; }
+  .projet-card { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: var(--s-5); cursor: pointer; text-decoration: none; }
+  .projet-card--wide { flex: 0 0 calc(655 * var(--unit)); min-width: 0; max-width: calc(655 * var(--unit)); }
+  .projets-row--secondaires { flex-wrap: wrap; }
+  .projet-card--secondaire { flex: 1 0 calc(30%); max-width: calc((100% - 2 * var(--s-10)) / 3); }
+  .projet-card-img { position: relative; width: 100%; border-radius: var(--r-sm); aspect-ratio: 6 / 5;; overflow: hidden; transition: transform 0.4s var(--ease); }
+  .projet-card:hover .projet-card-img { transform: scale(1.02); }
+  .projet-card--wide .projet-card-img { aspect-ratio: 424/300; }
+  .projet-card--secondaire .projet-card-img { aspect-ratio: 16/11; height: auto; }
+  .projet-card-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .projet-card-content { display: flex; flex-direction: column; gap: var(--s-6); }
+  .projet-card-text { display: flex; flex-direction: column; gap: var(--s-2); }
+  .projet-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+  .projet-card:hover .projet-card-title { color: var(--teal); }
+  .projet-card-desc { font-size: var(--t-base); color: var(--muted); line-height: 1.5; }
+  .projet-card-tags { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: flex-start; }
 
-  .projects-hero__title {
-    /* Fluid: 48px mobile → 102px desktop */
-    font-size: var(--text-archive-hero);
-    color: var(--color-aubergine);
-    text-align: center;
-    letter-spacing: 0.02em;
-    margin: 0;
-    width: 100%;
-  }
-
-  /* ============================================
-     ARCHIVE — filters + grid
-     ============================================ */
-  .projects-archive {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-16);
-    padding: var(--space-30) var(--container-padding);
-    background: var(--color-white);
-  }
-
-  .sticker {
-    position: absolute;
-    pointer-events: none;
-    z-index: 5;
-    height: auto;
-    will-change: transform;
-  }
-
-  /* Etoile — TOP LEFT zone, around 1/4 in from the left */
-  .sticker--etoile {
-    top: 18%;
-    left: 22%;
-    width: calc(133 * var(--unit));
-    transform: rotate(19.32deg);
-  }
-
-  /* Peace — BOTTOM RIGHT zone */
-  .sticker--peace {
-    bottom: 18%;
-    right: 18%;
-    width: calc(120 * var(--unit));
-    transform: rotate(-20deg);
-  }
-  /* Filters */
-  .filters {
-    display: none;
-    gap: calc(28 * var(--unit));
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .filter-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
-    border: 1px solid var(--color-aubergine);
-    border-radius: var(--radius-sm);
-    background: var(--color-white);
-    color: #000;
-    /* Fluid: 14px mobile → 16px desktop */
-    font-size: var(--text-filter);
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: background var(--transition-base), color var(--transition-base);
-  }
-
-  .filter-btn:hover {
-    background: var(--color-aubergine);
-    color: var(--color-white);
-  }
-
-  .filter-btn.is-active {
-    background: var(--color-aubergine);
-    color: var(--color-white);
-  }
-
-  /* Cards grid — 2 cols desktop, 1 col mobile */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-16) var(--space-10);
-  }
-
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-5);
-    text-decoration: none;
-    color: var(--color-aubergine);
-    transition: transform var(--transition-base);
-  }
-
-  .project-card:hover {
-    transform: translateY(-4px);
-  }
-
-  .project-card__image {
-    width: 100%;
-    aspect-ratio: 451 / 300;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-placeholder);
-  }
-
-  .project-card__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s var(--ease-out);
-  }
-
-  .project-card:hover .project-card__image img {
-    transform: scale(1.04);
-  }
-
-  .project-card__placeholder {
-    width: 100%;
-    height: 100%;
-  }
-
-  .project-card__tag {
-    color: var(--color-aubergine);
-    align-self: flex-start;
-  }
-
-  .project-card__title {
-    font-family: var(--font-body);
-    /* Fluid: 18px mobile → 24px desktop */
-    font-size: var(--text-card-title);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  /* ============================================
-     MOBILE
-     ============================================ */
+  /* MOBILE */
   @media (max-width: 768px) {
-    .projects-hero {
-      padding: 140px var(--container-padding) 60px;
-      min-height: 350px;
-    }
-
-    .projects-archive {
-      gap: 64px;
-      padding: 60px var(--container-padding);
-    }
-
-    .filters {
-      gap: 28px;
-    }
-
-    .filter-btn {
-      padding: 16px;
-      border-radius: 16px;
-    }
-
-    .cards-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-
-    .project-card {
-      gap: 20px;
-    }
-
-    .project-card__image {
-      border-radius: 20px;
-    }
-
-    /* Keep 3 stickers visible: Etoile, Eyes, Planète */
-    .sticker--etoile {
-      top: 22%;
-      left: 8%;
-      right: auto;
-      width: 70px;
-    }
-
-    .sticker--peace {
-      bottom: 2%;
-      right: 8%;
-      left: auto;
-      width: 85px;
-    }
-
+    .hero-wrap { padding: 0 12px; }
+    .hero { height: auto; min-height: 200px; padding: 40px 24px 40px; align-items: flex-start; border: none; }
+    .hero-title { font-size: clamp(28px, 8vw, 48px); }
+    .hero-subtitle { font-size: 16px; }
+    .projets { padding: 40px 20px; gap: 40px; }
+    .projets-row { flex-direction: column; gap: 32px; }
+    .projet-card, .projet-card--wide, .projet-card--secondaire { flex: none; width: 100%; max-width: 100%; }
   }
 </style>

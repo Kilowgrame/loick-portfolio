@@ -16,15 +16,22 @@ const projetsCollection = defineCollection({
     // CARD info (home + archive)
     // ============================
     title: z.string(),
-    cover: z.string().optional(),              // path to cover image (used on home + archive cards)
+    cover: z.string().optional(),
     coverAlt: z.string().optional(),
-    bgColor: z.string().default('#06535e'),    // damier block bg (home)
-    textColor: z.string().default('#ffffff'),  // damier block text color
-    description: z.string().optional(),        // shown on home damier + single sidebar
-    fields: z.array(z.string()).default([]),   // ex: ["UI Design", "UX Design"]
-    category: z.string().optional(),           // primary category for archive filter
+    bgColor: z.string().default('#06535e'),
+    textColor: z.string().default('#ffffff'),
+    description: z.string().optional(),
+    fields: z.array(z.string()).default([]),
+    category: z.string().optional(),
     order: z.number().default(99),
     draft: z.boolean().default(false),
+
+    // ============================
+    // V2 — card display (home + archive)
+    // ============================
+    wide: z.boolean().default(false),        // true = card large (655px)
+    cardImage: z.string().optional(),         // image affichée sur la card (peut différer du projet)
+    cardDescription: z.string().optional(),   // texte sur la card (peut différer de description)
 
     // ============================
     // SINGLE PAGE — sticky sidebar
@@ -87,6 +94,16 @@ const projetsCollection = defineCollection({
               })
             ),
             colonnes: z.number().min(1).max(4).default(2),
+          }),
+          z.object({
+            type: z.literal('galerie-mixte'),
+            items: z.array(
+              z.object({
+                type: z.string(),
+                src: z.string(),
+                alt: z.string().optional(),
+              })
+            ),
           }),
         ])
       )

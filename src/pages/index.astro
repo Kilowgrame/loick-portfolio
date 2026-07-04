@@ -1,137 +1,383 @@
 ---
+import Layout from '../layouts/LayoutV2.astro';
 import { getCollection } from 'astro:content';
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import StatsBlock from '../components/StatsBlock.astro';
-import ProjectBlock from '../components/ProjectBlock.astro';
-import CtaProjects from '../components/CtaProjects.astro';
-import ResourcesSection from '../components/ResourcesSection.astro';
 
-const featured = (await getCollection('projets'))
-  .filter((p) => !p.data.draft)
-  .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 5);
+// Les 6 projets principaux, triés par order
+const projets = (await getCollection('projets'))
+  .filter((p) => !p.data.draft && p.data.order <= 6)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const methodo = [
+  {
+    title: 'Analyser',
+    text: 'Appréhender le projet, connaître le client, prendre le brief, analyser les metrics, définir les objectifs, créer un parcours utilisateurs.',
+    icon: `<svg width="110" height="110" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="55" cy="55" r="54" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="69.7476" r="39" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55" cy="84.7476" r="24" stroke="#FF6F00" stroke-width="2"/>
+      <circle cx="55.3977" cy="99.7476" r="9" stroke="#FF6F00" stroke-width="2"/>
+    </svg>`,
+  },
+  {
+    title: 'Co-construire',
+    text: 'Créer des wireframes, designer l\'interface, prototyper le parcours, réaliser des tests utilisateurs.',
+    icon: `<svg width="167" height="104" viewBox="0 0 167 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M83.3527 51.0476L3.35266 26.0476L83.3527 1.04761L163.353 26.0476L83.3527 51.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 68.0476L3.35266 43.0476L83.3527 18.0476L163.353 43.0476L83.3527 68.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 85.0476L3.35266 60.0476L83.3527 35.0476L163.353 60.0476L83.3527 85.0476Z" stroke="#31C96E" stroke-width="2"/>
+      <path d="M83.3527 102.048L3.35266 77.0476L83.3527 52.0476L163.353 77.0476L83.3527 102.048Z" stroke="#31C96E" stroke-width="2"/>
+    </svg>`,
+  },
+  {
+    title: 'Ajuster',
+    text: 'Livrer le webdesign, le Design System, analyser les nouvelles metrics, ajuster en fonction des retours.',
+    icon: `<svg width="130" height="100" viewBox="0 0 130 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M65 1C82.8465 1 98.956 4.11774 110.566 9.11914C116.373 11.6206 121.009 14.5737 124.179 17.8018C127.344 21.0253 129 24.4704 129 28C129 31.5296 127.344 34.9747 124.179 38.1982C121.009 41.4263 116.373 44.3794 110.566 46.8809C98.956 51.8823 82.8465 55 65 55C47.1535 55 31.044 51.8823 19.4336 46.8809C13.6267 44.3794 8.99083 41.4263 5.82129 38.1982C2.65619 34.9747 1 31.5296 1 28C1 24.4704 2.65619 21.0253 5.82129 17.8018C8.99083 14.5737 13.6267 11.6206 19.4336 9.11914C31.044 4.11774 47.1535 1 65 1Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 23C82.8465 23 98.956 26.1177 110.566 31.1191C116.373 33.6206 121.009 36.5737 124.179 39.8018C127.344 43.0253 129 46.4704 129 50C129 53.5296 127.344 56.9747 124.179 60.1982C121.009 63.4263 116.373 66.3794 110.566 68.8809C98.956 73.8823 82.8465 77 65 77C47.1535 77 31.044 73.8823 19.4336 68.8809C13.6267 66.3794 8.99083 63.4263 5.82129 60.1982C2.65619 56.9747 1 53.5296 1 50C1 46.4704 2.65619 43.0253 5.82129 39.8018C8.99083 36.5737 13.6267 33.6206 19.4336 31.1191C31.044 26.1177 47.1535 23 65 23Z" stroke="#075056" stroke-width="2"/>
+      <path d="M65 45C82.8465 45 98.956 48.1177 110.566 53.1191C116.373 55.6206 121.009 58.5737 124.179 61.8018C127.344 65.0253 129 68.4704 129 72C129 75.5296 127.344 78.9747 124.179 82.1982C121.009 85.4263 116.373 88.3794 110.566 90.8809C98.956 95.8823 82.8465 99 65 99C47.1535 99 31.044 95.8823 19.4336 90.8809C13.6267 88.3794 8.99083 85.4263 5.82129 82.1982C2.65619 78.9747 1 75.5296 1 72C1 68.4704 2.65619 65.0253 5.82129 61.8018C8.99083 58.5737 13.6267 55.6206 19.4336 53.1191C31.044 48.1177 47.1535 45 65 45Z" stroke="#075056" stroke-width="2"/>
+    </svg>`,
+  },
+];
+
+const logosRow1 = [1, 2, 3, 4, 5];
+const logosRow2 = [6, 7, 8, 9];
+
+const ressources = [
+  { tag: 'Plugin Figma', title: 'WebP Manager', slug: 'webp-manager', url: 'https://www.figma.com/community/plugin/1587802543036369275/webp-manager-rename-resize-export', image: '/images/ressources/webp-exporter.webp' },
+  { tag: 'Plugin Figma', title: 'Template Application (à venir)', slug: 'contrast-checker', image: '/images/ressources/template-application.webp' },
+  { tag: 'Article', title: 'Template E-Commerce (à venir)', slug: 'design-system', image: '/images/ressources/template-e-commerce.webp' },
+];
 ---
 
-<Layout>
-  <Hero />
+<Layout title="Loïck Legallais — UI / UX Designer Freelance" menuVariant="teal">
 
-  <StatsBlock />
-
-  <!--
-    STACK SECTION
-    ===========
-    Each .stack-item is position: sticky to top: 0.
-    They naturally pile up: the next one slides over the previous one as you scroll.
-    The .stack-container is taller than the viewport so there's room to scroll.
-
-    `--stack-height` controls each block's height (70vh as chosen).
-    The container is `N * --stack-height` tall, where N = number of blocks.
-
-    `data-stack-index` is the z-index — last block on top.
-  -->
-  <section
-    class="stack-section"
-    aria-label="Projets en avant"
-    style={`--stack-count: ${featured.length}`}
-  >
-    {featured.map((project, index) => (
-      <div
-        class="stack-item"
-        style={`z-index: ${index + 1}`}
-      >
-        <ProjectBlock
-          title={project.data.title}
-          description={project.data.description ?? ''}
-          tags={project.data.fields}
-          bgColor={project.data.bgColor}
-          textColor={project.data.textColor}
-          href={`/projets/${project.slug}`}
-          image={project.data.cover}
-        />
+  <!-- HERO -->
+  <section class="hero-wrap">
+    <div class="hero">
+      <img src="/images/stickers/etoile.svg" alt="" class="sticker sticker-etoile" aria-hidden="true" />
+      <img src="/images/stickers/eyes.svg"   alt="" class="sticker sticker-eyes"   aria-hidden="true" />
+      <img src="/images/stickers/peace.svg"  alt="" class="sticker sticker-peace"  aria-hidden="true" />
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
+          UI / UX Designer Freelance - Disponible
+        </div>
+        <h1 class="hero-title">Des interfaces pensées pour vos objectifs</h1>
+        <p class="hero-subtitle">Le design ne doit plus être seulement esthétique mais répondre à des objectifs clairs. En vous accompagnant, je me base sur des datas solides pour proposer une expérience utilisateur réussie.</p>
       </div>
-    ))}
+    </div>
   </section>
 
-  <CtaProjects />
+  <!-- PROJETS -->
+  <section class="projets">
+    <div class="projets-header">
+      <h2 class="section-title">Des projets qui ont du sens.</h2>
+      <a href="/projets" class="section-link">Tout découvrir</a>
+    </div>
 
-  <ResourcesSection />
+    <!--
+      Grille asymétrique :
+      Row 1 : projet 1 (wide) + projets 2 et 3 (flex-1)
+      Row 2 : projets 4 et 6 (flex-1) + projet 5 (wide)
+
+      Pour changer quelle card est "large" → modifier wide: true dans le .md
+    -->
+    <div class="projets-grid">
+      <!-- ROW 1 : projets 0, 1, 2 -->
+      <div class="projets-row">
+        {projets.slice(0, 3).map((p) => (
+          <a
+            href={`/projets/${p.slug}`}
+            class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}
+          >
+            <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+              {p.data.cardImage && (
+                <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />
+              )}
+            </div>
+            <div class="projet-card-content">
+              <div class="projet-card-text">
+                <span class="projet-card-title">{p.data.title}</span>
+                <span class="projet-card-desc">
+                  {p.data.cardDescription ?? p.data.description}
+                </span>
+              </div>
+              <div class="projet-card-tags">
+                {p.data.fields.map((t) => <span class="tag">{t}</span>)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- ROW 2 : projets 3, 4, 5 -->
+      <div class="projets-row">
+        {projets.slice(3, 6).map((p) => (
+          <a
+            href={`/projets/${p.slug}`}
+            class={`projet-card ${p.data.wide ? 'projet-card--wide' : ''}`}
+          >
+            <div class="projet-card-img" style={`background-color: ${p.data.bgColor}`}>
+              {p.data.cardImage && (
+                <img src={p.data.cardImage} alt={p.data.title} class="projet-card-media" />
+              )}
+            </div>
+            <div class="projet-card-content">
+              <div class="projet-card-text">
+                <span class="projet-card-title">{p.data.title}</span>
+                <span class="projet-card-desc">
+                  {p.data.cardDescription ?? p.data.description}
+                </span>
+              </div>
+              <div class="projet-card-tags">
+                {p.data.fields.map((t) => <span class="tag">{t}</span>)}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MÉTHODOLOGIE -->
+  <section class="methodo-wrap">
+    <div class="methodo">
+      <h2 class="section-title">Une méthodologie efficace et sur mesure.</h2>
+      <div class="methodo-grid">
+        {methodo.map((step) => (
+          <div class="methodo-card">
+           <span class="methodo-card-title">{step.title}</span>
+            <div class="methodo-card-icon" set:html={step.icon}></div>
+            <p class="methodo-card-text">{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS 
+  <section class="clients">
+    <h2 class="section-title clients-title">Ils me font confiance</h2>
+    <div class="clients-grid">
+      <div class="clients-row">
+        {logosRow1.map((i) => (
+          <div class="client-cell"><span class="client-logo-text">Logo {i}</span></div>
+        ))}
+      </div>
+      <div class="clients-row">
+        {logosRow2.map((i) => (
+          <div class="client-cell client-cell--fixed"><span class="client-logo-text">Logo {i}</span></div>
+        ))}
+      </div>
+    </div>
+  </section>
+-->
+
+  <!-- RESSOURCES -->
+  <section class="ressources">
+    <div class="ressources-header">
+      <h2 class="section-title">Quelques ressources à disposition</h2>
+      <a href="/ressources" class="section-link">Tout découvrir</a>
+    </div>
+    <div class="ressources-grid">
+      {ressources.map((r) => (
+        <a href={r.url} target="_blank" rel="noopener noreferrer" class="ressource-card">
+          <div class="ressource-card-img">
+  {r.image && <img src={r.image} alt={r.title} class="ressource-card-media" />}
+</div>
+          <span class="tag">{r.tag}</span>
+          <span class="ressource-card-title">{r.title}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  /* ============================================
-     STACK SECTION — sticky-card animation
-     Inspired by serious.business
-     ============================================ */
-
-  /* The height of one "card slot" in the stack.
-     Lower = faster transition. Higher = slower. */
-  .stack-section {
-    --stack-height: 70vh;
-
-    /* Position relative so sticky children are anchored to this section */
+  /* HERO */
+  .hero-wrap { padding: 0 var(--outer-pad); }
+  .hero {
     position: relative;
-
-    /* The section is N times taller than one card — this is the scroll
-       distance available. Without this, sticky would have nothing to scroll over. */
-    height: calc(var(--stack-count, 5) * var(--stack-height));
-  }
-
-  /* Each stack item is sticky at the top of the viewport.
-     When the next one's top reaches the viewport top, it covers the previous one. */
-  .stack-item {
-    position: sticky;
-    top: 0;
-    height: var(--stack-height);
-    /* Hide overflow so the inner ProjectBlock (which might be taller than 70vh
-       on certain screens) doesn't break the layout */
-    overflow: hidden;
-  }
-
-  /* Make the inner ProjectBlock fill the sticky slot fully */
-  .stack-item :global(.project-block) {
-    min-height: 100%;
-    /* Vertically center the content inside the sticky slot since the block
-       may be shorter than the slot */
+    height: calc(671 * var(--unit));
+    min-height: 400px;
+    background: radial-gradient(ellipse at 100% 100%, #0a767f 0%, var(--teal) 60%);
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding: calc(100 * var(--unit)) calc(80 * var(--unit)) calc(120 * var(--unit));
+    overflow: hidden;
+  }
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(16 * var(--unit));
+    max-width: 60%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(12 * var(--unit));
+    background: var(--teal-mid);
+    color: var(--white);
+    font-size: var(--t-base);
+    padding: 8px 16px;
+    border-radius: var(--r-sm);
+  }
+  .hero-badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--dot-green);
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .hero-title {
+    font-size: var(--t-hero);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+  .hero-subtitle {
+    font-size: clamp(15px, calc(20 * var(--unit)), 20px);
+    line-height: 1.5;
+    color: rgba(255,255,255,0.8);
+    max-width: calc(655 * var(--unit));
+  }
+  .sticker { position: absolute; pointer-events: none; z-index: 3; }
+  .sticker-etoile { left: calc(149 * var(--unit)); top: calc(227 * var(--unit)); width: calc(90 * var(--unit)); transform: rotate(19.32deg); }
+  .sticker-eyes   { right: calc(180 * var(--unit)); top: calc(115 * var(--unit)); width: calc(117 * var(--unit)); transform: rotate(-6.11deg); }
+  .sticker-peace  { left: 52%; bottom: calc(58 * var(--unit)); width: calc(80 * var(--unit)); transform: rotate(24.81deg); }
+
+  /* PROJETS */
+  .projets { padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
+  .projets-header { display: flex; align-items: flex-end; justify-content: space-between; }
+  .projets-grid { display: flex; flex-direction: column; gap: var(--s-10); }
+
+  /* Chaque row = flex, les cards flex-1 sauf si .projet-card--wide */
+  .projets-row { display: flex; align-items: flex-start; gap: var(--s-10); width: 100%; }
+
+  .projet-card {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+    cursor: pointer;
+    text-decoration: none;
   }
 
-  /* Mobile: also fluid. We keep the stack effect, but allow the block content
-     to scroll if it's taller than the slot (column layout adds height). */
-  @media (max-width: 768px) {
-  /* Désactive le stack sur mobile — blocs normaux */
-  .stack-section {
-    height: auto;
+  /* Card large : taille fixe 655px (Figma) */
+  .projet-card--wide {
+    flex: 0 0 calc(655 * var(--unit));
+    max-width: calc(655 * var(--unit));
   }
-  
-  .stack-item {
+
+  /* Image de la card */
+  .projet-card-img {
     position: relative;
-    height: auto;
-    overflow: visible;
+    width: 100%;
+    border-radius: var(--r-sm);
+    aspect-ratio: 6 / 5;
+    overflow: hidden;
+    transition: transform 0.4s var(--ease);
+    background: var(--cream);
   }
+
+  /* La card large a un ratio différent */
+  .projet-card--wide .projet-card-img { aspect-ratio: 16 / 11; }
+
+  .projet-card:hover .projet-card-img { transform: scale(1.02); }
+
+  /* Image centrée et cadrée */
+  .projet-card-media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .projet-card-content { display: flex; flex-direction: column; gap: 16px; }
+  .projet-card-text { display: flex; flex-direction: column; gap: 4px; }
+  .projet-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--dark); line-height: 1.3; transition: color 0.2s; }
+  .projet-card:hover .projet-card-title { color: var(--teal); }
+  .projet-card-desc { font-size: var(--t-base); color: var(--muted); line-height: 1.5; }
+  .projet-card-tags { display: flex; flex-wrap: wrap; gap: var(--s-5); align-items: flex-start; }
+
+  /* MÉTHODOLOGIE */
+  .methodo-wrap { padding: calc(28 * var(--unit)) var(--outer-pad); }
+  .methodo { background: var(--cream); border-radius: var(--r-lg); padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
+  .methodo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-10); }
+  .methodo-card { background: var(--white); border-radius: var(--r-sm); padding: calc(28 * var(--unit)); height: calc(428 * var(--unit)); min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.3s var(--ease); }
+  .methodo-card:hover { transform: translateY(-4px); }
+  .methodo-card-title { font-size: var(--t-lg); font-weight: 500; color: var(--purple); line-height: 1.5; }
+  .methodo-card-text { font-size: clamp(14px, calc(20 * var(--unit)), 20px); color: var(--muted); line-height: 1.5; }
+  .methodo-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
-    .stack-item {
-      /* Allow the block to be taller than the slot on small screens */
-      overflow: visible;
-    }
+.methodo-card-icon svg {
+  max-width: 100%;
+  height: auto;
+}
 
-    .stack-item :global(.project-block) {
-      min-height: 100%;
-      align-items: flex-start;
-    }
-  
+  /* CLIENTS */
+  .clients { padding: var(--inner-pad-y) var(--inner-pad-x); display: flex; flex-direction: column; gap: var(--s-16); }
+  .clients-title { text-align: center; }
+  .clients-grid { display: flex; flex-direction: column; }
+  .clients-row { display: flex; align-items: stretch; }
+  .client-cell { flex: 1 0 0; min-width: 0; display: flex; align-items: center; justify-content: center; padding: var(--s-16) calc(28 * var(--unit)); border: 1px solid var(--border-cream); background: var(--white); transition: background 0.2s; }
+  .client-cell:hover { background: var(--cream); }
+  .client-cell--fixed { flex: 0 0 calc(270.4 * var(--unit)); max-width: calc(270.4 * var(--unit)); }
+  .client-logo-text { font-size: var(--t-sm); color: var(--muted); font-weight: 500; }
 
-  /* Respect reduced motion: disable the sticky effect entirely */
-  @media (prefers-reduced-motion: reduce) {
-    .stack-section {
-      height: auto;
-    }
-    .stack-item {
-      position: static;
-      height: auto;
-      overflow: visible;
-    }
+  /* RESSOURCES */
+  .ressources { padding: var(--inner-pad-y) clamp(32px, calc(60 * var(--unit)), 60px); display: flex; flex-direction: column; gap: var(--s-16); }
+  .ressources-header { display: flex; align-items: flex-end; justify-content: space-between; }
+  .ressources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-10); }
+  .ressource-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-5); cursor: pointer; }
+  .ressource-card-img { width: 100%; height: calc(300 * var(--unit)); min-height: 160px; border-radius: var(--r-sm); overflow: hidden; transition: transform 0.4s var(--ease); }
+  .ressource-card:hover .ressource-card-img { transform: scale(1.02); }
+  .ressource-card-title { font-size: var(--t-lg); font-weight: 400; color: var(--purple); line-height: 1.3; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hero-wrap { padding: 0 12px; }
+    .hero { height: auto; min-height: 80vh; padding: 40px 16px 60px; }
+    .hero-title { font-size: clamp(28px, 8vw, 48px); }
+    .hero-subtitle { font-size: 16px; }
+    .sticker { display: none; }
+    .hero-content { max-width: 90%; }
+    .hero-subtitle { max-width: 70%; }
+
+    .projets { padding: 40px 20px; gap: 40px; }
+    .projets-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .projets-grid { gap: 32px; }
+    .projets-row { flex-direction: column; gap: 32px; }
+    .projet-card, .projet-card--wide { flex: none; width: 100%; max-width: 100%; }
+
+    .methodo-wrap { padding: 20px 12px; }
+    .methodo { padding: 40px 24px; }
+    .methodo-grid { grid-template-columns: 1fr; gap: 16px; }
+    .methodo-card { height: auto; min-height: 160px; padding: 24px; gap: 24px; }
+
+    .clients { padding: 40px 20px; }
+    .clients-row { flex-wrap: wrap; }
+    .client-cell, .client-cell--fixed { flex: 1 0 45%; max-width: none; padding: 28px 16px; }
+
+    .ressources { padding: 40px 20px; }
+    .ressources-grid { grid-template-columns: 1fr; gap: 32px; }
+    .ressource-card-img { height: 280px; }
   }
 </style>
