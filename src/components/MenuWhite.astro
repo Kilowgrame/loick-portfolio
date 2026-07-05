@@ -4,9 +4,9 @@ const currentPath = Astro.url.pathname;
 <header class="menu-wrap">
   <div class="menu">
     <div class="menu-brand">
-      <a href="/" class="menu-logo" aria-label="Retour à l'accueil">        
+      <a href="/" class="menu-logo" aria-label="Retour à l'accueil">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="24" fill="#206267"/>
+          <circle cx="24" cy="24" r="24" fill="#075056"/>
           <path d="M21.028 10.9125L24.4206 18.2021L30.4444 11.4939L28.7454 20.7133L36.8564 18.2021L30.245 23.9092L37.5452 27.7101L29.0533 28.0757L33.3855 34.6568L26.1178 29.5197L23.6558 38.0185L21.6942 28.0757L16.1987 32.3132L18.8501 26.1108L10.1383 24.9508L18.8501 22.181L14.2737 17.606L20.2942 19.4586L21.028 10.9125Z" fill="white"/>
         </svg>
       </a>
@@ -26,6 +26,20 @@ const currentPath = Astro.url.pathname;
       </nav>
       <a href="mailto:legallais.loick@gmail.com" class="menu-cta">Contact</a>
     </div>
+
+    <!-- Burger (mobile only) -->
+    <button class="menu-burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span class="menu-burger-line"></span>
+      <span class="menu-burger-line"></span>
+    </button>
+  </div>
+
+  <!-- Panneau déroulant (mobile only) -->
+  <div class="menu-panel">
+    <a href="/projets">Work</a>
+    <a href="/a-propos">A propos</a>
+    <a href="/ressources">Ressources</a>
+    <a href="mailto:legallais.loick@gmail.com">Contact</a>
   </div>
 </header>
 
@@ -54,11 +68,85 @@ const currentPath = Astro.url.pathname;
   .menu-cta { background: #075056; color: #ffffff; font-size: 16px; padding: 16px 24px; border-radius: 12px; transition: background 0.2s; }
   .menu-cta:hover { background: #206267; }
 
+  /* Burger — caché en desktop */
+  .menu-burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 13px;
+    background: #075056;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  .menu-burger-line {
+    display: block;
+    width: 14px;
+    height: 1.5px;
+    background: #ffffff;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  /* Panneau déroulant — caché en desktop */
+  .menu-panel { display: none; }
+
   @media (max-width: 768px) {
     .menu-wrap { padding: 12px 12px 0; }
     .menu { padding: 12px 16px; }
     .menu-identity { display: none; }
-    .menu-nav { gap: 20px; padding: 10px 14px; font-size: 14px; }
-    .menu-cta { padding: 10px 14px; font-size: 14px; }
+
+    /* On masque la nav + cta desktop, on montre le burger */
+    .menu-right { display: none; }
+    .menu-burger { display: flex; }
+
+    /* Panneau déroulant */
+    .menu-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      background: #ffffff;
+      border-radius: 0 0 20px 20px;
+      font-size: 16px;
+      color: #16232b;
+      overflow: hidden;
+      /* Animation fluide */
+      max-height: 0;
+      opacity: 0;
+      padding: 0 20px;
+      transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .menu-panel a { color: #16232b; transition: opacity 0.2s; }
+    .menu-panel a:hover { opacity: 0.6; }
+
+    /* Ouvert */
+    .menu-wrap.is-open .menu-panel {
+      max-height: 400px;
+      opacity: 1;
+      padding: 24px 20px;
+    }
+
+    /* Quand ouvert : coins du haut conservés */
+    .menu-wrap.is-open .menu { border-radius: 20px 20px 0 0; }
+
+    /* Animation burger → croix */
+    .menu-wrap.is-open .menu-burger-line:nth-child(1) { transform: translateY(3.25px) rotate(45deg); }
+    .menu-wrap.is-open .menu-burger-line:nth-child(2) { transform: translateY(-3.25px) rotate(-45deg); }
   }
 </style>
+
+<script>
+  // Toggle du menu mobile
+  document.querySelectorAll('.menu-wrap').forEach((wrap) => {
+    const burger = wrap.querySelector('.menu-burger');
+    if (!burger) return;
+
+    burger.addEventListener('click', () => {
+      const isOpen = wrap.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+</script>
